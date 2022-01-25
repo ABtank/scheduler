@@ -1,0 +1,24 @@
+server:
+  port: 8189
+  servlet:
+    context-path: /sheduler
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sheduler?&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 12345678
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        ddl-auto: validate

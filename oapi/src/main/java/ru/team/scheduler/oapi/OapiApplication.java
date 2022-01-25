@@ -1,13 +1,13 @@
-package ru.team.scheduler;
+package ru.team.scheduler.oapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SchedulerApplication {
+public class OapiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SchedulerApplication.class, args);
+        SpringApplication.run(OapiApplication.class, args);
     }
 
 }
