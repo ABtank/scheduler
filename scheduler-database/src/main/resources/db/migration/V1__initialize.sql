@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS users_roles;
 DROP TABLE IF EXISTS positions_users;
 DROP TABLE IF EXISTS teachers_disciplines;
 DROP TABLE IF EXISTS seances_students;
+DROP TABLE IF EXISTS teachers_students;
 DROP TABLE IF EXISTS disciplines;
 DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS seances;
@@ -69,7 +70,7 @@ CREATE TABLE disciplines  -- subjects очень размытое понятие
 (
     id   int auto_increment primary key,
     name VARCHAR(50) NOT NULL,
-    UNIQUE (name)
+    CONSTRAINT UK_discipline_name UNIQUE (name)
 );
 
 CREATE TABLE teachers_disciplines
@@ -126,13 +127,28 @@ CREATE TABLE seances_students -- можно обозвать (tickets)
         FOREIGN KEY (student_id) REFERENCES users (id)
 );
 
+-- при взятии билета на урок, запись ученика в таблицу к учителю, если такого нет в таблице
+CREATE TABLE teachers_students
+(
+    id         int auto_increment primary key,
+    teacher_id int       not null,
+    student_id int       not null,
+    archive    Boolean            DEFAULT 0,     -- поместить ученика в архив (типа удалить)
+    dt_create  timestamp NOT NULL DEFAULT NOW(), -- так, для аудита когда присоединился
+    dt_modify  timestamp NOT NULL DEFAULT NOW(), -- когда ушел в архив или вернулся из него
+    CONSTRAINT UK_teacher_id_student_id UNIQUE  (teacher_id, student_id),
+    CONSTRAINT teachers_students_teacher_id
+        FOREIGN KEY (teacher_id) REFERENCES users (id),
+    constraint teachers_students_student_id
+        FOREIGN KEY (student_id) REFERENCES users (id)
+);
 
 INSERT INTO roles (name)
 VALUES ('ROLE_USER'),
        ('ROLE_ADMIN');
 
-INSERT INTO positions (name)
-VALUES ('Учитель'),
+insert into positions (name)
+values ('Учитель'),
        ('Студент');
 
 INSERT INTO disciplines (name)
