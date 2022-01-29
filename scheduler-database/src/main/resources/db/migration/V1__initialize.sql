@@ -1,11 +1,11 @@
 DROP TABLE IF EXISTS users_roles;
 DROP TABLE IF EXISTS positions_users;
 DROP TABLE IF EXISTS teachers_disciplines;
-DROP TABLE IF EXISTS seances_students;
+DROP TABLE IF EXISTS lessons_students;
 DROP TABLE IF EXISTS teachers_students;
 DROP TABLE IF EXISTS disciplines;
 DROP TABLE IF EXISTS positions;
-DROP TABLE IF EXISTS seances;
+DROP TABLE IF EXISTS lessons;
 DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS users;
@@ -92,12 +92,11 @@ CREATE TABLE exercises
 (
     id            int auto_increment primary key,
     name          VARCHAR(128) NOT NULL,             -- название урока, если пусто, то ставится название дисциплины
-    link          VARCHAR(256) NOT NULL,             -- ссыль на вебинал
     is_personal   BOOLEAN      NOT NULL DEFAULT (1), -- персоналка или нет
     duration      INT          NOT NULL,             -- продолжительность урока
     quantity      INT          NOT NULL DEFAULT (1), -- если не персоналка, то указывается кол-во народу
     teacher_id    INT          NOT NULL,             -- учитель
-    discipline_id INT          NOT NULL,             -- дисциплину
+    discipline_id INT          NOT NULL,             -- дисциплина
     CONSTRAINT FK_exercises_teacher_id
         FOREIGN KEY (teacher_id) REFERENCES users (id),
     CONSTRAINT FK_exercises_discipline_id
@@ -105,24 +104,30 @@ CREATE TABLE exercises
 );
 
 -- сеансы урока, время начала и цена (необязательна, так что можно забить пока)
-CREATE TABLE seances  -- из них и формируется рассписание
+CREATE TABLE lessons -- из них и формируется рассписание
 (
-    id          int auto_increment primary key,
-    exercise_id int            not null,
-    price       decimal(19, 2) null,     -- цена
-    dt_start    timestamp      not null, -- время начала урока(сеанса)
-    CONSTRAINT seances_exercise_id
+    id          INT auto_increment primary key,
+    name        VARCHAR(128)   NOT NULL, -- название сеанса, если пусто, то ставится название урока
+    link        VARCHAR(256)   NOT NULL, -- ссыль на вебинар
+    exercise_id INT            NOT NULL,
+    price       decimal(19, 2) NULL,     -- цена (ну а вдруг)
+    dt_start    timestamp      NOT NULL, -- время начала урока(сеанса)
+    CONSTRAINT lessons_exercise_id
         FOREIGN KEY (exercise_id) REFERENCES exercises (id)
 );
 
 -- (типа билеты на урок)
-CREATE TABLE seances_students -- можно обозвать (tickets)
+CREATE TABLE lessons_students -- можно обозвать (tickets)
 (
-    seance_id  int not null,
-    student_id int not null,
-    PRIMARY KEY (seance_id, student_id),
-    CONSTRAINT tickets_seance_id
-        FOREIGN KEY (seance_id) REFERENCES seances (id),
+    id         int auto_increment primary key,
+    lesson_id  int       not null,
+    student_id int       not null,
+    is_attend  BOOLEAN   not null DEFAULT (1), -- присутствовал или нет. Изначально ставиться присутствовал. Если поздно отменил, то прогул = 0. Если вовремя отменил запись, то удаление записи.
+    dt_create  timestamp NOT NULL DEFAULT NOW(),
+    dt_modify  timestamp NOT NULL DEFAULT NOW(),
+    CONSTRAINT UK_lesson_id_student_id UNIQUE(lesson_id, student_id),
+    CONSTRAINT tickets_lesson_id
+        FOREIGN KEY (lesson_id) REFERENCES lessons (id),
     constraint tickets_student_id
         FOREIGN KEY (student_id) REFERENCES users (id)
 );
@@ -138,7 +143,7 @@ CREATE TABLE teachers_students
     dt_modify  timestamp NOT NULL DEFAULT NOW(), -- когда ушел в архив или вернулся из него
     CONSTRAINT UK_teacher_id_student_id UNIQUE  (teacher_id, student_id),
     CONSTRAINT teachers_students_teacher_id
-        FOREIGN KEY (teacher_id) REFERENCES users (id),
+        FOREIGN KEY (teacher_id) REFERENCES exercises (teacher_id),
     constraint teachers_students_student_id
         FOREIGN KEY (student_id) REFERENCES users (id)
 );
