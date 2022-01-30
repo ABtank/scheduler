@@ -10,18 +10,22 @@ import java.util.List;
 @NoArgsConstructor
 public class UserDto {
     private Integer id;
-    private String name;
-    private String phone;
     private String email;
+    private String phone;
+    private String firstName;
+    private String middleName;
+    private String lastName;
     private List<String> roles;
     private Date createDate;
     private Date modifyDate;
 
-    public UserDto(Integer id, String name, String phone, String email, List<String> roles, Date createDate, Date modifyDate) {
+    public UserDto(Integer id, String email, String phone, String firstName, String middleName, String lastName, List<String> roles, Date createDate, Date modifyDate) {
         this.id = id;
-        this.name = name;
-        this.phone = phone;
         this.email = email;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
         this.roles = roles;
         this.createDate = createDate;
         this.modifyDate = modifyDate;

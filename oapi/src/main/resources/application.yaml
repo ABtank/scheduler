@@ -1,12 +1,12 @@
 server:
   port: 8189
   servlet:
-    context-path: /sheduler
+    context-path: /scheduler
 
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sheduler?&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/scheduler?&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: 12345678
 
@@ -21,4 +21,4 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
-        ddl-auto: validate
+        ddl-auto: update
