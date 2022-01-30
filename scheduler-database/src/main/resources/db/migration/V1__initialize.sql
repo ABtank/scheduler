@@ -1,16 +1,14 @@
 DROP TABLE IF EXISTS users_roles;
-DROP TABLE IF EXISTS positions_users;
 DROP TABLE IF EXISTS teachers_disciplines;
 DROP TABLE IF EXISTS lessons_students;
 DROP TABLE IF EXISTS teachers_students;
 DROP TABLE IF EXISTS disciplines;
-DROP TABLE IF EXISTS positions;
 DROP TABLE IF EXISTS lessons;
 DROP TABLE IF EXISTS exercises;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS users;
 
--- пользовательские роли (ADMIN, USER)
+-- пользовательские роли (ADMIN, USER,TEACHER)
 CREATE TABLE roles
 (
     id   int auto_increment primary key,
@@ -22,9 +20,8 @@ CREATE TABLE roles
 CREATE TABLE users  -- not null только те поля, которые нужны при регистрации
 (
     id         int auto_increment primary key,
-    name       varchar(50)  not null,  -- логин
-    phone      varchar(128) null,
     email      varchar(255) not null,
+    phone      varchar(128) null,
     firstName  varchar(50)  null,
     middleName varchar(50)  null,
     lastName   varchar(50)  null,
@@ -34,25 +31,7 @@ CREATE TABLE users  -- not null только те поля, которые ну�
 );
 
 
--- статусы пользователей (Ученик, Преподаватель)
-CREATE TABLE positions -- имя status более размытое понятие
-(
-    id   int auto_increment primary key,
-    name varchar(50) NOT NULL,
-    CONSTRAINT UK_position_name unique (name)
-);
 
--- связь юзер позиция(должность) иначе препод не может быть учеником у другого препода
-CREATE TABLE positions_users
-(
-    position_id int not null,
-    user_id     int not null,
-    primary key (position_id, user_id),
-    CONSTRAINT FK_positions_users_user_id
-        FOREIGN KEY (user_id) references users (id),
-    CONSTRAINT FK_positions_users_position_id
-        FOREIGN KEY (position_id) references positions (id)
-);
 
 CREATE TABLE users_roles
 (
@@ -110,7 +89,7 @@ CREATE TABLE lessons -- из них и формируется рассписан
     name        VARCHAR(128)   NOT NULL, -- название сеанса, если пусто, то ставится название урока
     link        VARCHAR(256)   NOT NULL, -- ссыль на вебинар
     exercise_id INT            NOT NULL,
-    price       decimal(19, 2) NULL,     -- цена (ну а вдруг)
+--    price       decimal(19, 2) NULL,     -- цена (ну а вдруг)
     dt_start    timestamp      NOT NULL, -- время начала урока(сеанса)
     CONSTRAINT lessons_exercise_id
         FOREIGN KEY (exercise_id) REFERENCES exercises (id)
@@ -143,18 +122,15 @@ CREATE TABLE teachers_students
     dt_modify  timestamp NOT NULL DEFAULT NOW(), -- когда ушел в архив или вернулся из него
     CONSTRAINT UK_teacher_id_student_id UNIQUE  (teacher_id, student_id),
     CONSTRAINT teachers_students_teacher_id
-        FOREIGN KEY (teacher_id) REFERENCES exercises (teacher_id),
+        FOREIGN KEY (teacher_id) REFERENCES users (id),
     constraint teachers_students_student_id
         FOREIGN KEY (student_id) REFERENCES users (id)
 );
 
 INSERT INTO roles (name)
 VALUES ('ROLE_USER'),
+       ('ROLE_TEACHER'),
        ('ROLE_ADMIN');
-
-insert into positions (name)
-values ('Учитель'),
-       ('Студент');
 
 INSERT INTO disciplines (name)
 VALUES ('Физика'),

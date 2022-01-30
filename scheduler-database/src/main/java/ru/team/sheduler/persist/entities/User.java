@@ -21,17 +21,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    @NotBlank(message = "Укажите Login")
-    private String name;
+    @NotBlank(message = "Укажите email")
+    private String email;
+    @Column
+    private String phone;
+    @Column
+    private String firstName;
+    @Column
+    private String middleName;
+    @Column
+    private String lastName;
     @Column
     @NotBlank(message = "Укажите password")
     private String password;
     @Transient
     private String matchingPassword;
-    @Column
-    private String email;
-    @Column
-    private String phone;
 
 
     @Column
@@ -42,54 +46,74 @@ public class User {
     )
     private List<Role> roles;
 
+    @Column
+    @ManyToMany
+    @JoinTable(name = "lessons_students",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "lesson_id")
+    )
+    private List<Lesson> lessons;
+    
+    @Column
+    @ManyToMany
+    @JoinTable(name = "teachers_disciplines",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "discipline_id")
+    )
+    private List<Discipline> disciplines;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Exercise> exercises;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_create", updatable = false)
-    private Date createDate;
+    private Date dtCreate;
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_modify", nullable = false)
-    private Date modifyDate;
+    private Date dtModify;
 
-    public User(Integer id, String name, String password, String email) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.roles = new ArrayList<>();
-    }
 
-    public Date getCreateDate() {
-        return createDate;
+
+    public Date getDtCreate() {
+        return dtCreate;
     }
 
     @PrePersist
-    public void setCreateDate() {
-        this.createDate = this.modifyDate = new Date();
+    public void setDtCreate() {
+        this.dtCreate = this.dtModify = new Date();
     }
 
-    public Date getModifyDate() {
-        return modifyDate;
+    public Date getDtModify() {
+        return dtModify;
     }
 
     @PreUpdate
-    public void setModifyDate() {
-        this.modifyDate = new Date();
+    public void setDtModify() {
+        this.dtModify = new Date();
+    }
+
+
+    public User(Integer id, String password, String email) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.roles = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         StringBuilder cb = new StringBuilder("User{");
         cb.append("id=").append(id).append(", ");
-        cb.append("login=").append(name).append(", ");
         cb.append("password=").append(password).append(", ");
         cb.append("matchingPassword=").append(matchingPassword).append(", ");
         cb.append("email=").append(email).append(", ");
-        if (createDate != null) {
-            cb.append("createDate=").append(new SimpleDateFormat("dd MMMM yyyy").format(createDate)).append(", ");
+        if (dtCreate != null) {
+            cb.append("dtCreate=").append(new SimpleDateFormat("dd MMMM yyyy").format(dtCreate)).append(", ");
         }
-        if (modifyDate != null) {
-            cb.append("modifyDate=").append(new SimpleDateFormat("dd MMMM yyyy").format(modifyDate)).append(", ");
+        if (dtModify != null) {
+            cb.append("dtModify=").append(new SimpleDateFormat("dd MMMM yyyy").format(dtModify)).append(", ");
         }
         cb.append("}\n");
 
