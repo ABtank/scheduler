@@ -22,3 +22,30 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
         ddl-auto: update
+
+# spprtscheduler@gmail.com
+# iRIIYtpu6e1&
+  mail:
+    host: smtp.gmail.com
+#    host: smtp.mail.ru
+    port: 587
+#    port: 465
+    username: spprtscheduler
+#    username: scheduler@internet.ru
+    password: cxlqdyrubemqswzn
+#    password: WmfjcKa8aSvYvkhQBm0H
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        smtp:
+          connectiontimeout: 5000
+          timeout: 3000
+          auth: true
+          starttls:
+            enable: true
+
+mail:
+  name: spprtscheduler@gmail.com
+#  name: scheduler@internet.ru
+  debug: true
