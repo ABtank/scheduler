@@ -27,9 +27,9 @@ CREATE TABLE users  -- not null только те поля, которые ну�
     lastName   varchar(50)  null,
     password   varchar(128) not null,
     dt_create  timestamp    NOT NULL DEFAULT NOW(),
-    dt_modify  timestamp    NOT NULL DEFAULT NOW()
+    dt_modify  timestamp    NOT NULL DEFAULT NOW(),
+    UNIQUE (email)
 );
-
 
 
 
@@ -37,12 +37,15 @@ CREATE TABLE users_roles
 (
     user_id int not null,
     role_id int not null,
+    CONSTRAINT UC_user_role UNIQUE (user_id, role_id),
     primary key (user_id, role_id),
     CONSTRAINT FK_users_roles_user_id
         FOREIGN KEY (user_id) references users (id),
     CONSTRAINT FK_users_roles_role_id
         FOREIGN KEY (role_id) references roles (id)
 );
+
+
 
 -- преподаваемые предметы
 CREATE TABLE disciplines  -- subjects очень размытое понятие и боюсь получить конфликты имен Классов в Java
@@ -142,4 +145,5 @@ VALUES ('Физика'),
        ('Природоведение'),
        ('Информатика'),
        ('История');
+
 
