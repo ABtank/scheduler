@@ -1,10 +1,9 @@
-package ru.team.sheduler.persist.entities;
+package ru.team.scheduler.oapi.models.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity

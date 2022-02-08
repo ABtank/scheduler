@@ -1,4 +1,4 @@
-package ru.team.sheduler.persist.entities;
+package ru.team.scheduler.oapi.models.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,12 +22,17 @@ public class Role {
     @NotBlank
     private String name;
 
+    @Column(name = "description")
+    @NotBlank
+    private String description;
+
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    public Role(Integer id, @NotBlank String name) {
+    public Role(Integer id, @NotBlank String name, String description) {
         this.id = id;
         this.name = name;
+        this.description = description;
     }
 
     @Override
@@ -35,6 +40,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

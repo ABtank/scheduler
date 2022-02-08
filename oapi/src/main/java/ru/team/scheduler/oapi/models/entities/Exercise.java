@@ -1,4 +1,4 @@
-package ru.team.sheduler.persist.entities;
+package ru.team.scheduler.oapi.models.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

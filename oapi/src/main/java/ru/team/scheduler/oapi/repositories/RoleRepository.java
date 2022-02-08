@@ -1,9 +1,9 @@
-package ru.team.sheduler.persist.repositories;
+package ru.team.scheduler.oapi.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
-import ru.team.sheduler.persist.entities.Role;
+import ru.team.scheduler.oapi.models.entities.Role;
 
 import java.util.Optional;
 import java.util.Set;
