@@ -1,4 +1,4 @@
-package ru.team.scheduler.oapi;
+package ru.team.scheduler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -7,7 +7,7 @@ import ru.team.scheduler.oapi.services.EmailService;
 
 import javax.mail.MessagingException;
 
-@SpringBootApplication
+@SpringBootApplication (scanBasePackages = "ru.team.scheduler")
 public class OapiApplication {
 
 //    Пример рассылки
@@ -15,7 +15,7 @@ public class OapiApplication {
     @Autowired
     public void setEmailService(EmailService emailService) throws MessagingException {
         this.emailService = emailService;
-        emailService.sendSimpleMessage(new String[]{"spprtscheduler@gmail.com","scheduler@internet.ru"},"Заголовок","Какой-то там текст.");
+//        emailService.sendSimpleMessage(new String[]{"spprtscheduler@gmail.com","scheduler@internet.ru"},"Заголовок","Какой-то там текст.");
 //        emailService.sendMessageWithAttachment(new String[]{"spprtscheduler@gmail.com","scheduler@internet.ru"},"Заголовок с файлом","Какой-то там текст.","oapi/src/main/resources/application.yaml");
     }
 

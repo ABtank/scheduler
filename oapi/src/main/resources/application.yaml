@@ -21,7 +21,7 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
-        ddl-auto: update
+        ddl-auto: validate
 
 # spprtscheduler@gmail.com
 # iRIIYtpu6e1&
@@ -49,3 +49,20 @@ mail:
   name: spprtscheduler@gmail.com
 #  name: scheduler@internet.ru
   debug: true
+
+app:
+  debug: true
+
+# определение файла для логирования при запуске
+#$ java -Dlogging.file=/home/scheduler/app/logs/app.log -jar scheduler-0.0.1-SNAPSHOT.jar
+logging:
+  level:
+    ru:
+      team:
+        scheduler:
+          oapi: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logFile.log
