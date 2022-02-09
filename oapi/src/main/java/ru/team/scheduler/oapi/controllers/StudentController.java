@@ -1,5 +1,6 @@
 package ru.team.scheduler.oapi.controllers;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,13 +14,13 @@ import ru.team.sheduler.persist.entities.User;
 import java.security.Principal;
 
 @RestController
-//@RequiredArgsConstructor
+@NoArgsConstructor
 @RequestMapping("/api/v1/students")
 public class StudentController {
     private UserService userService;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public StudentController(UserService userService) {
         this.userService = userService;
     }
 

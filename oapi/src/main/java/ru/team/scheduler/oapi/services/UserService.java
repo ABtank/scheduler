@@ -10,13 +10,13 @@ import ru.team.sheduler.persist.repositories.UserRepository;
 import java.util.Optional;
 
 @Service
-//@NoArgsConstructor
+@NoArgsConstructor
 //@RequiredArgsConstructor
 public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

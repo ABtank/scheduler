@@ -1,12 +1,12 @@
-DROP TABLE IF EXISTS users_roles;
-DROP TABLE IF EXISTS teachers_disciplines;
-DROP TABLE IF EXISTS lessons_students;
-DROP TABLE IF EXISTS teachers_students;
-DROP TABLE IF EXISTS disciplines;
-DROP TABLE IF EXISTS lessons;
-DROP TABLE IF EXISTS exercises;
-DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS users;
+        DROP TABLE IF EXISTS users_roles;
+        DROP TABLE IF EXISTS teachers_disciplines;
+        DROP TABLE IF EXISTS lessons_students;
+        DROP TABLE IF EXISTS teachers_students;
+        DROP TABLE IF EXISTS disciplines;
+        DROP TABLE IF EXISTS lessons;
+        DROP TABLE IF EXISTS exercises;
+        DROP TABLE IF EXISTS roles;
+        DROP TABLE IF EXISTS users;
 
 -- пользовательские роли (ADMIN, USER,TEACHER)
 CREATE TABLE roles
@@ -146,4 +146,11 @@ VALUES ('Физика'),
        ('Информатика'),
        ('История');
 
+INSERT INTO users (email, phone, firstName, middleName, lastName, password)
+VALUES ('111@mail.com', '11-11-11', 'иван', 'иванович', 'иванов', '11'),
+       ('222@mail.com', '22-22-22', 'петр', 'петрович', 'петров', '22');
+
+INSERT INTO users_roles (user_id, role_id)
+VALUES  (1, 1),
+        (2, 2);
 
