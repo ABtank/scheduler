@@ -1,22 +1,20 @@
 package ru.team.scheduler.oapi.services;
 
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.team.sheduler.persist.entities.User;
-import ru.team.sheduler.persist.repositories.UserRepository;
+import ru.team.scheduler.persist.entities.User;
+import ru.team.scheduler.persist.repositories.UserRepository;
 
 import java.util.Optional;
 
 @Service
 @NoArgsConstructor
-//@RequiredArgsConstructor
 public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

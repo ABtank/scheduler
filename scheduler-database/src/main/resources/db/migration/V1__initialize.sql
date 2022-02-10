@@ -22,9 +22,9 @@ CREATE TABLE users  -- not null только те поля, которые ну�
     id         int auto_increment primary key,
     email      varchar(255) not null,
     phone      varchar(128) null,
-    firstName  varchar(50)  null,
-    middleName varchar(50)  null,
-    lastName   varchar(50)  null,
+    first_name  varchar(50)  null,
+    middle_name varchar(50)  null,
+    last_name   varchar(50)  null,
     password   varchar(128) not null,
     dt_create  timestamp    NOT NULL DEFAULT NOW(),
     dt_modify  timestamp    NOT NULL DEFAULT NOW(),
@@ -146,7 +146,7 @@ VALUES ('Физика'),
        ('Информатика'),
        ('История');
 
-INSERT INTO users (email, phone, firstName, middleName, lastName, password)
+INSERT INTO users (email, phone, first_name, middle_name, last_name, password)
 VALUES ('111@mail.com', '11-11-11', 'иван', 'иванович', 'иванов', '11'),
        ('222@mail.com', '22-22-22', 'петр', 'петрович', 'петров', '22');
 

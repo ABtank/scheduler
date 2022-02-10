@@ -1,4 +1,4 @@
-package ru.team.sheduler.persist.entities;
+package ru.team.scheduler.persist.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,18 +20,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(name = "email")
     @NotBlank(message = "Укажите email")
     private String email;
-    @Column
+    @Column(name = "phone")
     private String phone;
-    @Column
+    @Column(name = "first_name")
     private String firstName;
-    @Column
+    @Column(name = "middle_name")
     private String middleName;
-    @Column
+    @Column(name = "last_name")
     private String lastName;
-    @Column
+    @Column(name = "password")
     @NotBlank(message = "Укажите password")
     private String password;
     @Transient

@@ -2,7 +2,7 @@ package ru.team.scheduler.oapi.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.team.sheduler.persist.entities.User;
+import ru.team.scheduler.persist.entities.User;
 
 import java.util.Date;
 import java.util.List;
