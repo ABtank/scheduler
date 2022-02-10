@@ -1,4 +1,4 @@
-package ru.team.scheduler.oapi.exseption;
+package ru.team.scheduler.oapi.exceptions;
 
 public class NotFoundException extends RuntimeException {
 
