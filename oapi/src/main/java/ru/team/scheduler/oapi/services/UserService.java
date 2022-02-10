@@ -1,27 +1,28 @@
 package ru.team.scheduler.oapi.services;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
+import ru.team.scheduler.oapi.dto.UserCreationDto;
+import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.persist.entities.User;
-import ru.team.scheduler.persist.repositories.UserRepository;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-@Service
-//@NoArgsConstructor
-//@RequiredArgsConstructor
-public class UserService {
-    private UserRepository userRepository;
+public interface UserService {
+    List<UserDto> findAll();
+    Optional<UserDto> findById(Integer id);
+    Optional<UserDto> findByEmail(String email);
+    void deleteById(Integer id);
+    Optional<UserDto> save(UserCreationDto userCreationDTO);
+    Optional<UserDto> update(UserDto userDTO);
+    void deleteAll();
 
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    Page<UserDto> findAll(Map<String, String> params, PageRequest pageRequest);
 
-    public Optional<User> findByName(String username){
-        return userRepository.findByFirstName(username);
-    }
-
+    List<UserDto> findAll(Specification<User> spec);
+    boolean checkIsUnique(String email, Integer id);
+    long count();
 }

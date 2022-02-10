@@ -1,9 +1,8 @@
 package ru.team.scheduler.oapi.services;
 
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.dto.DisciplineDto;
@@ -14,10 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
+@Slf4j
 @Service
 @NoArgsConstructor
 public class DisciplineServiceImpl implements DisciplineService {
-    private final static Logger LOG = LoggerFactory.getLogger(DisciplineServiceImpl.class);
     private ModelMapper modelMapper;
     private DisciplineRepository disciplineRepository;
 
@@ -53,7 +52,7 @@ public class DisciplineServiceImpl implements DisciplineService {
 
     @Override
     public void deleteAll() {
-        LOG.error("Someone decided to delete all Disciplines");
+        log.error("Someone decided to delete all Disciplines");
     }
 
     @Override

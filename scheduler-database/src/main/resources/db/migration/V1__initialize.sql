@@ -27,7 +27,8 @@ CREATE TABLE users  -- not null только те поля, которые ну�
     last_name   varchar(50)  null,
     password   varchar(128) not null,
     dt_create  timestamp    NOT NULL DEFAULT NOW(),
-    dt_modify  timestamp    NOT NULL DEFAULT NOW()
+    dt_modify  timestamp    NOT NULL DEFAULT NOW(),
+    CONSTRAINT UK_user_email UNIQUE (email)
 );
 
 
