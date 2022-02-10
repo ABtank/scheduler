@@ -15,4 +15,5 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 
     List<User> findByEmailLike(String emailPattern);
 
+    Optional<User> findByFirstName(String username);
 }

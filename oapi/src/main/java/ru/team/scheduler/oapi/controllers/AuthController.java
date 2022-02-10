@@ -13,7 +13,7 @@ import ru.team.scheduler.oapi.services.SecurityUserService;
 import ru.team.scheduler.persist.entities.User;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
     private SecurityUserService userService;
 

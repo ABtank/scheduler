@@ -8,3 +8,5 @@ UPDATE roles SET description = 'Преподаватель' WHERE name = 'ROLE_T
 UPDATE roles SET description = 'Пользователь' WHERE name = 'ROLE_USER';
 UPDATE roles SET description = 'Администратор' WHERE name = 'ROLE_ADMIN';
 
+INSERT INTO users(email, phone, first_name, middle_name, last_name, password) values ('111@mail.com', '11-11-11', 'иван', 'иванович', 'иванов', '111');
+

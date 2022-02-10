@@ -2,6 +2,7 @@ package ru.team.scheduler.oapi.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.team.scheduler.persist.entities.User;
 
 import java.util.Date;
 import java.util.List;
@@ -29,5 +30,14 @@ public class UserDto {
         this.roles = roles;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
+    }
+
+    public UserDto(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.firstName = user.getFirstName();
+        this.middleName = user.getMiddleName();
+        this.lastName = user.getLastName();
     }
 }
