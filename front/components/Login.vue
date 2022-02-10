@@ -12,7 +12,7 @@
           'email',
           { rules: [{ required: true, message: 'Введите свой e-mail' }] },
         ]"
-        v-model="data.login"/>
+        v-model="data.email"/>
       </a-form-item>
       <a-form-item label="Пароль">
         <a-input-password
@@ -27,7 +27,7 @@
       <a-divider />
       <a-button
       type="primary"
-      html-type="submit"
+      @click="handleSubmit"
       v-text="'Войти'" />
     </a-form>
   </a-card>
@@ -42,7 +42,7 @@ export default {
     return {
       form: this.$form.createForm(this),
       data: {
-        login: null,
+        email: null,
         password: null,
       }
     }
