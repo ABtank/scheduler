@@ -10,7 +10,7 @@ import ru.team.scheduler.oapi.config.JwtProvider;
 import ru.team.scheduler.oapi.dto.LoginRequestDto;
 import ru.team.scheduler.oapi.dto.LoginResponseDto;
 import ru.team.scheduler.oapi.services.SecurityUserService;
-import ru.team.scheduler.oapi.models.entities.User;
+import ru.team.scheduler.persist.entities.User;
 
 @RestController
 @RequestMapping("/auth")

@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.team.scheduler.oapi.models.entities.User;
+import ru.team.scheduler.persist.entities.User;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

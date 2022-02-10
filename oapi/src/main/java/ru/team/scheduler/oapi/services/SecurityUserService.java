@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.models.CustomUserDetails;
-import ru.team.scheduler.oapi.models.entities.User;
-import ru.team.scheduler.oapi.repositories.UserRepository;
+import ru.team.scheduler.persist.entities.User;
+import ru.team.scheduler.persist.repositories.UserRepository;
 
 @Service
 public class SecurityUserService implements UserDetailsService {
