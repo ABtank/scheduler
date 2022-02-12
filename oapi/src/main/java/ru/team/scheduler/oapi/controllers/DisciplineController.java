@@ -36,15 +36,11 @@ public class DisciplineController {
     @ResponseStatus(HttpStatus.CREATED)
     public DisciplineDto create(@RequestBody DisciplineDto disciplineDto) {
         System.out.println(disciplineDto);
-        disciplineDto.setId(null);
         return disciplineService.save(disciplineDto).orElseThrow(NotFoundException::new);
     }
 
     @PutMapping
     public DisciplineDto updateDiscipline(@RequestBody DisciplineDto disciplineDto) {
-        if (disciplineDto.getId() == null) {
-            throw new IllegalArgumentException("Id not found in the update request");
-        }
         return disciplineService.save(disciplineDto).orElseThrow(NotFoundException::new);
     }
 
