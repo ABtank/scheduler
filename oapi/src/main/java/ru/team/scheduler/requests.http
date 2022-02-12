@@ -10,12 +10,12 @@ POST http://localhost:8189/sh/api/v1/users
 Content-Type: application/json
 
 {
-  "email": "admin2@bk.ru",
+  "email": "student@bk.ru",
   "password": "123",
   "matchingPassword": "123",
   "roles": [
     "ROLE_USER",
-    "ROLE_ADMIN"
+    "ROLE_STUDENT"
   ]
 }
 ###

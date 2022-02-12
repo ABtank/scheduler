@@ -8,14 +8,14 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.dto.UserCreationDto;
 import ru.team.scheduler.oapi.dto.UserDto;
+import ru.team.scheduler.persist.entities.Exercise;
+import ru.team.scheduler.persist.entities.Lesson;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.RoleRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
 import ru.team.scheduler.persist.repositories.specifications.UserSpecification;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
@@ -46,6 +46,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findAll() {
+        for (User u : userRepository.findAll()) {
+            System.out.println(u.getFirstName() + " " + u.getRoles());
+            String discipline = (!u.getDisciplines().isEmpty()) ? u.getDisciplines().stream().findFirst().get().getName() : "";
+            System.out.println("Где я учитель " + discipline);
+            u.getExercises().forEach(e -> {
+                if (Objects.equals(e.getTeacher().getId(), u.getId())) {
+                    System.out.println("Exercise:" + e.getName());
+                }
+                e.getLessons().forEach(l -> {
+                    if (Objects.equals(l.getExercise().getTeacher().getId(), u.getId()))
+                        System.out.println("    Lesson: " + l.getName());
+                });
+            });
+            System.out.println("Где я ученик");
+            HashMap<Exercise, List<Lesson>> map = new HashMap<>();
+            u.getLessons().forEach(l -> map.put(l.getExercise(), new ArrayList<>() {
+            }));
+            u.getLessons().forEach(l -> map.get(l.getExercise()).add(l));
+            map.forEach((key, value) -> {
+                System.out.println("Exercise:" + key.getName());
+                value.forEach(l -> {
+                    if (!Objects.equals(l.getExercise().getTeacher().getId(), u.getId()))
+                        System.out.println("    Lesson: " + l.getName());
+                });
+            });
+            System.out.println("-========-");
+        }
         return userRepository.findAll()
                 .stream()
                 .map(mapperService::userToDto)
