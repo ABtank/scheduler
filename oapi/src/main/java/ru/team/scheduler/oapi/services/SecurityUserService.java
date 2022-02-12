@@ -11,7 +11,7 @@ import ru.team.scheduler.persist.entities.Role;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.UserRepository;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class SecurityUserService implements UserDetailsService {
@@ -32,7 +32,7 @@ public class SecurityUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Неверные имя пользователя или пароль"));
-        List<Role> roles = user.getRoles();
+        Set<Role> roles = user.getRoles();
         return new CustomUserDetails(user, roles);
     }
 
