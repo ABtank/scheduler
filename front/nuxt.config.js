@@ -1,3 +1,5 @@
+//const bodyParser  = require('body-parser');
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -43,14 +45,19 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/api',
-    progress: true,
-    proxy: true
+    baseURL: 'http://localhost:8189/sh/api/v1/',
+    //progress: true,
+    //proxy: true
   },
 
+  /*serverMiddleware: [
+    'coexist-parser-proxy', // Needs to be before bodyParser
+    bodyParser.json()
+  ],
+
   proxy: {
-    '/api/': 'localhost:8189/api/v1/',
-  },
+    '/api/': 'localhost:8189/sh/api/v1/',
+  },*/
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -75,9 +82,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post' },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get' }
+          login: { url: '/auth/login', method: 'post' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/auth/user', method: 'get' }
         }
       }
     }
