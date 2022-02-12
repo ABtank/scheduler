@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "exercises")
@@ -34,6 +35,9 @@ public class Exercise {
     @ManyToOne(optional = false)
     @JoinColumn(name = "discipline_id", nullable = false)
     private Discipline discipline;
+
+    @OneToMany(mappedBy = "exercise")
+    private List<Lesson> lessons;
 
 
 }
