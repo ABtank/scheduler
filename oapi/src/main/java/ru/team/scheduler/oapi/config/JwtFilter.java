@@ -26,12 +26,17 @@ public class JwtFilter extends GenericFilterBean {
 
     @PostConstruct
     public void init() {
-        jwtProvider = new JwtProvider();
+        //jwtProvider = new JwtProvider();
     }
 
     @Autowired
     public void setUserService(SecurityUserService service) {
         this.userService = service;
+    }
+
+    @Autowired
+    public void setJwtProvider(JwtProvider jwtProvider) {
+        this.jwtProvider = jwtProvider;
     }
 
     @Override

@@ -7,8 +7,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.models.CustomUserDetails;
+import ru.team.scheduler.persist.entities.Role;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.UserRepository;
+
+import java.util.List;
 
 @Service
 public class SecurityUserService implements UserDetailsService {
@@ -29,7 +32,8 @@ public class SecurityUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Неверные имя пользователя или пароль"));
-        return new CustomUserDetails(user);
+        List<Role> roles = user.getRoles();
+        return new CustomUserDetails(user, roles);
     }
 
     public User getUserByCredentials(String email, String password) {
@@ -38,5 +42,9 @@ public class SecurityUserService implements UserDetailsService {
             return user;
         }
         return null;
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 }
