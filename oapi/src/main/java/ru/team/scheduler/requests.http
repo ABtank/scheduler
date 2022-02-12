@@ -1,4 +1,7 @@
 ### -=USER=-
+GET http://localhost:8189/sh/api/v1/students/student_info
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbjJAYmsucnUiLCJleHAiOjE2NDQ3ODYwMDB9.g1cl6DwTB3M3dSNNkkQKeKtBe6A9ZFs6hOGJ52XaL5K4uGh8pv9cyncin9j7kVnx
+###
 GET http://localhost:8189/sh/api/v1/users
 #Authorization: Bearer in_user 123
 ###

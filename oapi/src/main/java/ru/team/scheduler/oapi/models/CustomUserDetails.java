@@ -9,7 +9,7 @@ import ru.team.scheduler.persist.entities.Role;
 import ru.team.scheduler.persist.entities.User;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -20,7 +20,7 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> grantedAuthorities;
 
-    public CustomUserDetails(User user, List<Role> roles) {
+    public CustomUserDetails(User user, Set<Role> roles) {
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.grantedAuthorities = roles
