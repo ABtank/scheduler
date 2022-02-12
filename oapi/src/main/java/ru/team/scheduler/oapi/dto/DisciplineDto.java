@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DisciplineDto {
 
-  private long id;
+  private Integer id;
   private String name;
 
-  public DisciplineDto(long id, String name) {
+  public DisciplineDto(Integer id, String name) {
     this.id = id;
     this.name = name;
   }

@@ -13,10 +13,8 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
 
     Optional<User> findByFirstName(String name);
 
-    List<User> findByFirstNameLike(String namePattern);
+    Optional<User> findByEmail(String email);
 
     List<User> findByEmailLike(String emailPattern);
-
-    List<User> findByEmailLikeAndFirstNameLike(String emailPattern, String namePattern);
 
 }

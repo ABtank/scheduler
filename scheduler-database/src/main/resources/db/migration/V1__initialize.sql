@@ -28,7 +28,7 @@ CREATE TABLE users  -- not null только те поля, которые ну�
     password   varchar(128) not null,
     dt_create  timestamp    NOT NULL DEFAULT NOW(),
     dt_modify  timestamp    NOT NULL DEFAULT NOW(),
-    UNIQUE (email)
+    CONSTRAINT UK_user_email UNIQUE (email)
 );
 
 
@@ -146,11 +146,4 @@ VALUES ('Физика'),
        ('Информатика'),
        ('История');
 
-INSERT INTO users (email, phone, first_name, middle_name, last_name, password)
-VALUES ('111@mail.com', '11-11-11', 'иван', 'иванович', 'иванов', '11'),
-       ('222@mail.com', '22-22-22', 'петр', 'петрович', 'петров', '22');
-
-INSERT INTO users_roles (user_id, role_id)
-VALUES  (1, 1),
-        (2, 2);
 

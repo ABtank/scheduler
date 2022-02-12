@@ -2,15 +2,17 @@ package ru.team.scheduler.persist.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -44,7 +46,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private List<Role> roles;
+    @ToString.Exclude
+    private Set<Role> roles;
 
     @Column
     @ManyToMany
@@ -52,17 +55,20 @@ public class User {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id")
     )
+    @ToString.Exclude
     private List<Lesson> lessons;
-    
+
     @Column
     @ManyToMany
     @JoinTable(name = "teachers_disciplines",
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "discipline_id")
     )
+    @ToString.Exclude
     private List<Discipline> disciplines;
 
     @OneToMany(mappedBy = "teacher")
+    @ToString.Exclude
     private List<Exercise> exercises;
 
     @CreationTimestamp
@@ -95,11 +101,11 @@ public class User {
     }
 
 
-    public User(Integer id, String password, String email) {
+    public User(Integer id, String email, String password) {
         this.id = id;
         this.password = password;
         this.email = email;
-        this.roles = new ArrayList<>();
+        this.roles = new HashSet<>();
     }
 
     @Override
