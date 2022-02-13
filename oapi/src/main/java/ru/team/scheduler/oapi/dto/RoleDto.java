@@ -13,8 +13,11 @@ public class RoleDto {
     @NonNull
     private String name;
 
+    private String description;
+
     public RoleDto(Role role) {
         this.id = role.getId();
         this.name = role.getName();
+        this.description =role.getDescription();
     }
 }

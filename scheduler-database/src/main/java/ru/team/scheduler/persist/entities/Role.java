@@ -22,12 +22,16 @@ public class Role {
     @NotBlank
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    public Role(Integer id, @NotBlank String name) {
+    public Role(Integer id, @NotBlank String name, String description) {
         this.id = id;
         this.name = name;
+        this.description = description;
     }
 
     @Override
@@ -35,6 +39,7 @@ public class Role {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
