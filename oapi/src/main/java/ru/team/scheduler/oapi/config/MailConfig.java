@@ -27,21 +27,21 @@ public class MailConfig {
     @Value("${mail.debug}")
     private String debug;
 
-    @Bean
-    public JavaMailSender getJavaMailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(host);
-        mailSender.setPort(port);
-
-        mailSender.setUsername(username);
-        mailSender.setPassword(password);
-
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", protocol);
-        props.put("mail.smtp.auth", auth);
-        props.put("mail.smtp.starttls.enable", starttlsEnable);
-        props.put("mail.debug", debug);
-
-        return mailSender;
-    }
+//    @Bean
+//    public JavaMailSender getJavaMailSender() {
+//        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+//        mailSender.setHost(host);
+//        mailSender.setPort(port);
+//
+//        mailSender.setUsername(username);
+//        mailSender.setPassword(password);
+//
+//        Properties props = mailSender.getJavaMailProperties();
+//        props.put("mail.transport.protocol", protocol);
+//        props.put("mail.smtp.auth", auth);
+//        props.put("mail.smtp.starttls.enable", starttlsEnable);
+//        props.put("mail.debug", debug);
+//
+//        return mailSender;
+//    }
 }
