@@ -6,7 +6,6 @@ import java.util.Optional;
 public interface BasicService<E> {
     List<E> findAll();
     Optional<E> findById(Integer id);
-
     void deleteById(Integer id);
     void deleteAll();
     Optional<E> save(E o);

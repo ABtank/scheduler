@@ -11,6 +11,7 @@ import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.ExerciseService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -32,8 +33,8 @@ public class ExercisesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ExerciseDto create(@RequestBody ExerciseDto exerciseDto) {
-        return exerciseService.save(exerciseDto).orElseThrow(NotFoundException::new);
+    public ExerciseDto create(Principal principal,  @RequestBody ExerciseDto exerciseDto) {
+        return exerciseService.save(principal, exerciseDto).orElseThrow(NotFoundException::new);
     }
 
     @PutMapping

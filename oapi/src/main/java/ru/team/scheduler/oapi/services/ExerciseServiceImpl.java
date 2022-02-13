@@ -12,6 +12,7 @@ import ru.team.scheduler.persist.repositories.ExercisesRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,20 +44,25 @@ public class ExerciseServiceImpl implements ExerciseService{
         exercisesRepository.deleteAll();
     }
 
+    @Override
+    public Optional<ExerciseDto> save(ExerciseDto o) {
+        return Optional.empty();
+    }
+
+
     @Transactional
     @Override
-    public Optional<ExerciseDto> save(ExerciseDto exerciseDto) {
+    public Optional<ExerciseDto> save(Principal principal, ExerciseDto exerciseDto) {
         Exercise exercise = mapperService.exerciseDtoToExercise(exerciseDto);
         String disciplineTitle = exerciseDto.getDisciplineTitle();
-        String teachersFirstName = exerciseDto.getTeachersFirstName();
-        String teachersLastName = exerciseDto.getTeachersLastName();
+        String teachersEmail = principal.getName();
         DisciplineDto disciplineDto = new DisciplineDto(disciplineTitle);
         if (disciplineService.findEntityByName(disciplineTitle).isEmpty()){
             disciplineService.save(disciplineDto);
         }
         exercise.setDiscipline(disciplineService.findEntityByName(disciplineTitle).get());
-        if (userRepository.findByFirstName(teachersFirstName).isPresent()) {
-            exercise.setTeacher(userRepository.findByFirstName(teachersFirstName).get());
+        if (userRepository.findByEmail(teachersEmail).isPresent()) {
+            exercise.setTeacher(userRepository.findByEmail(teachersEmail).get());
         }
         else throw new NotFoundException("Учитель не найден");
         exercisesRepository.save(exercise);

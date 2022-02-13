@@ -16,7 +16,6 @@ import java.util.List;
 
 @Slf4j
 @Service
-@Data
 @RequiredArgsConstructor
 public class TeachersScheduleMasterService {
     private final LessonsStudentsService lessonsStudentsService;
@@ -41,7 +40,6 @@ public class TeachersScheduleMasterService {
         List<TeacherWorkingDayDto> teacherWorkingDayDtos = teachersScheduleMasterRequestDto.getTeacherWorkingDaysDtos();
         teacherWorkingDayDtos.forEach(o->o.setExerciseId(exerciseDto.getId()));
         teacherWorkingDayDtos.forEach(o->o.setWeekdayId(weekdaysRepository.findByName(o.getWeekDayName()).get().getId()));
-
             List<TeacherWorkingDay> teacherWorkingDays = teacherWorkingDayDtos.stream()
                     .map(mapperService::teacherWorkingDayDtoToTeacherWorkingDay).toList();
         teacherWorkingDaysRepository.saveAll(teacherWorkingDays);
