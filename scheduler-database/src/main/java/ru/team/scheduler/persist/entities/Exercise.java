@@ -1,14 +1,18 @@
 package ru.team.scheduler.persist.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "exercises")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +39,16 @@ public class Exercise {
     @JoinColumn(name = "discipline_id", nullable = false)
     private Discipline discipline;
 
+    @OneToMany(mappedBy = "exercise")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Lesson> lessons;
 
+    public Exercise(Integer id, String name, Boolean isPersonal,
+                    Integer duration, Integer quantity) {
+        this.id = id;
+        this.name = name;
+        this.isPersonal = isPersonal;
+        this.duration = duration;
+        this.quantity = quantity;
+    }
 }

@@ -90,7 +90,7 @@ CREATE TABLE lessons -- из них и формируется рассписан
 (
     id          INT auto_increment primary key,
     name        VARCHAR(128)   NOT NULL, -- название сеанса, если пусто, то ставится название урока
-    link        VARCHAR(256)   NOT NULL, -- ссыль на вебинар
+    link        VARCHAR(256)   NULL, -- ссыль на вебинар
     exercise_id INT            NOT NULL,
 --    price       decimal(19, 2) NULL,     -- цена (ну а вдруг)
     dt_start    timestamp      NOT NULL, -- время начала урока(сеанса)

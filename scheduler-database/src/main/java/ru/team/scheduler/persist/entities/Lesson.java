@@ -2,9 +2,11 @@ package ru.team.scheduler.persist.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "lessons")
@@ -21,6 +23,10 @@ public class Lesson {
 
     @Column(name = "link", nullable = false, length = 256)
     private String link;
+
+    @OneToMany(mappedBy = "lesson")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<LessonsStudent> lessonsStudents;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "exercise_id", nullable = false)

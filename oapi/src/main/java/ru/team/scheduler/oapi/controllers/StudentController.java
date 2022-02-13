@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.team.scheduler.oapi.dto.LessonDto;
 import ru.team.scheduler.oapi.dto.UserDto;
+import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.UserServiceImpl;
 import ru.team.scheduler.persist.entities.User;
 

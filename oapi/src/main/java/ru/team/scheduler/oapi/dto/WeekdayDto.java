@@ -5,11 +5,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class DisciplineDto {
-
-  private String name;
-
-  public DisciplineDto(String name) {
-    this.name = name;
-  }
+public class WeekdayDto {
+    private String name;
 }

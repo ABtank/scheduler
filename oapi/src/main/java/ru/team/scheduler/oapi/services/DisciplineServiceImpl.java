@@ -1,9 +1,10 @@
 package ru.team.scheduler.oapi.services;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.persist.entities.Discipline;
@@ -15,20 +16,10 @@ import java.util.Optional;
 import static java.util.stream.Collectors.toList;
 @Slf4j
 @Service
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class DisciplineServiceImpl implements DisciplineService {
-    private ModelMapper modelMapper;
-    private DisciplineRepository disciplineRepository;
-
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
-
-    @Autowired
-    public void setDisciplineRepository(DisciplineRepository disciplineRepository) {
-        this.disciplineRepository = disciplineRepository;
-    }
+    private final ModelMapper modelMapper;
+    private final DisciplineRepository disciplineRepository;
 
     @Override
     public List<DisciplineDto> findAll() {
@@ -43,6 +34,11 @@ public class DisciplineServiceImpl implements DisciplineService {
     @Override
     public Optional<DisciplineDto> findByName(String name) {
         return disciplineRepository.findByName(name).map(obj -> modelMapper.map(obj, DisciplineDto.class));
+    }
+
+    @Override
+    public Optional<Discipline> findEntityByName(String name){
+        return disciplineRepository.findByName(name);
     }
 
     @Override
