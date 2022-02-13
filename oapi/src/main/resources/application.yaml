@@ -69,3 +69,8 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
     name: logFile.log
+
+# Секретный ключ приложения и время жизни
+jwt:
+  secret: 45T47fcXazP5pgMmWXKByCZWpWUzQrZrJMVegYVbcxhXFk22uVDWS9TAzpwmq8ZG
+  ttl: 3600
