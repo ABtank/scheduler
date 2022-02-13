@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.persist.entities.LessonsStudent;
+import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.LessonsStudentsRepository;
 
 
@@ -53,5 +54,9 @@ public class LessonsStudentsServiceImpl implements LessonsStudentsService {
     @Override
     public long count() {
         return lessonsStudentsRepository.count();
+    }
+
+    public List<LessonsStudent> findAllByStudent(User student){
+        return lessonsStudentsRepository.findAllByStudent(student);
     }
 }
