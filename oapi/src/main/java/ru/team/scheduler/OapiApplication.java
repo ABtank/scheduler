@@ -14,7 +14,7 @@ public class OapiApplication {
     @Autowired
     public void setEmailService(EmailService emailService) throws MessagingException {
         this.emailService = emailService;
-//        emailService.sendSimpleMessage(new String[]{"timeout2001@mail.ru"},"Заголовок","Какой-то там текст.");
+//        emailService.sendSimpleMessage(new String[]{"spptr@mail.ru"},"Заголовок","Какой-то там текст.");
 //        emailService.sendMessageWithAttachment(new String[]{"spprtscheduler@gmail.com","scheduler@internet.ru"},"Заголовок с файлом","Какой-то там текст.","oapi/src/main/resources/application.yaml");
     }
     public static void main(String[] args) {
