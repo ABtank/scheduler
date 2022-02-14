@@ -1,9 +1,11 @@
 package ru.team.scheduler.oapi.controllers;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.config.JwtProvider;
+import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.*;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.SecurityUserService;
@@ -14,6 +16,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@Api(tags = {SwaggerConstant.API_TAG})
 public class AuthController {
     private SecurityUserService securityUserService;
     private UserService userService;
