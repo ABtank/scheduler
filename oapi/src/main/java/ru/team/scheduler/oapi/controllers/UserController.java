@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.team.scheduler.oapi.dto.UserCreationDto;
 import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.UserService;
@@ -31,16 +30,6 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public UserDto findById(@PathVariable("id") Integer id) {
         return userService.findById(id).orElseThrow(NotFoundException::new);
-    }
-
-    @PostMapping
-    public UserDto create(@RequestBody UserCreationDto userDTO) {
-        if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
-            throw new IllegalArgumentException("password not matching");
-        } else {
-            userDTO.setId(null);
-        }
-        return userService.save(userDTO).orElseThrow(NotFoundException::new);
     }
 
     @PutMapping

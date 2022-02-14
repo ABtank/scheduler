@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class UserCreationDto {
-    private Integer id;
     @NonNull
     private String email;
     @NonNull
@@ -20,8 +19,7 @@ public class UserCreationDto {
     @NonNull
     private List<String> roles;
 
-    public UserCreationDto(Integer id, String email, String password, String matchingPassword, List<String> roles) {
-        this.id = id;
+    public UserCreationDto(String email, String password, String matchingPassword, List<String> roles) {
         this.email = email;
         this.password = password;
         this.matchingPassword = matchingPassword;

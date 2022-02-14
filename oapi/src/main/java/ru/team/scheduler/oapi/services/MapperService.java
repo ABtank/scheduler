@@ -53,7 +53,7 @@ public class MapperService {
     }
 
     public User userCreationDTOtoUser(UserCreationDto userCreationDTO) {
-        return new User(userCreationDTO.getId(),
+        return new User(
                 userCreationDTO.getEmail(),
                 passwordEncoder.encode(userCreationDTO.getPassword())
         );
