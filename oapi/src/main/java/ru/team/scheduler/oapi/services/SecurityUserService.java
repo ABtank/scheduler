@@ -10,6 +10,8 @@ import ru.team.scheduler.oapi.models.CustomUserDetails;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.UserRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 public class SecurityUserService implements UserDetailsService {
     private UserRepository userRepository;
@@ -26,6 +28,7 @@ public class SecurityUserService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Неверные имя пользователя или пароль"));

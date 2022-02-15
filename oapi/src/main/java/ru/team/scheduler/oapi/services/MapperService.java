@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.team.scheduler.oapi.dto.*;
 import ru.team.scheduler.persist.entities.*;
@@ -22,15 +22,15 @@ import static java.util.stream.Collectors.toList;
 @Component
 @RequiredArgsConstructor
 public class MapperService {
-    //    private PasswordEncoder passwordEncoder;
+        private PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final WeekdaysRepository weekdaysRepository;
     private final ExercisesRepository exercisesRepository;
 
 
-//    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-//        this.passwordEncoder = passwordEncoder;
-//    }
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public UserDto userToDto(User user) {
         return new UserDto(user.getId(),

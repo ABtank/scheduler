@@ -52,10 +52,8 @@ public class AppAOP {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
-        emailService.sendSimpleMessage(new String[]{"spprtscheduler@gmail.com", "scheduler@internet.ru"}
+        emailService.sendSimpleMessage(new String[] {"schedulerfreeapp@gmail.com"}
                 , prefix + " [Scheduler] " + ex
                 , sw.toString());
     }
-
-
 }
