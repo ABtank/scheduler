@@ -20,6 +20,24 @@ WHERE
     ls.student_id = :user_id
 
 
+SELECT
+    lessons.id as lessons_id,
+    lessons.name as lessons_name,
+    lessons.dt_start as time_start,
+    exercises.duration as duration,
+    users.name as teacher_name,
+    disciplines.name as discipline_name
+FROM lessons as lessons
+    INNER JOIN exercises as exercises
+    ON lessons.exercise_id = exercises.id
+    INNER JOIN users as users
+    ON exercises.teacher_id = users.id
+    INNER JOIN disciplines as disciplines
+    ON exercises.discipline_id = disciplines.id
+WHERE
+    lessons.id = :lessons_id
+
+
    @Query("UPDATE Person p SET p.name = :name WHERE p.id = :id")
     void updatePersonName(@Param("user_id") Integer id);
 
