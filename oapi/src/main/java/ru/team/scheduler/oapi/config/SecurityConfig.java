@@ -19,6 +19,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
             "/api/v1/auth/**"
     };
+    private static final String[] AUTH_URLS = {
+            "/api/v1/disciplines/**",
+            "/api/v1/students/**",
+            "/api/v1/users/**"
+    };
 
     @Autowired
     public void setJwtFilter(JwtFilter filter) {
@@ -33,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(new String [] {"/api/v1/disciplines","/api/v1/users"}).authenticated()
+                .antMatchers(AUTH_URLS).authenticated()
                 .antMatchers(PUBLIC_URLS).permitAll()
                 //.antMatchers("/api/v1/score/get/{\\d+}").hasAnyAuthority("ADMIN")
                 .anyRequest().permitAll()
