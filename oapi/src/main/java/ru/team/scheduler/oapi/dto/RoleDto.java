@@ -1,6 +1,7 @@
 package ru.team.scheduler.oapi.dto;
 
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -10,5 +11,6 @@ import lombok.NonNull;
 public class RoleDto {
     private Integer id;
     @NonNull
+    @ApiModelProperty(notes = "Уникальное название роли", example = "ROLE_USER",required = true)
     private String name;
 }

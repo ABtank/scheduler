@@ -1,27 +1,31 @@
 package ru.team.scheduler.oapi.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class UserCreationDto {
-    private Integer id;
     @NonNull
+    @Email
+    @ApiModelProperty(notes = "Адрес электронной почты", example = "email@mail.ru",required = true)
     private String email;
     @NonNull
+    @ApiModelProperty(required = true, example = "123")
     private String password;
     @NonNull
+    @ApiModelProperty(required = true, example = "123")
     private String matchingPassword;
 
     @NonNull
     private List<String> roles;
 
-    public UserCreationDto(Integer id, String email, String password, String matchingPassword, List<String> roles) {
-        this.id = id;
+    public UserCreationDto(String email, String password, String matchingPassword, List<String> roles) {
         this.email = email;
         this.password = password;
         this.matchingPassword = matchingPassword;
