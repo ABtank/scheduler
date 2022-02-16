@@ -16,10 +16,10 @@ public class UserCreationDto {
     @ApiModelProperty(notes = "Адрес электронной почты", example = "email@mail.ru",required = true)
     private String email;
     @NonNull
-    @ApiModelProperty(required = true, example = "123")
+    @ApiModelProperty(required = true, example = "qwerty")
     private String password;
     @NonNull
-    @ApiModelProperty(required = true, example = "123")
+    @ApiModelProperty(required = true, example = "qwerty")
     private String matchingPassword;
 
     @NonNull
