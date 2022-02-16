@@ -1,258 +1,1041 @@
-2022-02-16 00:05:12 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 1504 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
-2022-02-16 00:05:12 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
-2022-02-16 00:05:13 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2022-02-16 00:05:13 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2022-02-16 00:05:15 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-02-16 00:05:15 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 242 ms. Found 9 JPA repository interfaces.
-2022-02-16 00:05:17 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
-2022-02-16 00:05:17 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2022-02-16 00:05:17 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-02-16 00:05:17 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
-2022-02-16 00:05:17 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4770 ms
-2022-02-16 00:05:18 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2022-02-16 00:05:19 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-02-16 00:05:19 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.5 by Redgate
-2022-02-16 00:05:19 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
-2022-02-16 00:05:19 [restartedMain] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#149bd119' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#149bd119': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : -1969209995
--> Resolved locally    : -798520269. Either revert the changes to the migration, or run repair to update the schema history.
-Migration checksum mismatch for migration version 2
--> Applied to database : 1711904144
--> Resolved locally    : 61886351. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-2022-02-16 00:05:19 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
-2022-02-16 00:05:19 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17/jdk.internal.misc.Unsafe.park(Native Method)
- java.base@17/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
- java.base@17/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
- java.base@17/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
- java.base@17/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
- java.base@17/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
- java.base@17/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
- java.base@17/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
- java.base@17/java.lang.Thread.run(Thread.java:833)
-2022-02-16 00:05:19 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17/com.sun.crypto.provider.CounterMode.implCrypt(CounterMode.java:194)
- java.base@17/com.sun.crypto.provider.CounterMode.crypt(CounterMode.java:181)
- java.base@17/com.sun.crypto.provider.CounterMode.encrypt(CounterMode.java:150)
- java.base@17/com.sun.crypto.provider.GCTR.update(GCTR.java:132)
- java.base@17/com.sun.crypto.provider.GCTR.doFinal(GCTR.java:257)
- java.base@17/com.sun.crypto.provider.GCTR.doFinal(GCTR.java:281)
- java.base@17/com.sun.crypto.provider.GaloisCounterMode$GCMEngine.doLastBlock(GaloisCounterMode.java:797)
- java.base@17/com.sun.crypto.provider.GaloisCounterMode$GCMDecrypt.doFinal(GaloisCounterMode.java:1505)
- java.base@17/com.sun.crypto.provider.GaloisCounterMode.engineDoFinal(GaloisCounterMode.java:447)
- java.base@17/javax.crypto.Cipher.doFinal(Cipher.java:2500)
- java.base@17/sun.security.ssl.SSLCipher$T13GcmReadCipherGenerator$GcmReadCipher.decrypt(SSLCipher.java:1933)
- java.base@17/sun.security.ssl.SSLSocketInputRecord.decodeInputRecord(SSLSocketInputRecord.java:260)
- java.base@17/sun.security.ssl.SSLSocketInputRecord.decode(SSLSocketInputRecord.java:181)
- java.base@17/sun.security.ssl.SSLTransport.decode(SSLTransport.java:111)
- java.base@17/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1500)
- java.base@17/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1415)
- java.base@17/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:450)
- java.base@17/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:421)
- app//com.mysql.cj.protocol.ExportControlled.performTlsHandshake(ExportControlled.java:347)
- app//com.mysql.cj.protocol.StandardSocketFactory.performTlsHandshake(StandardSocketFactory.java:194)
- app//com.mysql.cj.protocol.a.NativeSocketConnection.performTlsHandshake(NativeSocketConnection.java:101)
- app//com.mysql.cj.protocol.a.NativeProtocol.negotiateSSLConnection(NativeProtocol.java:308)
- app//com.mysql.cj.protocol.a.NativeAuthenticationProvider.connect(NativeAuthenticationProvider.java:204)
- app//com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1369)
- app//com.mysql.cj.NativeSession.connect(NativeSession.java:133)
- app//com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:949)
- app//com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:819)
- app//com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:449)
- app//com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:242)
- app//com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
- app//com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
- app//com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
- app//com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
- app//com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
- app//com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71)
- app//com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726)
- app//com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712)
- java.base@17/java.util.concurrent.FutureTask.run(FutureTask.java:264)
- java.base@17/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
- java.base@17/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
- java.base@17/java.lang.Thread.run(Thread.java:833)
-2022-02-16 00:05:19 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-2022-02-16 00:05:19 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2022-02-16 00:05:19 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2022-02-16 00:05:19 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+2022-02-17 00:26:54 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 10228 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
+2022-02-17 00:26:54 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
+2022-02-17 00:26:54 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-17 00:26:54 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-17 00:26:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-17 00:26:56 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 237 ms. Found 10 JPA repository interfaces.
+2022-02-17 00:26:58 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
+2022-02-17 00:26:58 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-02-17 00:26:58 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-17 00:26:59 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
+2022-02-17 00:26:59 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4686 ms
+2022-02-17 00:26:59 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-02-17 00:27:00 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-02-17 00:27:00 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.5 by Redgate
+2022-02-17 00:27:00 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
+2022-02-17 00:27:00 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.102s)
+2022-02-17 00:27:01 [restartedMain] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table `scheduler`.`flyway_schema_history` ...
+2022-02-17 00:27:01 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema `scheduler`: << Empty Schema >>
+2022-02-17 00:27:01 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "1 - initialize"
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.users_roles' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teachers_disciplines' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.lessons_students' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teachers_students' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.disciplines' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.lessons' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.exercises' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.roles' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.users' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "2 - role columns"
+2022-02-17 00:27:01 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "3 - initialize"
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.weekdays' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teacher_working_days' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:01 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.calendar_days' (SQL State: 42S02 - Error Code: 1051)
+2022-02-17 00:27:02 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "4 - working days"
+2022-02-17 00:27:02 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 4 migrations to schema `scheduler`, now at version v4 (execution time 00:01.002s)
+2022-02-17 00:27:02 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-17 00:27:02 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-02-17 00:27:03 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-02-17 00:27:03 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-02-17 00:27:04 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-17 00:27:04 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-17 00:27:06 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-17 00:27:08 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@38e6d8e7, org.springframework.security.web.context.SecurityContextPersistenceFilter@43354f12, org.springframework.security.web.header.HeaderWriterFilter@5debf7a8, org.springframework.security.web.authentication.logout.LogoutFilter@126488a2, ru.team.scheduler.oapi.config.JwtFilter@6dd0780, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@9e6fff9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@fb4c8b4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1160a555, org.springframework.security.web.session.SessionManagementFilter@3a5a2d7d, org.springframework.security.web.access.ExceptionTranslationFilter@6104f229, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@fab3c81]
+2022-02-17 00:27:08 [restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - 
 
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2022-02-16 00:05:19 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:163)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:577)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:414)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
-	at ru.team.scheduler.OapiApplication.main(OapiApplication.java:23)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
-Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:142)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:478)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:211)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:182)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:160)
-	... 13 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#149bd119' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#149bd119': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : -1969209995
--> Resolved locally    : -798520269. Either revert the changes to the migration, or run repair to update the schema history.
-Migration checksum mismatch for migration version 2
--> Applied to database : 1711904144
--> Resolved locally    : 61886351. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:767)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:719)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:212)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:175)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:170)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:155)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:260)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:234)
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:53)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5219)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:835)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:263)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:432)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:927)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:486)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123)
-	... 18 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#149bd119' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#149bd119': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : -1969209995
--> Resolved locally    : -798520269. Either revert the changes to the migration, or run repair to update the schema history.
-Migration checksum mismatch for migration version 2
--> Applied to database : 1711904144
--> Resolved locally    : 61886351. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:767)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:719)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1389)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1309)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:759)
-	... 60 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#149bd119' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#149bd119': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : -1969209995
--> Resolved locally    : -798520269. Either revert the changes to the migration, or run repair to update the schema history.
-Migration checksum mismatch for migration version 2
--> Applied to database : 1711904144
--> Resolved locally    : 61886351. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:134)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1707)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1452)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1389)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1309)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:759)
-	... 74 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#149bd119': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : -1969209995
--> Resolved locally    : -798520269. Either revert the changes to the migration, or run repair to update the schema history.
-Migration checksum mismatch for migration version 2
--> Applied to database : 1711904144
--> Resolved locally    : 61886351. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:693)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:510)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:374)
-	... 87 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : -1969209995
--> Resolved locally    : -798520269. Either revert the changes to the migration, or run repair to update the schema history.
-Migration checksum mismatch for migration version 2
--> Applied to database : 1711904144
--> Resolved locally    : 61886351. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
-	... 95 common frames omitted
-Caused by: org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : -1969209995
--> Resolved locally    : -798520269. Either revert the changes to the migration, or run repair to update the schema history.
-Migration checksum mismatch for migration version 2
--> Applied to database : 1711904144
--> Resolved locally    : 61886351. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.flywaydb.core.Flyway$1.execute(Flyway.java:131)
-	at org.flywaydb.core.Flyway$1.execute(Flyway.java:124)
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:214)
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:124)
-	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
-	... 104 common frames omitted
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2022-02-17 00:27:09 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-02-17 00:27:09 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8189 (http) with context path '/sh'
+2022-02-17 00:27:09 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Started OapiApplication in 16.314 seconds (JVM running for 17.621)
+2022-02-17 00:27:23 [http-nio-8189-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-17 00:27:23 [http-nio-8189-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-02-17 00:27:23 [http-nio-8189-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2022-02-17 00:27:23 [http-nio-8189-exec-1] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/students':
+
+org.apache.catalina.connector.RequestFacade@7073277
+
+servletPath:/api/v1/students
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:27:23 [http-nio-8189-exec-1] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(String ru.team.scheduler.oapi.controllers.StudentController.demo())
+2022-02-17 00:27:27 [http-nio-8189-exec-4] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/students':
+
+org.apache.catalina.connector.RequestFacade@3cd4d8fe
+
+servletPath:/api/v1/students
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+cache-control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:27:27 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(String ru.team.scheduler.oapi.controllers.StudentController.demo())
+2022-02-17 00:27:36 [http-nio-8189-exec-7] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/lessons':
+
+org.apache.catalina.connector.RequestFacade@3cd4d8fe
+
+servletPath:/api/v1/lessons
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:27:37 [http-nio-8189-exec-7] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@6a6d4403
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:27:48 [http-nio-8189-exec-10] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/students':
+
+org.apache.catalina.connector.RequestFacade@7073277
+
+servletPath:/api/v1/students
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:27:48 [http-nio-8189-exec-10] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(String ru.team.scheduler.oapi.controllers.StudentController.demo())
+2022-02-17 00:28:15 [http-nio-8189-exec-2] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1':
+
+org.apache.catalina.connector.RequestFacade@3cd4d8fe
+
+servletPath:/api/v1
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:28:15 [http-nio-8189-exec-2] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@7dda5247
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:28:22 [http-nio-8189-exec-4] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/login':
+
+org.apache.catalina.connector.RequestFacade@3cd4d8fe
+
+servletPath:/login
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:28:22 [http-nio-8189-exec-4] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@69270e9c
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:28:51 [http-nio-8189-exec-7] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/student_info':
+
+org.apache.catalina.connector.RequestFacade@3cd4d8fe
+
+servletPath:/api/v1/student_info
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:28:51 [http-nio-8189-exec-7] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@3084af5a
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:32:13 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-02-17 00:32:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-02-17 00:32:13 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-02-17 00:33:26 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 1060 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
+2022-02-17 00:33:26 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
+2022-02-17 00:33:26 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-17 00:33:26 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-17 00:33:28 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-17 00:33:28 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 211 ms. Found 10 JPA repository interfaces.
+2022-02-17 00:33:30 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
+2022-02-17 00:33:30 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-02-17 00:33:30 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-17 00:33:30 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
+2022-02-17 00:33:30 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4289 ms
+2022-02-17 00:33:31 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-02-17 00:33:32 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-02-17 00:33:32 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.5 by Redgate
+2022-02-17 00:33:32 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
+2022-02-17 00:33:32 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 4 migrations (execution time 00:00.073s)
+2022-02-17 00:33:32 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema `scheduler`: 4
+2022-02-17 00:33:32 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema `scheduler` is up to date. No migration necessary.
+2022-02-17 00:33:32 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-17 00:33:33 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.4.Final
+2022-02-17 00:33:33 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-02-17 00:33:33 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-02-17 00:33:35 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-17 00:33:35 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-17 00:33:36 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-17 00:33:38 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@eaf097b, org.springframework.security.web.context.SecurityContextPersistenceFilter@640e3b7d, org.springframework.security.web.header.HeaderWriterFilter@788687af, org.springframework.security.web.authentication.logout.LogoutFilter@5fb0f41a, ru.team.scheduler.oapi.config.JwtFilter@7b82a269, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@52698b2b, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@15f3f3f7, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5128679f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@25188d82, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5805eed7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@10930ff1, org.springframework.security.web.session.SessionManagementFilter@543bcf56, org.springframework.security.web.access.ExceptionTranslationFilter@7394bae, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6a978d94]
+2022-02-17 00:33:38 [restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2022-02-17 00:33:39 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-02-17 00:33:39 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8189 (http) with context path '/sh'
+2022-02-17 00:33:39 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Started OapiApplication in 13.826 seconds (JVM running for 15.016)
+2022-02-17 00:33:52 [http-nio-8189-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-17 00:33:52 [http-nio-8189-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-02-17 00:33:52 [http-nio-8189-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2022-02-17 00:33:52 [http-nio-8189-exec-1] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/student_info':
+
+org.apache.catalina.connector.RequestFacade@1de23f7f
+
+servletPath:/api/v1/student_info
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+cache-control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:33:52 [http-nio-8189-exec-1] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@2db2a54d
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+cache-control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:33:54 [http-nio-8189-exec-2] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/student_info':
+
+org.apache.catalina.connector.RequestFacade@1de23f7f
+
+servletPath:/api/v1/student_info
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+cache-control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:33:54 [http-nio-8189-exec-2] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@13efc77d
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+cache-control: max-age=0
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:34:04 [http-nio-8189-exec-5] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/students':
+
+org.apache.catalina.connector.RequestFacade@4b21748e
+
+servletPath:/api/v1/students
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:34:04 [http-nio-8189-exec-5] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(String ru.team.scheduler.oapi.controllers.StudentController.demo())
+2022-02-17 00:34:34 [http-nio-8189-exec-8] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/student_info':
+
+org.apache.catalina.connector.RequestFacade@1de23f7f
+
+servletPath:/api/v1/student_info
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:34:34 [http-nio-8189-exec-8] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@5a07a1e0
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:34:45 [http-nio-8189-exec-1] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/lessons':
+
+org.apache.catalina.connector.RequestFacade@1de23f7f
+
+servletPath:/api/v1/lessons
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:34:45 [http-nio-8189-exec-1] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@45372297
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+upgrade-insecure-requests: 1
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+sec-fetch-site: none
+sec-fetch-mode: navigate
+sec-fetch-user: ?1
+sec-fetch-dest: document
+accept-encoding: gzip, deflate, br
+accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  UsernamePasswordAuthenticationFilter
+  DefaultLoginPageGeneratingFilter
+  DefaultLogoutPageGeneratingFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-17 00:34:54 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-02-17 00:34:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-02-17 00:34:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
