@@ -12,6 +12,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Role {
+    public static final String STUDENT_ROLE = "ROLE_STUDENT";
+    public static final String TEACHER_ROLE = "ROLE_TEACHER";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

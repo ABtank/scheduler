@@ -25,6 +25,7 @@
         v-model="data.password"/>
       </a-form-item>
       <a-divider />
+      <a-alert v-if="isErrorLogin" type="error" message="Неправильный логин или пароль" banner />
       <a-button
       type="primary"
       @click="handleSubmit"
@@ -44,7 +45,8 @@ export default {
       data: {
         email: null,
         password: null,
-      }
+      },
+      isErrorLogin: false
     }
   },
   methods: {
@@ -56,8 +58,14 @@ export default {
       });
     },
     async sendForm() {
-      let response = await this.$auth.loginWith('local', { data: this.data });
-      console.log(response);
+      this.isErrorLogin = false;
+      try {
+        let response = await this.$auth.loginWith('local', { data: this.data });
+        window.location.href = '/';
+      }
+      catch (e) {
+        this.isErrorLogin = true;
+      }
     }
   }
 }

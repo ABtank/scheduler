@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.config.JwtProvider;
-import ru.team.scheduler.oapi.dto.LoginRequestDto;
-import ru.team.scheduler.oapi.dto.LoginResponseDto;
-import ru.team.scheduler.oapi.dto.UserDto;
-import ru.team.scheduler.oapi.dto.UserResponseDto;
+import ru.team.scheduler.oapi.dto.*;
 import ru.team.scheduler.oapi.services.SecurityUserService;
 import ru.team.scheduler.persist.entities.User;
 
@@ -40,8 +37,15 @@ public class AuthController {
     }
 
     @GetMapping("/user")
-    public UserResponseDto login(Principal principal) {
+    public UserResponseDto getUser(Principal principal) {
         User user = userService.getUserByEmail(principal.getName());
+
+        return new UserResponseDto(new UserDto(user));
+    }
+
+    @PostMapping("/registration")
+    public UserResponseDto registration(@RequestBody RegistrationRequestDto requestDto) {
+        User user = userService.registerUser(requestDto);
 
         return new UserResponseDto(new UserDto(user));
     }
