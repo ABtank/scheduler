@@ -24,7 +24,7 @@ public class SwaggerConfig {
     @Bean
     public Docket apiDocket(){
         return new Docket(SWAGGER_2)
-                .groupName(API_TAG)
+                .groupName(API_AUTH)
                 .apiInfo(apiInfo())
                 .forCodeGeneration(true)
                 .select()
@@ -33,7 +33,10 @@ public class SwaggerConfig {
                 .build()
                 .securitySchemes(singletonList(apiKey()))
                 .securityContexts(singletonList(securityContext()))
-                .tags(new Tag(API_TAG, "All APIs relating to Invoices"));
+                .tags(new Tag(API_AUTH, "Авторизация и регистрация пользователя."),
+                        new Tag(API_DISCIPLINE, "Работа с Дисциплинами."),
+                        new Tag(API_USER, "Операции с пользователем.")
+                );
     }
 
     private ApiInfo apiInfo(){
