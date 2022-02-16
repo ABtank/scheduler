@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] AUTH_URLS = {
             "/api/v1/disciplines/**",
             "/api/v1/students/**",
-            "/api/v1/users/**"
+            "/api/v1/users/**",
+            "/api/v1/roles/**",
     };
 
     @Autowired
