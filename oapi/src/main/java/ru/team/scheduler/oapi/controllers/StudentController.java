@@ -3,6 +3,7 @@ package ru.team.scheduler.oapi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +30,7 @@ public class StudentController {
 
     @GetMapping("/student_info")
     public UserDto personalAccount(Principal principal){
-//        User user = userService.findByName(principal.getName()).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД не найден!!!"));
-        User user = userService.findByName("иван").get();
-//                .orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
+        User user = userService.findByName(principal.getName()).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД не найден!!!"));
         return new UserDto(user);
     }
 }

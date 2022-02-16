@@ -3,10 +3,16 @@ package ru.team.scheduler.oapi.config;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.time.LocalDate;
@@ -18,15 +24,26 @@ import java.util.Date;
 @Service
 public class JwtProvider {
 
-    @Value("${jwt.secret}")
-    private String secretKey;
+//   private String secretKey = "45T47fcXazP5pgMmWXKByCZWpWUzQrZrJMVegYVbcxhXFk22uVDWS9TAzpwmq8ZG";
 
     @Value("${jwt.ttl:3600}")
     private long tokenTtl;
 
+    private Key key;
+
+    @Value("${jwt.secret}")
+    private String secretKey;
+
+//    @Autowired
+//    public JwtProvider (@Value("${jwt.secret}" ) String secretKey){
+//
+//    }
+
     public String createToken(String username) {
+        Date issuedDate = new Date();
         return Jwts.builder()
                 .setSubject(username)
+                .setIssuedAt(issuedDate)
                 .setExpiration(Date.from(LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .signWith(getKey())
                 .compact();
@@ -39,8 +56,7 @@ public class JwtProvider {
                     .build()
                     .parseClaimsJws(token);
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
             return false;
         }
@@ -54,20 +70,22 @@ public class JwtProvider {
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
             return null;
         }
     }
 
     private Key getKey() {
-        if (secretKey != null) {
-            byte[] decodeKey = Base64.getDecoder().decode(secretKey);
-            return new SecretKeySpec(decodeKey, 0, decodeKey.length, SignatureAlgorithm.HS256.getJcaName());
+        System.out.println("secretKey " + secretKey);
+        if (key == null) {
+            if (secretKey != null) {
+                byte[] decodeKey = Base64.getDecoder().decode(secretKey);
+                key = new SecretKeySpec(decodeKey, 0, decodeKey.length, SignatureAlgorithm.HS256.getJcaName());
+            } else {
+               key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+            }
         }
-        else {
-            return Keys.secretKeyFor(SignatureAlgorithm.HS256);
-        }
+        return key;
     }
 }

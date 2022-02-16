@@ -1,6 +1,5 @@
 package ru.team.scheduler.oapi.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,22 +9,32 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 import ru.team.scheduler.oapi.services.SecurityUserService;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.io.IOException;
 
 import static org.springframework.util.StringUtils.hasText;
 
 @Component
-@RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
-    private final JwtProvider jwtProvider;
-    private final SecurityUserService userService;
+
+    private  JwtProvider jwtProvider;
+    private  SecurityUserService userService;
+
+    @Autowired
+    public void setJwtProvider(JwtProvider jwtProvider) {
+        this.jwtProvider = jwtProvider;
+    }
+
+    @Autowired
+    public void setUserService(SecurityUserService userService) {
+        this.userService = userService;
+    }
+
+
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

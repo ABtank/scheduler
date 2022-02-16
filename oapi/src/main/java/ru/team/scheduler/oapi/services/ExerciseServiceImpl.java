@@ -49,7 +49,6 @@ public class ExerciseServiceImpl implements ExerciseService{
         return Optional.empty();
     }
 
-
     @Transactional
     @Override
     public Optional<ExerciseDto> save(Principal principal, ExerciseDto exerciseDto) {

@@ -3,11 +3,13 @@ package ru.team.scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 //import ru.team.scheduler.oapi.services.EmailService;
 
 import javax.mail.MessagingException;
 
 @SpringBootApplication
+@PropertySource("classpath:secured.properties")
 public class OapiApplication {
     //    Пример рассылки
 //    private EmailService emailService;

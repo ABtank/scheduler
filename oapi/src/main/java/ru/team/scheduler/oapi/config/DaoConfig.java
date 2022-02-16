@@ -1,5 +1,6 @@
 package ru.team.scheduler.oapi.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,17 +11,17 @@ import ru.team.scheduler.oapi.services.SecurityUserService;
 
 @Configuration
 public class DaoConfig {
-    private SecurityUserService userService;
-    private PasswordEncoder passwordEncoder;
+    private  SecurityUserService userService;
+    private  PasswordEncoder passwordEncoder;
 
     @Autowired
-    public void setUserService(SecurityUserService service) {
-        this.userService = service;
+    public void setUserService(SecurityUserService userService) {
+        this.userService = userService;
     }
 
     @Autowired
-    public void setPasswordEncoder(PasswordEncoder encoder) {
-        this.passwordEncoder = encoder;
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Bean
@@ -30,4 +31,5 @@ public class DaoConfig {
         provider.setUserDetailsService(userService);
         return provider;
     }
+
 }
