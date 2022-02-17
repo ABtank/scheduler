@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.team.scheduler.oapi.dto.UserCreationDto;
 import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.persist.entities.User;
@@ -67,6 +68,7 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public Optional<UserDto> save(UserCreationDto userCreationDTO) {
         User user = mapperService.userCreationDTOtoUser(userCreationDTO);

@@ -41,7 +41,7 @@ public class User {
 
 
     @Column
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
@@ -101,8 +101,7 @@ public class User {
     }
 
 
-    public User(Integer id, String email, String password) {
-        this.id = id;
+    public User( String email, String password) {
         this.password = password;
         this.email = email;
         this.roles = new HashSet<>();

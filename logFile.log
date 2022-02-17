@@ -1,268 +1,665 @@
-2022-02-12 13:44:29 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 18804 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
-2022-02-12 13:44:29 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
-2022-02-12 13:44:29 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2022-02-12 13:44:29 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2022-02-12 13:44:30 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-02-12 13:44:30 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 178 ms. Found 3 JPA repository interfaces.
-2022-02-12 13:44:32 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
-2022-02-12 13:44:32 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2022-02-12 13:44:32 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-02-12 13:44:33 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
-2022-02-12 13:44:33 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3671 ms
-2022-02-12 13:44:33 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2022-02-12 13:44:34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-02-12 13:44:34 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.5 by Redgate
-2022-02-12 13:44:34 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
-2022-02-12 13:44:34 [restartedMain] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#9321c6a' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#9321c6a': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1108119652. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-2022-02-12 13:44:34 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
-2022-02-12 13:44:34 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17/jdk.internal.misc.Unsafe.park(Native Method)
- java.base@17/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
- java.base@17/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
- java.base@17/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
- java.base@17/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
- java.base@17/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1062)
- java.base@17/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
- java.base@17/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
- java.base@17/java.lang.Thread.run(Thread.java:833)
-2022-02-12 13:44:34 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17/java.util.regex.Pattern$SliceI.match(Pattern.java:4111)
- java.base@17/java.util.regex.Pattern$Branch.match(Pattern.java:4734)
- java.base@17/java.util.regex.Pattern$Start.match(Pattern.java:3608)
- java.base@17/java.util.regex.Matcher.search(Matcher.java:1728)
- java.base@17/java.util.regex.Matcher.find(Matcher.java:745)
- java.base@17/java.util.regex.Pattern.split(Pattern.java:1265)
- java.base@17/java.util.regex.Pattern.split(Pattern.java:1335)
- java.base@17/sun.security.util.AlgorithmDecomposer.decomposeImpl(AlgorithmDecomposer.java:60)
- java.base@17/sun.security.util.AlgorithmDecomposer.decompose(AlgorithmDecomposer.java:87)
- java.base@17/sun.security.ssl.SSLAlgorithmDecomposer.decompose(SSLAlgorithmDecomposer.java:276)
- java.base@17/sun.security.util.AbstractAlgorithmConstraints.checkAlgorithm(AbstractAlgorithmConstraints.java:100)
- java.base@17/sun.security.util.DisabledAlgorithmConstraints.permits(DisabledAlgorithmConstraints.java:164)
- java.base@17/sun.security.ssl.SSLAlgorithmConstraints.permits(SSLAlgorithmConstraints.java:159)
- java.base@17/sun.security.ssl.SignatureScheme.isPermitted(SignatureScheme.java:360)
- java.base@17/sun.security.ssl.SignatureScheme.getSupportedAlgorithms(SignatureScheme.java:408)
- java.base@17/sun.security.ssl.SignatureAlgorithmsExtension$CHSignatureSchemesProducer.produce(SignatureAlgorithmsExtension.java:190)
- java.base@17/sun.security.ssl.SSLExtension.produce(SSLExtension.java:599)
- java.base@17/sun.security.ssl.SSLExtensions.produce(SSLExtensions.java:265)
- java.base@17/sun.security.ssl.ClientHello$ClientHelloKickstartProducer.produce(ClientHello.java:649)
- java.base@17/sun.security.ssl.SSLHandshake.kickstart(SSLHandshake.java:529)
- java.base@17/sun.security.ssl.ClientHandshakeContext.kickstart(ClientHandshakeContext.java:107)
- java.base@17/sun.security.ssl.TransportContext.kickstart(TransportContext.java:251)
- java.base@17/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:443)
- java.base@17/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:421)
- app//com.mysql.cj.protocol.ExportControlled.performTlsHandshake(ExportControlled.java:347)
- app//com.mysql.cj.protocol.StandardSocketFactory.performTlsHandshake(StandardSocketFactory.java:194)
- app//com.mysql.cj.protocol.a.NativeSocketConnection.performTlsHandshake(NativeSocketConnection.java:101)
- app//com.mysql.cj.protocol.a.NativeProtocol.negotiateSSLConnection(NativeProtocol.java:308)
- app//com.mysql.cj.protocol.a.NativeAuthenticationProvider.connect(NativeAuthenticationProvider.java:204)
- app//com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1369)
- app//com.mysql.cj.NativeSession.connect(NativeSession.java:133)
- app//com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:949)
- app//com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:819)
- app//com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:449)
- app//com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:242)
- app//com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:198)
- app//com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
- app//com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:364)
- app//com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
- app//com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:476)
- app//com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71)
- app//com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:726)
- app//com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:712)
- java.base@17/java.util.concurrent.FutureTask.run(FutureTask.java:264)
- java.base@17/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
- java.base@17/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
- java.base@17/java.lang.Thread.run(Thread.java:833)
-2022-02-12 13:44:34 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-2022-02-12 13:44:34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2022-02-12 13:44:34 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2022-02-12 13:44:34 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+2022-02-18 00:10:32 [http-nio-8189-exec-5] INFO  Spring Security Debugger - 
 
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2022-02-12 13:44:34 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:163)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:577)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:414)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
-	at ru.team.scheduler.OapiApplication.main(OapiApplication.java:43)
+************************************************************
+
+Request received for GET '/v2/api-docs?group=Authorization%20Service':
+
+org.apache.catalina.connector.RequestFacade@6659bd5e
+
+servletPath:/v2/api-docs
+pathInfo:null
+headers: 
+host: localhost:8189
+connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Microsoft Edge";v="98"
+accept: application/json, application/yaml
+sec-ch-ua-mobile: ?0
+user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36 Edg/98.0.1108.50
+sec-ch-ua-platform: "Windows"
+sec-fetch-site: same-origin
+sec-fetch-mode: cors
+sec-fetch-dest: empty
+referer: http://localhost:8189/sh/swagger-ui/
+accept-encoding: gzip, deflate, br
+accept-language: ru,en;q=0.9,en-GB;q=0.8,en-US;q=0.7
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:12:40 [http-nio-8189-exec-6] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/auth':
+
+org.apache.catalina.connector.RequestFacade@6659bd5e
+
+servletPath:/auth
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 19e9b826-4281-4143-832b-8a571d06f249
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 61
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:12:40 [http-nio-8189-exec-6] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@252e3ee0
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 19e9b826-4281-4143-832b-8a571d06f249
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 61
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:13:09 [http-nio-8189-exec-9] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/api/v1/auth':
+
+org.apache.catalina.connector.RequestFacade@6659bd5e
+
+servletPath:/api/v1/auth
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 4b2a6478-2165-4e41-9a24-54e78c86adc9
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 61
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:13:09 [http-nio-8189-exec-9] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported]
+2022-02-18 00:13:09 [http-nio-8189-exec-9] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@7c35ec7b
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 4b2a6478-2165-4e41-9a24-54e78c86adc9
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 61
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:16:16 [http-nio-8189-exec-8] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/api/v1/auth':
+
+org.apache.catalina.connector.RequestFacade@6659bd5e
+
+servletPath:/api/v1/auth
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 996a05a3-2e38-4343-bb33-00ac69268b70
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:16:16 [http-nio-8189-exec-8] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported]
+2022-02-18 00:16:16 [http-nio-8189-exec-8] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@592d7087
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 996a05a3-2e38-4343-bb33-00ac69268b70
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:16:49 [http-nio-8189-exec-7] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/api/v1/auth':
+
+org.apache.catalina.connector.RequestFacade@6659bd5e
+
+servletPath:/api/v1/auth
+pathInfo:null
+headers: 
+authorization: Basic Og==
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 8df1d464-bb52-4ff6-bb45-1afaefb3fd72
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:16:49 [http-nio-8189-exec-7] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported]
+2022-02-18 00:16:49 [http-nio-8189-exec-7] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@3d041bce
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Basic Og==
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 8df1d464-bb52-4ff6-bb45-1afaefb3fd72
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:18:00 [http-nio-8189-exec-2] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/api/v1/auth':
+
+org.apache.catalina.connector.RequestFacade@6659bd5e
+
+servletPath:/api/v1/auth
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: e6e0c215-7cd5-4144-8073-78b4a92e93c3
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:18:00 [http-nio-8189-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'text/plain;charset=UTF-8' not supported]
+2022-02-18 00:18:00 [http-nio-8189-exec-2] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@7bd26fc
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: text/plain
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: e6e0c215-7cd5-4144-8073-78b4a92e93c3
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:18:43 [http-nio-8189-exec-4] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/api/v1/auth':
+
+org.apache.catalina.connector.RequestFacade@6659bd5e
+
+servletPath:/api/v1/auth
+pathInfo:null
+headers: 
+content-type: application/json
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 7d198f3f-76d7-4336-b008-debadf8cfb49
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:18:43 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(UserDto ru.team.scheduler.oapi.controllers.AuthController.create(UserCreationDto))
+2022-02-18 00:18:43 [http-nio-8189-exec-4] ERROR ru.team.scheduler.oapi.config.AppAOP - ERROR : execution(UserDto ru.team.scheduler.oapi.controllers.AuthController.create(UserCreationDto))
+2022-02-18 00:18:43 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(void ru.team.scheduler.oapi.services.EmailServiceImpl.sendSimpleMessage(String[],String,String))
+2022-02-18 00:18:47 [http-nio-8189-exec-4] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/sh] threw exception [Request processing failed; nested exception is java.lang.IllegalArgumentException: password not matching] with root cause
+java.lang.IllegalArgumentException: password not matching
+	at ru.team.scheduler.oapi.controllers.AuthController.create(AuthController.java:71)
+	at ru.team.scheduler.oapi.controllers.AuthController$$FastClassBySpringCGLIB$$b11ca05.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:58)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at ru.team.scheduler.oapi.controllers.AuthController$$EnhancerBySpringCGLIB$$2f2dd5a9.create(<generated>)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
-Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:142)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:478)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:211)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:182)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:160)
-	... 13 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#9321c6a' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#9321c6a': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1108119652. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:767)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:719)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:212)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:175)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:170)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:155)
-	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:260)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:234)
-	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:53)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5219)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
-	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:835)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1396)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1386)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
-	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
-	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:919)
-	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:263)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:432)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:927)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
-	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:486)
-	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123)
-	... 18 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#9321c6a' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#9321c6a': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1108119652. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:767)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:719)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1389)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1309)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:759)
-	... 60 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#9321c6a' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#9321c6a': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1108119652. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:134)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1707)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1452)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1389)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1309)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:759)
-	... 74 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#9321c6a': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1108119652. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:693)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:510)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:374)
-	... 87 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1108119652. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
-	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
-	... 95 common frames omitted
-Caused by: org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1108119652. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.flywaydb.core.Flyway$1.execute(Flyway.java:131)
-	at org.flywaydb.core.Flyway$1.execute(Flyway.java:124)
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:214)
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:124)
-	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
-	... 104 common frames omitted
-2022-02-12 13:45:08 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 5932 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
-2022-02-12 13:45:08 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
-2022-02-12 13:45:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2022-02-12 13:45:09 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2022-02-12 13:45:10 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-02-12 13:45:10 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 121 ms. Found 3 JPA repository interfaces.
-2022-02-12 13:45:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
-2022-02-12 13:45:12 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2022-02-12 13:45:12 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-02-12 13:45:12 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
-2022-02-12 13:45:12 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3361 ms
-2022-02-12 13:45:12 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2022-02-12 13:45:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-02-12 13:45:13 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.5 by Redgate
-2022-02-12 13:45:13 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
-2022-02-12 13:45:13 [restartedMain] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#689fe9de' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#689fe9de': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1969209995. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-2022-02-12 13:45:13 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
-2022-02-12 13:45:13 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at ru.team.scheduler.oapi.config.JwtFilter.doFilterInternal(JwtFilter.java:45)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.security.web.debug.DebugFilter.invokeWithWrappedRequest(DebugFilter.java:90)
+	at org.springframework.security.web.debug.DebugFilter.doFilter(DebugFilter.java:78)
+	at org.springframework.security.web.debug.DebugFilter.doFilter(DebugFilter.java:67)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:94)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1732)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-02-18 00:18:47 [http-nio-8189-exec-4] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@31b30191
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: 7d198f3f-76d7-4336-b008-debadf8cfb49
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+content-length: 58
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:21:33 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-02-18 00:21:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-02-18 00:21:33 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-02-18 00:21:39 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 18612 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
+2022-02-18 00:21:39 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
+2022-02-18 00:21:39 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-18 00:21:39 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-18 00:21:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-18 00:21:41 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 178 ms. Found 8 JPA repository interfaces.
+2022-02-18 00:21:43 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
+2022-02-18 00:21:43 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-02-18 00:21:43 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-18 00:21:43 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
+2022-02-18 00:21:43 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4334 ms
+2022-02-18 00:21:44 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 7.7.3 by Redgate
+2022-02-18 00:21:44 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-02-18 00:21:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-02-18 00:21:45 [restartedMain] INFO  o.f.c.i.database.base.DatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
+2022-02-18 00:21:45 [restartedMain] ERROR o.s.b.w.e.tomcat.TomcatStarter - Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#70fe8e1b' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#70fe8e1b': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 4
+-> Applied to database : 1961230422
+-> Resolved locally    : 324690595. Either revert the changes to the migration, or run repair to update the schema history.
+2022-02-18 00:21:45 [restartedMain] INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2022-02-18 00:21:45 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
  java.base@17/jdk.internal.misc.Unsafe.park(Native Method)
  java.base@17/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:252)
  java.base@17/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1672)
@@ -272,21 +669,13 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
  java.base@17/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1122)
  java.base@17/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
  java.base@17/java.lang.Thread.run(Thread.java:833)
-2022-02-12 13:45:13 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
- java.base@17/java.util.regex.Pattern$GroupHead.match(Pattern.java:4789)
- java.base@17/java.util.regex.Pattern$NotBehind.match(Pattern.java:5290)
- java.base@17/java.util.regex.Pattern$Branch.match(Pattern.java:4734)
- java.base@17/java.util.regex.Pattern$Start.match(Pattern.java:3608)
- java.base@17/java.util.regex.Matcher.search(Matcher.java:1728)
- java.base@17/java.util.regex.Matcher.find(Matcher.java:745)
- java.base@17/java.util.regex.Pattern.split(Pattern.java:1265)
- java.base@17/java.util.regex.Pattern.split(Pattern.java:1335)
- java.base@17/sun.security.util.AlgorithmDecomposer.decomposeImpl(AlgorithmDecomposer.java:60)
- java.base@17/sun.security.util.AlgorithmDecomposer.decompose(AlgorithmDecomposer.java:87)
- java.base@17/sun.security.ssl.SSLAlgorithmDecomposer.decompose(SSLAlgorithmDecomposer.java:276)
- java.base@17/sun.security.util.AbstractAlgorithmConstraints.checkAlgorithm(AbstractAlgorithmConstraints.java:100)
+2022-02-18 00:21:45 [restartedMain] WARN  o.a.c.loader.WebappClassLoaderBase - The web application [sh] appears to have started a thread named [HikariPool-1 connection adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base@17/java.util.HashMap$HashIterator.nextNode(HashMap.java:1583)
+ java.base@17/java.util.HashMap$KeyIterator.next(HashMap.java:1602)
+ java.base@17/sun.security.util.AbstractAlgorithmConstraints.checkAlgorithm(AbstractAlgorithmConstraints.java:104)
  java.base@17/sun.security.util.DisabledAlgorithmConstraints.permits(DisabledAlgorithmConstraints.java:164)
  java.base@17/sun.security.ssl.SSLAlgorithmConstraints.permits(SSLAlgorithmConstraints.java:159)
+ java.base@17/sun.security.ssl.SSLAlgorithmConstraints.permits(SSLAlgorithmConstraints.java:154)
  java.base@17/sun.security.ssl.SignatureScheme.isPermitted(SignatureScheme.java:364)
  java.base@17/sun.security.ssl.SignatureScheme.getSupportedAlgorithms(SignatureScheme.java:408)
  java.base@17/sun.security.ssl.SignatureAlgorithmsExtension$CHSignatureSchemesProducer.produce(SignatureAlgorithmsExtension.java:190)
@@ -321,23 +710,23 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
  java.base@17/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
  java.base@17/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
  java.base@17/java.lang.Thread.run(Thread.java:833)
-2022-02-12 13:45:13 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
-2022-02-12 13:45:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2022-02-12 13:45:13 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2022-02-12 13:45:13 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+2022-02-18 00:21:45 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+2022-02-18 00:21:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-02-18 00:21:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-02-18 00:21:45 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
 
 Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
-2022-02-12 13:45:13 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
+2022-02-18 00:21:45 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
 org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:163)
 	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:577)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:145)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:414)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:302)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
-	at ru.team.scheduler.OapiApplication.main(OapiApplication.java:43)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:767)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:447)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:338)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1356)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1345)
+	at ru.team.scheduler.OapiApplication.main(OapiApplication.java:21)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -346,16 +735,15 @@ org.springframework.context.ApplicationContextException: Unable to start web ser
 Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
 	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:142)
 	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:478)
-	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:211)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:455)
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:204)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:182)
 	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:160)
 	... 13 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#689fe9de' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#689fe9de': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1969209995. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'jwtFilter': Unsatisfied dependency expressed through method 'setUserService' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#70fe8e1b' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#70fe8e1b': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 4
+-> Applied to database : 1961230422
+-> Resolved locally    : 324690595. Either revert the changes to the migration, or run repair to update the schema history.
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:767)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:719)
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
@@ -400,11 +788,10 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
 	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:486)
 	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123)
 	... 18 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#689fe9de' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#689fe9de': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1969209995. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityUserService': Unsatisfied dependency expressed through method 'setUserRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#70fe8e1b' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#70fe8e1b': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 4
+-> Applied to database : 1961230422
+-> Resolved locally    : 324690595. Either revert the changes to the migration, or run repair to update the schema history.
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:767)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:719)
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
@@ -421,11 +808,10 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1309)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:759)
 	... 60 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#689fe9de' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#689fe9de': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1969209995. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in ru.team.scheduler.persist.repositories.UserRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#70fe8e1b' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#70fe8e1b': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 4
+-> Applied to database : 1961230422
+-> Resolved locally    : 324690595. Either revert the changes to the migration, or run repair to update the schema history.
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:389)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:134)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1707)
@@ -441,11 +827,10 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
 	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1309)
 	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:759)
 	... 74 common frames omitted
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#689fe9de': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1969209995. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#70fe8e1b': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
+Migration checksum mismatch for migration version 4
+-> Applied to database : 1961230422
+-> Resolved locally    : 324690595. Either revert the changes to the migration, or run repair to update the schema history.
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:342)
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113)
 	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:693)
@@ -457,10 +842,9 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveInnerBean(BeanDefinitionValueResolver.java:374)
 	... 87 common frames omitted
 Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1969209995. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
+Migration checksum mismatch for migration version 4
+-> Applied to database : 1961230422
+-> Resolved locally    : 324690595. Either revert the changes to the migration, or run repair to update the schema history.
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
@@ -473,57 +857,106 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
 	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330)
 	... 95 common frames omitted
 Caused by: org.flywaydb.core.api.exception.FlywayValidateException: Validate failed: Migrations have failed validation
-Migration checksum mismatch for migration version 1
--> Applied to database : 832094651
--> Resolved locally    : -1969209995. Either revert the changes to the migration, or run repair to update the schema history.
-Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
-	at org.flywaydb.core.Flyway$1.execute(Flyway.java:131)
-	at org.flywaydb.core.Flyway$1.execute(Flyway.java:124)
-	at org.flywaydb.core.FlywayExecutor.execute(FlywayExecutor.java:214)
-	at org.flywaydb.core.Flyway.migrate(Flyway.java:124)
+Migration checksum mismatch for migration version 4
+-> Applied to database : 1961230422
+-> Resolved locally    : 324690595. Either revert the changes to the migration, or run repair to update the schema history.
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:173)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:165)
+	at org.flywaydb.core.Flyway.execute(Flyway.java:572)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:165)
 	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
 	... 104 common frames omitted
-2022-02-12 13:46:26 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 14484 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
-2022-02-12 13:46:26 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
-2022-02-12 13:46:26 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2022-02-12 13:46:26 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2022-02-12 13:46:28 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-02-12 13:46:28 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 116 ms. Found 3 JPA repository interfaces.
-2022-02-12 13:46:29 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
-2022-02-12 13:46:29 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2022-02-12 13:46:29 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
-2022-02-12 13:46:30 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
-2022-02-12 13:46:30 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3303 ms
-2022-02-12 13:46:30 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2022-02-12 13:46:31 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2022-02-12 13:46:31 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 8.0.5 by Redgate
-2022-02-12 13:46:31 [restartedMain] INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
-2022-02-12 13:46:31 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.042s)
-2022-02-12 13:46:31 [restartedMain] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table `scheduler`.`flyway_schema_history` ...
-2022-02-12 13:46:31 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema `scheduler`: << Empty Schema >>
-2022-02-12 13:46:31 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "1 - initialize"
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.users_roles' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teachers_disciplines' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.lessons_students' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teachers_students' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.disciplines' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.lessons' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.exercises' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.roles' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:31 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.users' (SQL State: 42S02 - Error Code: 1051)
-2022-02-12 13:46:32 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "2 - role columns"
-2022-02-12 13:46:32 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 2 migrations to schema `scheduler`, now at version v2 (execution time 00:00.732s)
-2022-02-12 13:46:32 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-02-12 13:46:32 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.4.Final
-2022-02-12 13:46:32 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2022-02-12 13:46:33 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2022-02-12 13:46:34 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-02-12 13:46:34 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-02-12 13:46:35 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-02-12 13:46:36 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@373744f5, org.springframework.security.web.context.SecurityContextPersistenceFilter@99ef333, org.springframework.security.web.header.HeaderWriterFilter@a47cb75, org.springframework.security.web.authentication.logout.LogoutFilter@410845e7, ru.team.scheduler.oapi.config.JwtFilter@c2e7251, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@387b3550, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c02963f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@75f1af86, org.springframework.security.web.session.SessionManagementFilter@724a120d, org.springframework.security.web.access.ExceptionTranslationFilter@28189274, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3de9a0e2]
-2022-02-12 13:46:36 [restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - 
+2022-02-18 00:22:01 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 15156 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
+2022-02-18 00:22:01 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
+2022-02-18 00:22:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-02-18 00:22:01 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-02-18 00:22:03 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-02-18 00:22:03 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 165 ms. Found 8 JPA repository interfaces.
+2022-02-18 00:22:05 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
+2022-02-18 00:22:05 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-02-18 00:22:05 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-02-18 00:22:05 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
+2022-02-18 00:22:05 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4108 ms
+2022-02-18 00:22:05 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 7.7.3 by Redgate
+2022-02-18 00:22:05 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-02-18 00:22:06 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.c.i.database.base.DatabaseType - Database: jdbc:mysql://localhost:3306/scheduler (MySQL 8.0)
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 5 migrations (execution time 00:00.044s)
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table `scheduler`.`flyway_schema_history` ...
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema `scheduler`: << Empty Schema >>
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "1 - initialize"
+2022-02-18 00:22:06 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.users_roles' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:06 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teachers_disciplines' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:06 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.lessons_students' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teachers_students' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.disciplines' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.lessons' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.exercises' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.roles' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.users' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 3 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 9 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "2 - role columns"
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 1 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 1 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 1 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 1 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 1 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 1 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "3 - initialize"
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.weekdays' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.teacher_working_days' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] WARN  o.f.c.i.s.DefaultSqlScriptExecutor - DB: Unknown table 'scheduler.calendar_days' (SQL State: 42S02 - Error Code: 1051)
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 0 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "4 - role columns"
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 5 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 2 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 4 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 2 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 2 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 2 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Migrating schema `scheduler` to version "5 - working days"
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 7 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 14 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.c.i.s.DefaultSqlScriptExecutor - 2 rows affected
+2022-02-18 00:22:07 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 5 migrations to schema `scheduler`, now at version v5 (execution time 00:00.987s)
+2022-02-18 00:22:08 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-02-18 00:22:08 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.33
+2022-02-18 00:22:08 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-02-18 00:22:08 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-02-18 00:22:09 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-02-18 00:22:09 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-02-18 00:22:10 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-02-18 00:22:12 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2e884453, org.springframework.security.web.context.SecurityContextPersistenceFilter@4175c506, org.springframework.security.web.header.HeaderWriterFilter@1220bf7e, org.springframework.security.web.authentication.logout.LogoutFilter@4748cc69, ru.team.scheduler.oapi.config.JwtFilter@eac9fd7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@312705d2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23143ab9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@12133747, org.springframework.security.web.session.SessionManagementFilter@1c86e04e, org.springframework.security.web.access.ExceptionTranslationFilter@2fbd0b28, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@594dda72]
+2022-02-18 00:22:12 [restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - 
 
 ********************************************************************
 **********        Security debugging is enabled.       *************
@@ -532,37 +965,31 @@ Need more flexibility with validation rules? Learn more: https://rd.gt/3AbJUZE
 ********************************************************************
 
 
-2022-02-12 13:46:37 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2022-02-12 13:46:37 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8189 (http) with context path '/sh'
-2022-02-12 13:46:37 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Started OapiApplication in 11.615 seconds (JVM running for 12.59)
-2022-02-12 13:47:11 [http-nio-8189-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-02-12 13:47:11 [http-nio-8189-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2022-02-12 13:47:11 [http-nio-8189-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
-2022-02-12 13:47:11 [http-nio-8189-exec-2] INFO  Spring Security Debugger - 
+2022-02-18 00:22:13 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-02-18 00:22:13 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8189 (http) with context path '/sh'
+2022-02-18 00:22:14 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Started OapiApplication in 14.092 seconds (JVM running for 15.134)
+2022-02-18 00:22:51 [http-nio-8189-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-02-18 00:22:51 [http-nio-8189-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2022-02-18 00:22:51 [http-nio-8189-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2022-02-18 00:22:51 [http-nio-8189-exec-1] INFO  Spring Security Debugger - 
 
 ************************************************************
 
-Request received for GET '/api/v1/students':
+Request received for POST '/api/v1/auth/login':
 
-org.apache.catalina.connector.RequestFacade@2a589093
+org.apache.catalina.connector.RequestFacade@747f4e80
 
-servletPath:/api/v1/students
+servletPath:/api/v1/auth/login
 pathInfo:null
 headers: 
+content-type: application/json
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: d7662077-27b2-4e84-9f8a-4e866d36f6b8
 host: localhost:8189
-connection: keep-alive
-sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="97", "Chromium";v="97"
-sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "Windows"
-upgrade-insecure-requests: 1
-user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36
-accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-sec-fetch-site: none
-sec-fetch-mode: navigate
-sec-fetch-user: ?1
-sec-fetch-dest: document
 accept-encoding: gzip, deflate, br
-accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7
+connection: keep-alive
+content-length: 57
 
 
 Security filter chain: [
@@ -583,7 +1010,534 @@ Security filter chain: [
 ************************************************************
 
 
-2022-02-12 13:47:11 [http-nio-8189-exec-2] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(String ru.team.scheduler.oapi.controllers.StudentController.demo())
-2022-02-12 13:47:20 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-02-12 13:47:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2022-02-12 13:47:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-02-18 00:22:52 [http-nio-8189-exec-1] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(LoginResponseDto ru.team.scheduler.oapi.controllers.AuthController.login(LoginRequestDto))
+2022-02-18 00:22:52 [http-nio-8189-exec-1] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(User ru.team.scheduler.oapi.services.SecurityUserService.getUserByCredentials(String,String))
+2022-02-18 00:23:19 [http-nio-8189-exec-3] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/students':
+
+org.apache.catalina.connector.RequestFacade@747f4e80
+
+servletPath:/api/v1/students
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdHVkZW50MEBtYWlsLnJ1IiwiaWF0IjoxNjQ1MTMyOTcyLCJleHAiOjE5NTYxNzE2MDB9.Q4tonBUQ0OWbOkcN7WkEqzsG-TO3JsuOqD9ymf7HeFFxWBPkc5vUXzaRKWsKpb-e
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: d0b8191e-4544-423b-a6f6-99b7656851ea
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:23:20 [http-nio-8189-exec-3] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(UserDetails ru.team.scheduler.oapi.services.SecurityUserService.loadUserByUsername(String))
+2022-02-18 00:23:20 [http-nio-8189-exec-3] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(String ru.team.scheduler.oapi.controllers.StudentController.demo())
+2022-02-18 00:23:42 [http-nio-8189-exec-4] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/students/student_info':
+
+org.apache.catalina.connector.RequestFacade@747f4e80
+
+servletPath:/api/v1/students/student_info
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdHVkZW50MEBtYWlsLnJ1IiwiaWF0IjoxNjQ1MTMyOTcyLCJleHAiOjE5NTYxNzE2MDB9.Q4tonBUQ0OWbOkcN7WkEqzsG-TO3JsuOqD9ymf7HeFFxWBPkc5vUXzaRKWsKpb-e
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: c9538f95-9f84-4b8d-869a-1676e11cf585
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:23:42 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(UserDetails ru.team.scheduler.oapi.services.SecurityUserService.loadUserByUsername(String))
+2022-02-18 00:23:42 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(UserDto ru.team.scheduler.oapi.controllers.StudentController.personalAccount(Principal))
+2022-02-18 00:23:42 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(Optional ru.team.scheduler.oapi.services.UserServiceImpl.findByName(String))
+2022-02-18 00:23:42 [http-nio-8189-exec-4] ERROR ru.team.scheduler.oapi.config.AppAOP - ERROR : execution(Optional ru.team.scheduler.oapi.services.UserServiceImpl.findByName(String))
+2022-02-18 00:23:42 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(void ru.team.scheduler.oapi.services.EmailServiceImpl.sendSimpleMessage(String[],String,String))
+2022-02-18 00:23:44 [http-nio-8189-exec-4] ERROR ru.team.scheduler.oapi.config.AppAOP - ERROR : execution(UserDto ru.team.scheduler.oapi.controllers.StudentController.personalAccount(Principal))
+2022-02-18 00:23:44 [http-nio-8189-exec-4] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(void ru.team.scheduler.oapi.services.EmailServiceImpl.sendSimpleMessage(String[],String,String))
+2022-02-18 00:23:45 [http-nio-8189-exec-4] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/sh] threw exception [Request processing failed; nested exception is org.springframework.dao.IncorrectResultSizeDataAccessException: query did not return a unique result: 2; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 2] with root cause
+javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:128)
+	at org.hibernate.query.internal.AbstractProducedQuery.getSingleResult(AbstractProducedQuery.java:1659)
+	at org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter.getSingleResult(CriteriaQueryTypeQueryAdapter.java:111)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:196)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:88)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:155)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:143)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:137)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:121)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:159)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:80)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:145)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215)
+	at jdk.proxy3/jdk.proxy3.$Proxy135.findByFirstName(Unknown Source)
+	at ru.team.scheduler.oapi.services.UserServiceImpl.findByName(UserServiceImpl.java:45)
+	at ru.team.scheduler.oapi.services.UserServiceImpl$$FastClassBySpringCGLIB$$abbd4284.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:58)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at ru.team.scheduler.oapi.services.UserServiceImpl$$EnhancerBySpringCGLIB$$b27fc73c.findByName(<generated>)
+	at ru.team.scheduler.oapi.controllers.StudentController.personalAccount(StudentController.java:39)
+	at ru.team.scheduler.oapi.controllers.StudentController$$FastClassBySpringCGLIB$$b63745f6.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:58)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at ru.team.scheduler.oapi.controllers.StudentController$$EnhancerBySpringCGLIB$$da3c4a8a.personalAccount(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at ru.team.scheduler.oapi.config.JwtFilter.doFilterInternal(JwtFilter.java:45)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.security.web.debug.DebugFilter.invokeWithWrappedRequest(DebugFilter.java:90)
+	at org.springframework.security.web.debug.DebugFilter.doFilter(DebugFilter.java:78)
+	at org.springframework.security.web.debug.DebugFilter.doFilter(DebugFilter.java:67)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:94)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1732)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-02-18 00:23:45 [http-nio-8189-exec-4] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@58fa62e2
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdHVkZW50MEBtYWlsLnJ1IiwiaWF0IjoxNjQ1MTMyOTcyLCJleHAiOjE5NTYxNzE2MDB9.Q4tonBUQ0OWbOkcN7WkEqzsG-TO3JsuOqD9ymf7HeFFxWBPkc5vUXzaRKWsKpb-e
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: c9538f95-9f84-4b8d-869a-1676e11cf585
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:25:26 [http-nio-8189-exec-6] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/api/v1/students/student_info':
+
+org.apache.catalina.connector.RequestFacade@747f4e80
+
+servletPath:/api/v1/students/student_info
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdHVkZW50MEBtYWlsLnJ1IiwiaWF0IjoxNjQ1MTMyOTcyLCJleHAiOjE5NTYxNzE2MDB9.Q4tonBUQ0OWbOkcN7WkEqzsG-TO3JsuOqD9ymf7HeFFxWBPkc5vUXzaRKWsKpb-e
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: aa532329-bec5-4cc7-9fad-06c13c4162a4
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:25:26 [http-nio-8189-exec-6] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(UserDetails ru.team.scheduler.oapi.services.SecurityUserService.loadUserByUsername(String))
+2022-02-18 00:25:26 [http-nio-8189-exec-6] INFO  ru.team.scheduler.oapi.config.AppAOP - Controller : execution(UserDto ru.team.scheduler.oapi.controllers.StudentController.personalAccount(Principal))
+2022-02-18 00:25:26 [http-nio-8189-exec-6] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(Optional ru.team.scheduler.oapi.services.UserServiceImpl.findByName(String))
+2022-02-18 00:25:26 [http-nio-8189-exec-6] ERROR ru.team.scheduler.oapi.config.AppAOP - ERROR : execution(Optional ru.team.scheduler.oapi.services.UserServiceImpl.findByName(String))
+2022-02-18 00:25:26 [http-nio-8189-exec-6] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(void ru.team.scheduler.oapi.services.EmailServiceImpl.sendSimpleMessage(String[],String,String))
+2022-02-18 00:25:29 [http-nio-8189-exec-6] ERROR ru.team.scheduler.oapi.config.AppAOP - ERROR : execution(UserDto ru.team.scheduler.oapi.controllers.StudentController.personalAccount(Principal))
+2022-02-18 00:25:29 [http-nio-8189-exec-6] INFO  ru.team.scheduler.oapi.config.AppAOP - Service : execution(void ru.team.scheduler.oapi.services.EmailServiceImpl.sendSimpleMessage(String[],String,String))
+2022-02-18 00:25:32 [http-nio-8189-exec-6] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [/sh] threw exception [Request processing failed; nested exception is org.springframework.dao.IncorrectResultSizeDataAccessException: query did not return a unique result: 2; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 2] with root cause
+javax.persistence.NonUniqueResultException: query did not return a unique result: 2
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:128)
+	at org.hibernate.query.internal.AbstractProducedQuery.getSingleResult(AbstractProducedQuery.java:1659)
+	at org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter.getSingleResult(CriteriaQueryTypeQueryAdapter.java:111)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$SingleEntityExecution.doExecute(JpaQueryExecution.java:196)
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:88)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:155)
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:143)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:137)
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:121)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:159)
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:138)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:80)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:145)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215)
+	at jdk.proxy3/jdk.proxy3.$Proxy135.findByFirstName(Unknown Source)
+	at ru.team.scheduler.oapi.services.UserServiceImpl.findByName(UserServiceImpl.java:45)
+	at ru.team.scheduler.oapi.services.UserServiceImpl$$FastClassBySpringCGLIB$$abbd4284.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:58)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at ru.team.scheduler.oapi.services.UserServiceImpl$$EnhancerBySpringCGLIB$$b27fc73c.findByName(<generated>)
+	at ru.team.scheduler.oapi.controllers.StudentController.personalAccount(StudentController.java:39)
+	at ru.team.scheduler.oapi.controllers.StudentController$$FastClassBySpringCGLIB$$b63745f6.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:783)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:58)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:753)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:698)
+	at ru.team.scheduler.oapi.controllers.StudentController$$EnhancerBySpringCGLIB$$da3c4a8a.personalAccount(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:111)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:121)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:115)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:105)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at ru.team.scheduler.oapi.config.JwtFilter.doFilterInternal(JwtFilter.java:45)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.security.web.debug.DebugFilter.invokeWithWrappedRequest(DebugFilter.java:90)
+	at org.springframework.security.web.debug.DebugFilter.doFilter(DebugFilter.java:78)
+	at org.springframework.security.web.debug.DebugFilter.doFilter(DebugFilter.java:67)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:94)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1732)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-02-18 00:25:32 [http-nio-8189-exec-6] INFO  Spring Security Debugger - 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@3790b293
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzdHVkZW50MEBtYWlsLnJ1IiwiaWF0IjoxNjQ1MTMyOTcyLCJleHAiOjE5NTYxNzE2MDB9.Q4tonBUQ0OWbOkcN7WkEqzsG-TO3JsuOqD9ymf7HeFFxWBPkc5vUXzaRKWsKpb-e
+user-agent: PostmanRuntime/7.29.0
+accept: */*
+postman-token: aa532329-bec5-4cc7-9fad-06c13c4162a4
+host: localhost:8189
+accept-encoding: gzip, deflate, br
+connection: keep-alive
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  JwtFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-02-18 00:26:55 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-02-18 00:26:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-02-18 00:26:55 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

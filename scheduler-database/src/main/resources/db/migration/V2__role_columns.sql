@@ -10,4 +10,3 @@ UPDATE roles SET description = 'Администратор' WHERE name = 'ROLE_A
 
 INSERT INTO users(email, phone, first_name, middle_name, last_name, password) values ('111@mail.com', '11-11-11', 'иван', 'иванович', 'иванов', '111');
 INSERT INTO users_roles (user_id, role_id) VALUES (1, 1);
-
