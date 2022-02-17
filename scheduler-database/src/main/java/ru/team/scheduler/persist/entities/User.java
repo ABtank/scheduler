@@ -101,8 +101,7 @@ public class User {
     }
 
 
-    public User(Integer id, String email, String password) {
-        this.id = id;
+    public User( String email, String password) {
         this.password = password;
         this.email = email;
         this.roles = new HashSet<>();
