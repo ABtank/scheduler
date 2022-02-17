@@ -1,5 +1,6 @@
 package ru.team.scheduler.oapi.controllers;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.oapi.dto.RoleDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
@@ -20,6 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 @RequestMapping("/api/v1/roles")
+@Api(tags = {SwaggerConstant.API_ROLE})
 @RestController
 public class RoleController {
 
@@ -30,7 +33,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @ApiOperation(value = "Вывод всписка ролей.", notes = "Найти Роли по названию или описанию.")
+    @ApiOperation(value = "Вывод списка ролей.", notes = "Найти Роли по названию или описанию.")
     @GetMapping
     public List<RoleDto> getAllRoles(
             @ApiParam(name = "name", value = "Название Роли", example = "ROLE_USER", allowEmptyValue = true)
