@@ -6,5 +6,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class WeekdayDto {
+    private Integer id;
     private String name;
 }

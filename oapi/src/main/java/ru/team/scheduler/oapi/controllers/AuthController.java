@@ -3,10 +3,7 @@ package ru.team.scheduler.oapi.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.config.JwtProvider;
 import ru.team.scheduler.oapi.dto.LoginRequestDto;
 import ru.team.scheduler.oapi.dto.LoginResponseDto;
@@ -18,11 +15,16 @@ import ru.team.scheduler.persist.entities.User;
 @RequiredArgsConstructor
 public class AuthController {
     private SecurityUserService userService;
-    private final JwtProvider jwtProvider;
+    private JwtProvider jwtProvider;
 
     @Autowired
     public void setUserService(SecurityUserService service) {
         this.userService = service;
+    }
+
+    @Autowired
+    public void setJwtProvider(JwtProvider jwtProvider) {
+        this.jwtProvider = jwtProvider;
     }
 
     @PostMapping("/login")
@@ -31,6 +33,7 @@ public class AuthController {
         if (user == null) {
             throw new UsernameNotFoundException("Неверные логин или пароль");
         }
+
         return new LoginResponseDto(jwtProvider.createToken(user.getEmail()));
     }
 }

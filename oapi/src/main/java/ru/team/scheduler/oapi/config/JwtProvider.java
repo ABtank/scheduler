@@ -3,16 +3,10 @@ package ru.team.scheduler.oapi.config;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.time.LocalDate;
@@ -24,8 +18,6 @@ import java.util.Date;
 @Service
 public class JwtProvider {
 
-//   private String secretKey = "45T47fcXazP5pgMmWXKByCZWpWUzQrZrJMVegYVbcxhXFk22uVDWS9TAzpwmq8ZG";
-
     @Value("${jwt.ttl:3600}")
     private long tokenTtl;
 
@@ -33,11 +25,6 @@ public class JwtProvider {
 
     @Value("${jwt.secret}")
     private String secretKey;
-
-//    @Autowired
-//    public JwtProvider (@Value("${jwt.secret}" ) String secretKey){
-//
-//    }
 
     public String createToken(String username) {
         Date issuedDate = new Date();

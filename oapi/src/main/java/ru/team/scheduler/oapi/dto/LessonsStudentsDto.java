@@ -12,6 +12,7 @@ public class LessonsStudentsDto {
 
   private Integer id;
   private Integer lessonId;
+  private String lessonTitle;
   private Integer studentId;
   private String studentFirstName;
   private String studentMiddleName;
