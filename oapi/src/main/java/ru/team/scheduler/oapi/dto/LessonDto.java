@@ -16,4 +16,8 @@ public class LessonDto {
   private String exercise;
   private Date dtStart;
 
+  public LessonDto(String name, Date dtStart) {
+    this.name = name;
+    this.dtStart = dtStart;
+  }
 }
