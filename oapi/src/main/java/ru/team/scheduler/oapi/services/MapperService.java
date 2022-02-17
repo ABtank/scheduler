@@ -3,7 +3,6 @@ package ru.team.scheduler.oapi.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.team.scheduler.oapi.dto.*;
@@ -15,22 +14,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.util.stream.Collectors.summarizingDouble;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class MapperService {
-        private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
     private final WeekdaysRepository weekdaysRepository;
     private final ExercisesRepository exercisesRepository;
 
-
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public UserDto userToDto(User user) {
         return new UserDto(user.getId(),
@@ -96,6 +90,7 @@ public class MapperService {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        assert dateStart != null;
         TeacherWorkingDay teacherWorkingDay = new TeacherWorkingDay(
                 dateStart.toInstant(),
                 dateEnd.toInstant()
