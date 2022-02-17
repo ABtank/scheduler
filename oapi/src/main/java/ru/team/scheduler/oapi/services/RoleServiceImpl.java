@@ -36,10 +36,6 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findById(id).map(RoleDto::new);
     }
 
-    @Override
-    public Optional<RoleDto> findByName(String name) {
-        return roleRepository.findByName(name).map(RoleDto::new);
-    }
 
     @Override
     public Optional<RoleDto> save(RoleDto o) {
