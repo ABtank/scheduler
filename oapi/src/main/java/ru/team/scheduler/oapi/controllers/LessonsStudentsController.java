@@ -1,11 +1,13 @@
 package ru.team.scheduler.oapi.controllers;
 
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.LessonsStudentsService;
@@ -13,6 +15,7 @@ import ru.team.scheduler.oapi.services.LessonsStudentsService;
 @Slf4j
 @RequestMapping("/api/v1/lessonsStudents")
 @RestController
+@Api(tags = {SwaggerConstant.API_EXERCISE})
 @RequiredArgsConstructor
 public class LessonsStudentsController {
     private final LessonsStudentsService lessonsStudentsService;

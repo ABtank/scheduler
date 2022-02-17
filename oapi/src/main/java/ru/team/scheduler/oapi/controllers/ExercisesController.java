@@ -1,11 +1,13 @@
 package ru.team.scheduler.oapi.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1/exercises")
+@Api(tags = {SwaggerConstant.API_EXERCISE})
 @RequiredArgsConstructor
 public class ExercisesController {
     private final ExerciseService exerciseService;

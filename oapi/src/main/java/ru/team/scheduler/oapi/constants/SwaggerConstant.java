@@ -27,4 +27,5 @@ public class SwaggerConstant {
     public static final String API_USER = "Пользователи";
     public static final String API_ROLE = "Роли";
     public static final String API_DISCIPLINE = "Дисциплина";
+    public static final String API_EXERCISE = "Лекции";
 }

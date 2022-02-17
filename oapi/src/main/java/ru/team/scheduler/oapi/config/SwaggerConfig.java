@@ -35,6 +35,7 @@ public class SwaggerConfig {
                 .securityContexts(singletonList(securityContext()))
                 .tags(new Tag(API_AUTH, "Авторизация и регистрация пользователя."),
                         new Tag(API_DISCIPLINE, "Работа с Дисциплинами."),
+                        new Tag(API_EXERCISE, "Работа с Уроками/лекциями/курсами."),
                         new Tag(API_ROLE, "Работа с Ролями."),
                         new Tag(API_USER, "Операции с пользователем.")
                 );

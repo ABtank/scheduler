@@ -1,8 +1,10 @@
 package ru.team.scheduler.oapi.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.dto.TeacherWorkingDayDto;
 import ru.team.scheduler.oapi.dto.TeachersScheduleMasterRequestDto;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/teachersScheduleMaster")
+@Api(tags = {SwaggerConstant.API_USER})
 @RequiredArgsConstructor
 public class TeachersScheduleMasterController {
     private final TeachersScheduleMasterService teachersScheduleMasterService;
