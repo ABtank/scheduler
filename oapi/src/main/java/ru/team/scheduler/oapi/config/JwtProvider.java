@@ -18,19 +18,15 @@ import java.util.Date;
 @Service
 public class JwtProvider {
 
-    @Value("${jwt.ttl:3600}")
-    private long tokenTtl;
-
-    private Key key;
-
     @Value("${jwt.secret}")
     private String secretKey;
 
+    @Value("${jwt.ttl:3600}")
+    private long tokenTtl;
+
     public String createToken(String username) {
-        Date issuedDate = new Date();
         return Jwts.builder()
                 .setSubject(username)
-                .setIssuedAt(issuedDate)
                 .setExpiration(Date.from(LocalDate.now().plusDays(2).atStartOfDay(ZoneId.systemDefault()).toInstant()))
                 .signWith(getKey())
                 .compact();
@@ -43,7 +39,8 @@ public class JwtProvider {
                     .build()
                     .parseClaimsJws(token);
             return true;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.error(e.getMessage(), e);
             return false;
         }
@@ -57,22 +54,20 @@ public class JwtProvider {
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             log.error(e.getMessage(), e);
             return null;
         }
     }
 
     private Key getKey() {
-        System.out.println("secretKey " + secretKey);
-        if (key == null) {
-            if (secretKey != null) {
-                byte[] decodeKey = Base64.getDecoder().decode(secretKey);
-                key = new SecretKeySpec(decodeKey, 0, decodeKey.length, SignatureAlgorithm.HS256.getJcaName());
-            } else {
-               key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-            }
+        if (secretKey != null) {
+            byte[] decodeKey = Base64.getDecoder().decode(secretKey);
+            return new SecretKeySpec(decodeKey, 0, decodeKey.length, SignatureAlgorithm.HS256.getJcaName());
         }
-        return key;
+        else {
+            return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        }
     }
 }

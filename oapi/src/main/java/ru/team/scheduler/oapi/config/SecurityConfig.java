@@ -1,25 +1,34 @@
 package ru.team.scheduler.oapi.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
 @EnableWebSecurity(debug = true)
-
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private  JwtFilter jwtFilter;
+    private JwtFilter jwtFilter;
 
+    private static final String[] PUBLIC_URLS = {
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/api/v1/auth/**"
+    };
+    private static final String[] AUTH_URLS = {
+            "/api/v1/disciplines/**",
+            "/api/v1/students/**",
+            "/api/v1/users/**",
+            "/api/v1/roles/**",
+    };
 
     @Autowired
-    public void setJwtFilter(JwtFilter jwtFilter) {
-        this.jwtFilter = jwtFilter;
+    public void setJwtFilter(JwtFilter filter) {
+        this.jwtFilter = filter;
     }
 
     @Override
@@ -27,14 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and()
                 .authorizeRequests()
-                //.antMatchers("/api/v1/score/get/current").authenticated()
+                .antMatchers(AUTH_URLS).authenticated()
+                .antMatchers(PUBLIC_URLS).permitAll()
                 //.antMatchers("/api/v1/score/get/{\\d+}").hasAnyAuthority("ADMIN")
                 .anyRequest().permitAll()
                 .and()
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .formLogin();
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

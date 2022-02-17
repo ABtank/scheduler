@@ -10,8 +10,8 @@ import ru.team.scheduler.oapi.services.SecurityUserService;
 
 @Configuration
 public class DaoConfig {
-    private  SecurityUserService userService;
-    private  PasswordEncoder passwordEncoder;
+    private SecurityUserService userService;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setUserService(SecurityUserService service) {

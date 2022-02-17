@@ -46,14 +46,19 @@ public class AppAOP {
         sendError(joinPoint, ex);
     }
 
+
+
+
     private void sendError(JoinPoint joinPoint, Exception ex) {
         String prefix = (Boolean.getBoolean(DEBUG)) ? "DEBUG" : "ERROR";
         log.error(prefix + " : " + joinPoint.toString());
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
-        emailService.sendSimpleMessage(new String[] {"schedulerfreeapp@gmail.com"}
+        emailService.sendSimpleMessage(new String[]{"spprtscheduler@gmail.com", "scheduler@internet.ru"}
                 , prefix + " [Scheduler] " + ex
                 , sw.toString());
     }
+
+
 }
