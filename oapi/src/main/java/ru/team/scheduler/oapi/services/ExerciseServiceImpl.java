@@ -53,7 +53,7 @@ public class ExerciseServiceImpl implements ExerciseService{
     @Override
     public Optional<ExerciseDto> save(Principal principal, ExerciseDto exerciseDto) {
         Exercise exercise = mapperService.exerciseDtoToExercise(exerciseDto);
-        String disciplineTitle = exerciseDto.getDisciplineTitle();
+        String disciplineTitle = exerciseDto.getDiscipline();
         String teachersEmail = principal.getName();
         DisciplineDto disciplineDto = new DisciplineDto(disciplineTitle);
         if (disciplineService.findEntityByName(disciplineTitle).isEmpty()){

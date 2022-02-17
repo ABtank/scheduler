@@ -73,4 +73,4 @@ logging:
 # Секретный ключ приложения и время жизни
 jwt:
   secret: 45T47fcXazP5pgMmWXKByCZWpWUzQrZrJMVegYVbcxhXFk22uVDWS9TAzpwmq8ZG
-  ttl: 120000
+  ttl: 3600

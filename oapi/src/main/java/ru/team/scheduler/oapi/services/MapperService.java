@@ -68,13 +68,12 @@ public class MapperService {
         return new ExerciseDto(
                 exercise.getId(),
                 exercise.getName(),
-                exercise.getDiscipline().getId(),
                 exercise.getIsPersonal(),
                 exercise.getDuration(),
                 exercise.getQuantity(),
                 exercise.getTeacher().getId(),
                 exercise.getTeacher().getFirstName(),
-                exercise.getTeacher().getLastName(),
+                exercise.getDiscipline().getId(),
                 exercise.getDiscipline().getName()
         );
     }

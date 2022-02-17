@@ -30,11 +30,11 @@ public class TeachersScheduleMasterService {
     @Transactional
     public void creteNewTeachersSchedule
             (TeachersScheduleMasterRequestDto teachersScheduleMasterRequestDto) {
-        if (disciplineService.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDisciplineTitle()).isEmpty())
+        if (disciplineService.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).isEmpty())
         {
-            disciplineService.save(new DisciplineDto(teachersScheduleMasterRequestDto.getExerciseDto().getDisciplineTitle()));
+            disciplineService.save(new DisciplineDto(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()));
         }
-        Discipline discipline = disciplineRepository.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDisciplineTitle()).get();
+        Discipline discipline = disciplineRepository.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).get();
         teachersScheduleMasterRequestDto.getExerciseDto().setDisciplineId(discipline.getId());
         ExerciseDto exerciseDto = exerciseService.save(teachersScheduleMasterRequestDto.getExerciseDto()).get();
         List<TeacherWorkingDayDto> teacherWorkingDayDtos = teachersScheduleMasterRequestDto.getTeacherWorkingDaysDtos();
