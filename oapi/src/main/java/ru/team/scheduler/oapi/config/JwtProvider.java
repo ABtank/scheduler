@@ -64,7 +64,6 @@ public class JwtProvider {
     }
 
     private Key getKey() {
-        System.out.println("secretKey " + secretKey);
         if (key == null) {
             if (secretKey != null) {
                 byte[] decodeKey = Base64.getDecoder().decode(secretKey);

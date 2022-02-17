@@ -28,7 +28,6 @@ public class LessonsStudentsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LessonsStudentsDto create(@RequestBody LessonsStudentsDto lessonsStudentsDto) {
-        System.out.println(lessonsStudentsDto);
         return lessonsStudentsService.save(lessonsStudentsDto).orElseThrow(NotFoundException::new);
     }
 
