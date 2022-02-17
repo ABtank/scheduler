@@ -16,4 +16,8 @@ public class DisciplineDto {
     this.id = id;
     this.name = name;
   }
+
+  public DisciplineDto(String name) {
+    this.name = name;
+  }
 }

@@ -8,7 +8,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/scheduler
     username: root
-    password: 1234567890
+    password: 12345678
 
   mvc:
     hiddenmethod:
@@ -30,9 +30,11 @@ spring:
     #    host: smtp.mail.ru
     port: 587
     #    port: 465
-    username: spprtscheduler
+    username: schedulerfreeapp@gmail.com
+    # spprtscheduler
     #    username: scheduler@internet.ru
-    password: cxlqdyrubemqswzn
+    password: tfeyskjgkdsjpfet
+    # cxlqdyrubemqswzn
     #    password: WmfjcKa8aSvYvkhQBm0H
     properties:
       mail:
@@ -46,7 +48,8 @@ spring:
             enable: true
 
 mail:
-  name: spprtscheduler@gmail.com
+  name: schedulerfreeapp@gmail.com
+  # spprtscheduler@gmail.com
   #  name: scheduler@internet.ru
   debug: true
 

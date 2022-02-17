@@ -1,6 +1,8 @@
 package ru.team.scheduler.oapi.services;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,11 @@ public class DisciplineServiceImpl implements DisciplineService {
     @Override
     public Optional<DisciplineDto> findByName(String name) {
         return disciplineRepository.findByName(name).map(obj -> modelMapper.map(obj, DisciplineDto.class));
+    }
+
+    @Override
+    public Optional<Discipline> findEntityByName(String name){
+        return disciplineRepository.findByName(name);
     }
 
     @Override

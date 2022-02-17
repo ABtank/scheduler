@@ -82,3 +82,29 @@ DELETE http://localhost:8189/sh/api/v1/role
 Content-Type: application/json
 
 
+### -=ROLE=-
+GET http://localhost:8189/sh/api/v1/roles
+###
+GET http://localhost:8189/sh/api/v1/roles/1
+###
+POST http://localhost:8189/sh/api/v1/roles
+Content-Type: application/json
+
+{
+  "name": "ROLE_POST",
+  "description": "post role"
+}
+###
+PUT http://localhost:8189/sh/api/v1/role
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "ROLE_POST_PUT"
+}
+###
+DELETE http://localhost:8189/sh/api/v1/role/3
+Content-Type: application/json
+###
+DELETE http://localhost:8189/sh/api/v1/role
+Content-Type: application/json
