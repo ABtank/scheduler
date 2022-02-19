@@ -51,4 +51,11 @@ public class Exercise {
         this.duration = duration;
         this.quantity = quantity;
     }
+
+    public Exercise(String name, Integer duration, Boolean isPersonal, Integer quantity) {
+        this.name = name;
+        this.duration = duration;
+        this.isPersonal = isPersonal;
+        this.quantity = quantity;
+    }
 }

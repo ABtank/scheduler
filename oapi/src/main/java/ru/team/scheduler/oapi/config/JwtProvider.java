@@ -18,13 +18,11 @@ import java.util.Date;
 @Service
 public class JwtProvider {
 
-    @Value("${jwt.ttl:3600}")
-    private long tokenTtl;
-
-    private Key key;
-
     @Value("${jwt.secret}")
     private String secretKey;
+
+    @Value("${jwt.ttl:3600}")
+    private long tokenTtl;
 
     public String createToken(String username) {
         Date issuedDate = new Date();
@@ -64,14 +62,12 @@ public class JwtProvider {
     }
 
     private Key getKey() {
-        if (key == null) {
-            if (secretKey != null) {
-                byte[] decodeKey = Base64.getDecoder().decode(secretKey);
-                key = new SecretKeySpec(decodeKey, 0, decodeKey.length, SignatureAlgorithm.HS256.getJcaName());
-            } else {
-                key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-            }
+        if (secretKey != null) {
+            byte[] decodeKey = Base64.getDecoder().decode(secretKey);
+            return new SecretKeySpec(decodeKey, 0, decodeKey.length, SignatureAlgorithm.HS256.getJcaName());
         }
-        return key;
+        else {
+            return Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        }
     }
 }

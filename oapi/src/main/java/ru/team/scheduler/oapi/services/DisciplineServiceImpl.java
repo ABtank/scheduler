@@ -15,7 +15,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @NoArgsConstructor
-public class DisciplineServiceImpl implements DisciplineService {
+public class DisciplineServiceImpl implements DisciplineService{
     private ModelMapper modelMapper;
     private DisciplineRepository disciplineRepository;
 
