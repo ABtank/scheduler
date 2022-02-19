@@ -12,6 +12,8 @@ import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.ExerciseService;
+import ru.team.scheduler.oapi.services.MapperService;
+import ru.team.scheduler.persist.entities.Exercise;
 
 import java.security.Principal;
 import java.util.List;
@@ -23,21 +25,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ExercisesController {
     private final ExerciseService exerciseService;
+    private final MapperService mapperService;
 
     @GetMapping
     public List<ExerciseDto> getAllExercises() {
-        return exerciseService.findAll();
+        return exerciseService.findAll().stream().map(mapperService::exerciseToDto).toList();
     }
 
     @GetMapping("/{id}")
     public ExerciseDto findById(@PathVariable Integer id){
-        return exerciseService.findById(id).orElseThrow(NotFoundException::new);
+        return exerciseService.findById(id).map(mapperService::exerciseToDto).orElseThrow(NotFoundException::new);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ExerciseDto create(Principal principal,  @RequestBody ExerciseDto exerciseDto) {
-        return exerciseService.save(principal, exerciseDto).orElseThrow(NotFoundException::new);
+        Exercise exercise = mapperService.exerciseDtoToExercise(exerciseDto);
+        return exerciseService.save(principal, exercise).orElseThrow(NotFoundException::new);
     }
 
     @PutMapping

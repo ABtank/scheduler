@@ -2,11 +2,11 @@ package ru.team.scheduler.oapi.services;
 
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
+import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.entities.Exercise;
 import ru.team.scheduler.persist.repositories.ExercisesRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
@@ -25,13 +25,13 @@ public class ExerciseServiceImpl implements ExerciseService{
     private final MapperService mapperService;
 
     @Override
-    public List<ExerciseDto> findAll() {
-        return exercisesRepository.findAll().stream().map(mapperService::exerciseToDto).toList();
+    public List<Exercise> findAll() {
+        return exercisesRepository.findAll();
     }
 
     @Override
-    public Optional<ExerciseDto> findById(Integer id) {
-        return exercisesRepository.findById(id).map(mapperService::exerciseToDto);
+    public Optional<Exercise> findById(Integer id) {
+        return exercisesRepository.findById(id);
     }
 
     @Override
@@ -51,13 +51,12 @@ public class ExerciseServiceImpl implements ExerciseService{
 
     @Transactional
     @Override
-    public Optional<ExerciseDto> save(Principal principal, ExerciseDto exerciseDto) {
-        Exercise exercise = mapperService.exerciseDtoToExercise(exerciseDto);
-        String disciplineTitle = exerciseDto.getDiscipline();
+    public Optional<Exercise> save(Principal principal, Exercise exercise) {
+        String disciplineTitle = exercise.getDiscipline().getName();
         String teachersEmail = principal.getName();
-        DisciplineDto disciplineDto = new DisciplineDto(disciplineTitle);
-        if (disciplineService.findEntityByName(disciplineTitle).isEmpty()){
-            disciplineService.save(disciplineDto);
+        Optional <Discipline> discipline = disciplineService.findByName(disciplineTitle);
+        if (discipline.isEmpty()){
+            disciplineService.save(discipline);
         }
         exercise.setDiscipline(disciplineService.findEntityByName(disciplineTitle).get());
         if (userRepository.findByEmail(teachersEmail).isPresent()) {
