@@ -24,6 +24,7 @@ public class MapperService {
     private final ModelMapper modelMapper;
     private final WeekdaysRepository weekdaysRepository;
     private final ExercisesRepository exercisesRepository;
+    private final DisciplineService disciplineService;
 
 
     public UserDto userToDto(User user) {
@@ -65,19 +66,21 @@ public class MapperService {
                 exercise.getDuration(),
                 exercise.getQuantity(),
                 exercise.getTeacher().getId(),
-                exercise.getTeacher().getFirstName(),
+                exercise.getTeacher().getFirstName() + " " + exercise.getTeacher().getMiddleName() + " " +
+                exercise.getTeacher().getLastName(),
                 exercise.getDiscipline().getId(),
                 exercise.getDiscipline().getName()
         );
     }
 
-    public Exercise exerciseDtoToExercise(ExerciseDto exerciseDto) {
+    public Exercise exerciseDTOtoExercise(ExerciseDto exerciseDto) {
         return new Exercise(
                 exerciseDto.getId(),
                 exerciseDto.getName(),
                 exerciseDto.getIsPersonal(),
                 exerciseDto.getDuration(),
-                exerciseDto.getQuantity());
+                exerciseDto.getQuantity()
+        );
     }
 
     public TeacherWorkingDay teacherWorkingDayDtoToTeacherWorkingDay(TeacherWorkingDayDto teacherWorkingDaysDto) {

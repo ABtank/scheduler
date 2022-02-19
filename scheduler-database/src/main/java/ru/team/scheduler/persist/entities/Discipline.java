@@ -17,4 +17,8 @@ public class Discipline {
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
+
+    public Discipline(String name){
+        this.name = name;
+    }
 }

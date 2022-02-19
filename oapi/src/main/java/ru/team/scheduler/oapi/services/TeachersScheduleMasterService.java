@@ -29,20 +29,20 @@ public class TeachersScheduleMasterService {
 
     @Transactional
     public void creteNewTeachersSchedule
-            (TeachersScheduleMasterRequestDto teachersScheduleMasterRequestDto) {
-        if (disciplineService.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).isEmpty())
-        {
-            disciplineService.save(new DisciplineDto(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()));
-        }
-        Discipline discipline = disciplineRepository.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).get();
-        teachersScheduleMasterRequestDto.getExerciseDto().setDisciplineId(discipline.getId());
-        ExerciseDto exerciseDto = exerciseService.save(teachersScheduleMasterRequestDto.getExerciseDto()).get();
-        List<TeacherWorkingDayDto> teacherWorkingDayDtos = teachersScheduleMasterRequestDto.getTeacherWorkingDaysDtos();
-        teacherWorkingDayDtos.forEach(o->o.setExerciseId(exerciseDto.getId()));
-        teacherWorkingDayDtos.forEach(o->o.setWeekdayId(weekdaysRepository.findByName(o.getWeekDayName()).get().getId()));
-            List<TeacherWorkingDay> teacherWorkingDays = teacherWorkingDayDtos.stream()
-                    .map(mapperService::teacherWorkingDayDtoToTeacherWorkingDay).toList();
-        teacherWorkingDaysRepository.saveAll(teacherWorkingDays);
+          (TeachersScheduleMasterRequestDto teachersScheduleMasterRequestDto) {
+//        if (disciplineService.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).isEmpty())
+//        {
+//            disciplineService.save(new DisciplineDto(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()));
+//        }
+//        Discipline discipline = disciplineRepository.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).get();
+//        teachersScheduleMasterRequestDto.getExerciseDto().setDisciplineId(discipline.getId());
+//        ExerciseDto exerciseDto = exerciseService.save(teachersScheduleMasterRequestDto.getExerciseDto()).get();
+//        List<TeacherWorkingDayDto> teacherWorkingDayDtos = teachersScheduleMasterRequestDto.getTeacherWorkingDaysDtos();
+//        teacherWorkingDayDtos.forEach(o->o.setExerciseId(exerciseDto.getId()));
+//        teacherWorkingDayDtos.forEach(o->o.setWeekdayId(weekdaysRepository.findByName(o.getWeekDayName()).get().getId()));
+//            List<TeacherWorkingDay> teacherWorkingDays = teacherWorkingDayDtos.stream()
+//                    .map(mapperService::teacherWorkingDayDtoToTeacherWorkingDay).toList();
+//        teacherWorkingDaysRepository.saveAll(teacherWorkingDays);
 
     }
 }

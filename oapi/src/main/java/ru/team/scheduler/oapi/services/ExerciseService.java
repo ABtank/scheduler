@@ -7,6 +7,6 @@ import java.security.Principal;
 import java.util.Optional;
 
 public interface ExerciseService extends BasicService<Exercise> {
-     Optional<Exercise> save(ExerciseDto o);
      Optional<Exercise> save(Principal principal, Exercise exercise);
+     Optional<Exercise> update(Principal principal, Exercise exercise);
 }
