@@ -27,6 +27,4 @@ public class ExerciseDto {
   private Integer disciplineId;
   @ApiModelProperty(notes = "Название Дисциплины")
   private String discipline;
-
-
 }
