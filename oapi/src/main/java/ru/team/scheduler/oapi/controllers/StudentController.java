@@ -12,6 +12,7 @@ import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.persist.dto.LessonByIdDto;
 import ru.team.scheduler.persist.dto.StudentScheduleDto;
@@ -19,6 +20,7 @@ import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.oapi.services.LessonsStudentsServiceImpl;
 import ru.team.scheduler.oapi.services.StudentService;
 import ru.team.scheduler.oapi.services.UserServiceImpl;
+import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.User;
 
 import java.security.Principal;
@@ -65,9 +67,10 @@ public class StudentController {
     public List<StudentScheduleDto> getLessons(Principal principal){
         UserDto userDto = userServiceImpl.findByEmail(principal.getName()).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
         return studentService.getScheduleByUser(userDto.getId());
+//        return studentService.getScheduleByUser(2);
     }
 
-    //возвращает расписание учителя по ссылке
+    //возвращает расписание учителя по предоставленной ссылке
     @GetMapping("/lessons/{id}")
     public LessonByIdDto getLessons(@PathVariable Integer id){
         return studentService.getLessonById(id).orElseThrow(() -> new NotFoundException());
@@ -77,15 +80,16 @@ public class StudentController {
     @DeleteMapping("/lessons/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable Integer id) {
-        studentService.deleteLessonById(id);
+        studentService.deleteLessonsStudentById(id);
     }
 
     //записаться на лекцию
-    @PutMapping("/lessons/{id}")
-    public List<StudentScheduleDto> subscribe(@PathVariable(name = "id") Integer lesson_id, Principal principal){
+    @PostMapping("/lessons/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public LessonsStudentsDto subscribe(@PathVariable("id") Integer lesson_id, Principal principal){
         UserDto userDto = userServiceImpl.findByEmail(principal.getName()).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
-        return studentService.reserveLecture(lesson_id, userDto);
+        LessonsStudent lessonsStudent = studentService.reserveLecture(lesson_id, userDto);
+        return new LessonsStudentsDto(lessonsStudent);
     }
-
 
 }

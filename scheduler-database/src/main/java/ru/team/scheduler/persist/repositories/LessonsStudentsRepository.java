@@ -17,4 +17,6 @@ public interface LessonsStudentsRepository extends JpaRepository<LessonsStudent,
 
     Optional<LessonsStudent> findById(Integer id);
 
+    Optional<LessonsStudent> findByLessonIdAndStudentId(Integer lesson_id, Integer student_id);
+
 }

@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +14,10 @@ import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.DisciplineService;
-import ru.team.scheduler.persist.entities.Discipline;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @RequestMapping("/api/v1/disciplines")
@@ -29,12 +25,6 @@ import static java.util.stream.Collectors.toList;
 @RestController
 public class DisciplineController {
     private DisciplineService disciplineService;
-    private ModelMapper modelMapper;
-
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
 
     @Autowired
     public void setDisciplineService(DisciplineService disciplineService) {
@@ -53,10 +43,7 @@ public class DisciplineController {
     public List<DisciplineDto> getAllDisciplines(
             @ApiParam(name = "name", value = "Название Дисциплины или его часть", allowEmptyValue = true)
             @RequestParam Optional<String> name) {
-        return disciplineService.findAll(name.orElse(""))
-                .stream()
-                .map(this::EntityToDto)
-                .collect(toList());
+        return disciplineService.findAll(name.orElse(""));
     }
 
     @ApiOperation(value = "Найти Дисциплину по id.", notes = "Дисциплина которую преподает учитель.", response = DisciplineDto.class)
@@ -69,9 +56,7 @@ public class DisciplineController {
     })
     @GetMapping(value = "/{id}")
     public DisciplineDto findById(@PathVariable("id") Integer id) {
-        return disciplineService.findById(id)
-                .map(this::EntityToDto)
-                .orElseThrow(NotFoundException::new);
+        return disciplineService.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Создать новую Дисциплину.", notes = "Дисциплина которую преподает учитель.", response = DisciplineDto.class)
@@ -88,10 +73,7 @@ public class DisciplineController {
             @ApiParam(name = "name", value = "Объект Дисциплина в формате Json", required = true)
             @RequestBody DisciplineDto disciplineDto) {
         disciplineDto.setId(null);
-        return disciplineService
-                .save(DtoToEntity(disciplineDto))
-                .map(this::EntityToDto)
-                .orElseThrow(NotFoundException::new);
+        return disciplineService.save(disciplineDto).orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Изменить существующую Дисциплину.", notes = "Изменить Дисциплину которую преподает учитель.", response = DisciplineDto.class)
@@ -109,10 +91,7 @@ public class DisciplineController {
         if (disciplineDto.getId() == null) {
             throw new IllegalArgumentException("Id not found in the update request");
         }
-        return disciplineService
-                .save(DtoToEntity(disciplineDto))
-                .map(this::EntityToDto)
-                .orElseThrow(NotFoundException::new);
+        return disciplineService.save(disciplineDto).orElseThrow(NotFoundException::new);
     }
 
     @ApiIgnore
@@ -135,14 +114,5 @@ public class DisciplineController {
     public void delete(@PathVariable Integer id) {
         disciplineService.deleteById(id);
         log.info("-=OK=-");
-    }
-
-
-    private Discipline DtoToEntity(DisciplineDto dto) {
-        return modelMapper.map(dto, Discipline.class);
-    }
-
-    private DisciplineDto EntityToDto(Discipline dto) {
-        return modelMapper.map(dto, DisciplineDto.class);
     }
 }

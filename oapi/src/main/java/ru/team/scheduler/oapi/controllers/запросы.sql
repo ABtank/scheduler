@@ -5,7 +5,7 @@ SELECT
     lessons.dt_start as time_start,
     exercises.name as exercise_name,
     exercises.duration as duration,
-    users.name as teacher_name,
+    users.id as teacher_id,
     disciplines.name as discipline_name
 FROM lessons_students as ls
     INNER JOIN lessons as lessons
@@ -25,7 +25,9 @@ SELECT
     lessons.name as lessons_name,
     lessons.dt_start as time_start,
     exercises.duration as duration,
-    users.name as teacher_name,
+    users.first_name as teacher_first_name,
+    users.middle_name as middle_name,
+    users.last_name as teacher_last_name,
     disciplines.name as discipline_name
 FROM lessons as lessons
     INNER JOIN exercises as exercises

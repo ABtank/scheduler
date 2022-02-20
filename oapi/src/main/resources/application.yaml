@@ -49,7 +49,8 @@ spring:
             enable: true
 
 mail:
-  name: schedulerfreeapp@gmail.com
+  name:
+#  name: schedulerfreeapp@gmail.com
   # spprtscheduler@gmail.com
   #  name: scheduler@internet.ru
   debug: true

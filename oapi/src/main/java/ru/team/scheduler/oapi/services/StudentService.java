@@ -3,7 +3,9 @@ package ru.team.scheduler.oapi.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.team.scheduler.oapi.constants.CRUD;
 import ru.team.scheduler.oapi.dto.UserDto;
+import ru.team.scheduler.oapi.exceptions.CrudException;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.persist.dto.LessonByIdDto;
 import ru.team.scheduler.persist.dto.StudentScheduleDto;
@@ -19,57 +21,57 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService {
+public class StudentService extends UserServiceImpl {
     private StudentRepository studentRepository;
     private LessonsStudentsRepository lessonsStudentRepository;
     private LessonRepository lessonRepository;
-    private UserRepository userRepository;
+    //private UserRepository userRepository;
 
     @Autowired
     public void setStudentRepository(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+
     @Autowired
     public void setLessonsStudentRepository(LessonsStudentsRepository lessonsStudentRepository) {
         this.lessonsStudentRepository = lessonsStudentRepository;
     }
+
     @Autowired
     public void setLessonRepository(LessonRepository lessonRepository) {
         this.lessonRepository = lessonRepository;
-    }
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
     }
 
     public List<StudentScheduleDto> getScheduleByUser(Integer user_id) {
         return studentRepository.getUserSchedule(user_id);
     }
 
-    public Optional<LessonByIdDto> getLessonById(Integer id){
-        return studentRepository.getLessonById(id);
+    public Optional<LessonByIdDto> getLessonById(Integer id) {
+        return lessonRepository.getLessonById(id);
     }
 
     @Transactional
-    public void deleteLessonById(Integer id){
+    public void deleteLessonsStudentById(Integer id) {
         Optional<LessonsStudent> lessonsStudent = lessonsStudentRepository.findById(id);
-        //добавить поле booked в LessonsStudent и снять бронь
-//        lessonsStudent.get().getLesson().setBooked(false);
         lessonsStudentRepository.deleteById(id);
     }
 
     @Transactional
-    public List<StudentScheduleDto> reserveLecture(Integer lesson_id, UserDto userDto) {
+    public LessonsStudent reserveLecture(Integer lesson_id, UserDto userDto) {
+        Optional findLessonStudent = lessonsStudentRepository.findByLessonIdAndStudentId(lesson_id, userDto.getId());
+        if (!findLessonStudent.isEmpty()) {
+            throw new CrudException("lessons_students", CRUD.CREATE, lesson_id, "Лекция уже добавлена");
+        }
         Optional<Lesson> lesson = lessonRepository.findById(lesson_id);
-        Optional<User> user = userRepository.findByEmail(userDto.getEmail());
+        Optional<UserDto> userDtoImp = findByEmail(userDto.getEmail());
+        Optional<User> user = findByName(userDto.getFirstName());
         if (!lesson.isEmpty() & !user.isEmpty()) {
             LessonsStudent lessonsStudent = new LessonsStudent();
             lessonsStudent.setLesson(lesson.get());
             lessonsStudent.setStudent(user.get());
             lessonsStudent.setDtCreate();
             lessonsStudent.setDtModify();
-            lessonsStudentRepository.save(lessonsStudent);
-            return getScheduleByUser(user.get().getId());
+            return lessonsStudentRepository.save(lessonsStudent);
         }
 
         throw new NotFoundException(

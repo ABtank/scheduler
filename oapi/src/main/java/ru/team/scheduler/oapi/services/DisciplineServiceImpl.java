@@ -1,17 +1,22 @@
 package ru.team.scheduler.oapi.services;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.repositories.DisciplineRepository;
 import ru.team.scheduler.persist.repositories.specifications.DisciplineSpecification;
 
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 @Slf4j
 @Service
 @NoArgsConstructor
@@ -30,26 +35,31 @@ public class DisciplineServiceImpl implements DisciplineService {
     }
 
     @Override
-    public List<Discipline> findAll() {
-        return disciplineRepository.findAll();
+    public List<DisciplineDto> findAll() {
+        return disciplineRepository.findAll().stream().map(obj -> modelMapper.map(obj, DisciplineDto.class)).collect(toList());
     }
 
     @Override
-    public List<Discipline> findAll(String name) {
+    public List<DisciplineDto> findAll(String name) {
         Specification<Discipline> spec = DisciplineSpecification.trueLiteral();
         if(name != null && !name.isBlank()){
             spec = spec.and(DisciplineSpecification.nameContains(name));
         }
-        return disciplineRepository.findAll(spec);
+        return disciplineRepository.findAll(spec).stream().map(obj -> modelMapper.map(obj, DisciplineDto.class)).collect(toList());
     }
 
     @Override
-    public Optional<Discipline> findById(Integer id) {
-        return disciplineRepository.findById(id);
+    public Optional<DisciplineDto> findById(Integer id) {
+        return disciplineRepository.findById(id).map(obj -> modelMapper.map(obj, DisciplineDto.class));
     }
 
     @Override
-    public Optional<Discipline> findByName(String name) {
+    public Optional<DisciplineDto> findByName(String name) {
+        return disciplineRepository.findByName(name).map(obj -> modelMapper.map(obj, DisciplineDto.class));
+    }
+
+    @Override
+    public Optional<Discipline> findEntityByName(String name){
         return disciplineRepository.findByName(name);
     }
 
@@ -64,8 +74,8 @@ public class DisciplineServiceImpl implements DisciplineService {
     }
 
     @Override
-    public Optional<Discipline> save(Discipline o) {
-        Discipline discipline = disciplineRepository.save(o);
+    public Optional<DisciplineDto> save(DisciplineDto o) {
+        Discipline discipline = disciplineRepository.save(modelMapper.map(o, Discipline.class));
         return findById(discipline.getId());
     }
 

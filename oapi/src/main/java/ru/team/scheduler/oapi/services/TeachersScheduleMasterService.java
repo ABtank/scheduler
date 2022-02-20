@@ -32,7 +32,7 @@ public class TeachersScheduleMasterService {
             (TeachersScheduleMasterRequestDto teachersScheduleMasterRequestDto) {
         if (disciplineService.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).isEmpty())
         {
-            disciplineService.save(new DisciplineDto(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()));
+//            disciplineService.save(new DisciplineDto(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()));
         }
         Discipline discipline = disciplineRepository.findByName(teachersScheduleMasterRequestDto.getExerciseDto().getDiscipline()).get();
         teachersScheduleMasterRequestDto.getExerciseDto().setDisciplineId(discipline.getId());

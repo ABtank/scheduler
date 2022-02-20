@@ -18,7 +18,7 @@ public class LessonsStudent {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "lesson_id", nullable = false)
     private Lesson lesson;
 
@@ -39,18 +39,18 @@ public class LessonsStudent {
     @Column(name = "dt_modify", nullable = false)
     private Date dtModify;
 
-    public Date getDtCreate() {
-        return dtCreate;
-    }
+//    public Date getDtCreate() {
+//        return dtCreate;
+//    }
 
     @PrePersist
     public void setDtCreate() {
         this.dtCreate = this.dtModify = new Date();
     }
 
-    public Date getDtModify() {
-        return dtModify;
-    }
+//    public Date getDtModify() {
+//        return dtModify;
+//    }
 
     @PreUpdate
     public void setDtModify() {
