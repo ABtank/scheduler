@@ -1,12 +1,16 @@
 <template>
 <div>
-  Регистрация
+  <Registration/>
 </div>
 </template>
 
 <script>
+import Registration from "@/components/Registration";
+
 export default {
-  name: "index"
+  name: "index",
+  auth: false,
+  components: { Registration }
 }
 </script>
 

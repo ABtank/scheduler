@@ -1,6 +1,5 @@
-//const bodyParser  = require('body-parser');
-
 export default {
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'frontend',
@@ -14,18 +13,21 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,700,400italic|Material+Icons' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'ant-design-vue/dist/antd.css'
+    { src: 'vue-material/dist/vue-material.min.css', lang: 'css' },
+    { src: '~/assets/theme.scss', lang: 'scss' } // include vue-material theme engine
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/antd-ui'
+    { src: '~/plugins/vue-material' },
+    { src: '~/plugins/vee-validate' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,18 +48,7 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: 'http://localhost:8189/sh/api/v1/',
-    //progress: true,
-    //proxy: true
   },
-
-  /*serverMiddleware: [
-    'coexist-parser-proxy', // Needs to be before bodyParser
-    bodyParser.json()
-  ],
-
-  proxy: {
-    '/api/': 'localhost:8189/sh/api/v1/',
-  },*/
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -74,8 +65,6 @@ export default {
         token: {
           property: 'accessToken',
           global: true,
-          // required: true,
-          // type: 'Bearer'
         },
         user: {
           property: 'user',

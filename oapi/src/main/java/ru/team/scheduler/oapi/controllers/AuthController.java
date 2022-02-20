@@ -56,6 +56,12 @@ public class AuthController {
     public UserDto login(@ApiIgnore Principal principal) {
         return userService.findByEmail(principal.getName()).orElseThrow(NotFoundException::new);
     }
+    @GetMapping("/user")
+    public UserResponseDto getUser(Principal principal) {
+        User user = userService.getUserByEmail(principal.getName());
+
+        return new UserResponseDto(new UserDto(user));
+    }
 
     @ApiOperation(value = "Зарегистрировать нового Пользователя.", notes = "Зарегистрировать нового Пользователя (учитель, студент).", response = DisciplineDto.class)
     @ApiResponses({@ApiResponse(responseCode = "201", description = "Новый Пользователь была зарегистрирован."),
@@ -71,5 +77,12 @@ public class AuthController {
             throw new IllegalArgumentException("password not matching");
         }
         return userService.save(userDTO).orElseThrow(NotFoundException::new);
+    }
+
+    @PostMapping("/registration")
+    public UserResponseDto registration(@RequestBody RegistrationRequestDto requestDto) {
+        User user = userService.registerUser(requestDto);
+
+        return new UserResponseDto(new UserDto(user));
     }
 }

@@ -1,22 +1,24 @@
 <template>
-  <div>
-    <Header />
-    <div class="content">
-      <Nuxt />
-    </div>
+  <div class="page-container">
+    <md-app md-waterfall md-mode="fixed">
+      <md-app-toolbar class="md-primary">
+        <span class="md-title">РАСПИСАНИЯ</span>
+      </md-app-toolbar>
+
+      <md-app-content>
+        <Nuxt />
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 
 <script>
-import Header from "~/components/Header";
 export default {
-  components: { Header },
+  components: {  },
   name: "default"
 }
 </script>
 
 <style scoped lang="scss">
-.content {
-  padding: 10px 0;
-}
+
 </style>
