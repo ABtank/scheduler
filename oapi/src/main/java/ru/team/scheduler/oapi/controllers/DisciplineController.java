@@ -18,6 +18,7 @@ import ru.team.scheduler.oapi.services.DisciplineService;
 import ru.team.scheduler.persist.entities.Discipline;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +53,7 @@ public class DisciplineController {
     @GetMapping
     public List<DisciplineDto> getAllDisciplines(
             @ApiParam(name = "name", value = "Название Дисциплины или его часть", allowEmptyValue = true)
-            @RequestParam Optional<String> name) {
+            @RequestParam Optional<String> name, @ApiIgnore Principal principal) {
         return disciplineService.findAll(name.orElse(""))
                 .stream()
                 .map(this::EntityToDto)
@@ -85,11 +86,10 @@ public class DisciplineController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DisciplineDto create(
-            @ApiParam(name = "name", value = "Объект Дисциплина в формате Json", required = true)
-            @RequestBody DisciplineDto disciplineDto) {
+            @RequestBody DisciplineDto disciplineDto, @ApiIgnore Principal principal) {
         disciplineDto.setId(null);
         return disciplineService
-                .save(DtoToEntity(disciplineDto))
+                .save(DtoToEntity(disciplineDto), principal)
                 .map(this::EntityToDto)
                 .orElseThrow(NotFoundException::new);
     }
@@ -105,20 +105,19 @@ public class DisciplineController {
     @PutMapping
     public DisciplineDto updateDiscipline(
             @ApiParam(name = "name", value = "Объект Дисциплина в формате Json", required = true)
-            @RequestBody DisciplineDto disciplineDto) {
+            @RequestBody DisciplineDto disciplineDto, @ApiIgnore Principal principal) {
         if (disciplineDto.getId() == null) {
             throw new IllegalArgumentException("Id not found in the update request");
         }
         return disciplineService
-                .save(DtoToEntity(disciplineDto))
+                .save(DtoToEntity(disciplineDto), principal)
                 .map(this::EntityToDto)
                 .orElseThrow(NotFoundException::new);
     }
 
     @ApiIgnore
     @DeleteMapping
-    public ResponseEntity<String> deleteAll() {
-        disciplineService.deleteAll();
+    public ResponseEntity<String> deleteAll(@ApiIgnore Principal principal) {
         return new ResponseEntity<>("-=You cannot delete all disciplines=-", HttpStatus.BAD_REQUEST);
     }
 
@@ -131,10 +130,10 @@ public class DisciplineController {
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Integer id) {
-        disciplineService.deleteById(id);
-        log.info("-=OK=-");
+    public ResponseEntity<HttpStatus> delete(@PathVariable Integer id,@ApiIgnore Principal principal) {
+        disciplineService.deleteById(id, principal);
+        Discipline discipline = disciplineService.findById(id).orElse(null);
+        return ResponseEntity.ok((discipline != null)?HttpStatus.CONFLICT:HttpStatus.OK);
     }
 
 

@@ -7,6 +7,7 @@ import ru.team.scheduler.oapi.dto.UserCreationDto;
 import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.persist.entities.User;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -15,10 +16,9 @@ public interface UserService {
     List<UserDto> findAll();
     Optional<UserDto> findById(Integer id);
     Optional<UserDto> findByEmail(String email);
-    void deleteById(Integer id);
+    void deleteById(Integer id, Principal principal);
     Optional<UserDto> save(UserCreationDto userCreationDTO);
-    Optional<UserDto> update(UserDto userDTO);
-    void deleteAll();
+    Optional<UserDto> update(UserDto userDTO, Principal principal);
 
     Page<UserDto> findAll(Map<String, String> params, PageRequest pageRequest);
 

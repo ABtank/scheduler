@@ -62,7 +62,7 @@ public class StudentService {
     public List<StudentScheduleDto> reserveLecture(Integer lesson_id, UserDto userDto) {
         Optional<Lesson> lesson = lessonRepository.findById(lesson_id);
         Optional<User> user = userRepository.findByEmail(userDto.getEmail());
-        if (!lesson.isEmpty() & !user.isEmpty()) {
+        if (lesson.isPresent() & user.isPresent()) {
             LessonsStudent lessonsStudent = new LessonsStudent();
             lessonsStudent.setLesson(lesson.get());
             lessonsStudent.setStudent(user.get());

@@ -14,6 +14,7 @@ import ru.team.scheduler.persist.repositories.RoleRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
 import ru.team.scheduler.persist.repositories.specifications.UserSpecification;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Integer id, Principal principal) {
         userRepository.deleteById(id);
     }
 
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserDto> update(UserDto userDTO) {
+    public Optional<UserDto> update(UserDto userDTO, Principal principal) {
         User user = userRepository.getById(userDTO.getId());
         user = mapperService.userDtoToUser(userDTO,user);
         if(!userDTO.getRoles().isEmpty()) {
@@ -90,11 +91,6 @@ public class UserServiceImpl implements UserService {
                     .forEach(user.getRoles()::add);
         }
         return findById(userRepository.save(user).getId());
-    }
-
-    @Override
-    public void deleteAll() {
-        log.error("Someone decided to delete all Users");
     }
 
     @Override

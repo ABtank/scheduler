@@ -14,6 +14,7 @@ import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.SecurityUserService;
 import ru.team.scheduler.oapi.services.UserService;
 import ru.team.scheduler.persist.entities.User;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
 
@@ -51,10 +52,9 @@ public class AuthController {
     }
 
     @ApiOperation(value = "Кто я.", notes = "Информация авторизовавшегося пользователя", response = DisciplineDto.class)
-    @GetMapping("/user")
-    public UserResponseDto login(Principal principal) {
-        User user = securityUserService.getUserByEmail(principal.getName());
-        return new UserResponseDto(new UserDto(user));
+    @GetMapping("/whoami")
+    public UserDto login(@ApiIgnore Principal principal) {
+        return userService.findByEmail(principal.getName()).orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Зарегистрировать нового Пользователя.", notes = "Зарегистрировать нового Пользователя (учитель, студент).", response = DisciplineDto.class)

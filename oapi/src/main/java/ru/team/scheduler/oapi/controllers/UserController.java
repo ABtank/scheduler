@@ -15,6 +15,7 @@ import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.UserService;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -64,17 +65,16 @@ public class UserController {
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
     @PutMapping
-    public UserDto updateUser(@RequestBody UserDto userDTO) {
+    public UserDto updateUser(@RequestBody UserDto userDTO, @ApiIgnore Principal principal) {
         if (userDTO.getId() == null && userService.checkIsUnique(userDTO.getEmail(), userDTO.getId())) {
             throw new IllegalArgumentException("Id not found in the update request or email not unique");
         }
-        return userService.update(userDTO).orElseThrow(NotFoundException::new);
+        return userService.update(userDTO, principal).orElseThrow(NotFoundException::new);
     }
 
     @ApiIgnore
     @DeleteMapping
     public ResponseEntity<String> deleteAll() {
-        userService.deleteAll();
         return new ResponseEntity<>("-=You cannot delete all Users=-", HttpStatus.BAD_REQUEST);
     }
 
@@ -88,8 +88,8 @@ public class UserController {
     })
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Integer id) {
-        userService.deleteById(id);
+    public void delete(@PathVariable Integer id, @ApiIgnore Principal principal) {
+        userService.deleteById(id, principal);
         log.info("-=OK=-");
     }
 }

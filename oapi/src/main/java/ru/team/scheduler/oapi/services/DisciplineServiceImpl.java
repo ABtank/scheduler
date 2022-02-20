@@ -2,27 +2,22 @@ package ru.team.scheduler.oapi.services;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.repositories.DisciplineRepository;
 import ru.team.scheduler.persist.repositories.specifications.DisciplineSpecification;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 @Slf4j
 @Service
 @NoArgsConstructor
 public class DisciplineServiceImpl implements DisciplineService{
-    private ModelMapper modelMapper;
     private DisciplineRepository disciplineRepository;
-
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
 
     @Autowired
     public void setDisciplineRepository(DisciplineRepository disciplineRepository) {
@@ -40,7 +35,7 @@ public class DisciplineServiceImpl implements DisciplineService{
         if(name != null && !name.isBlank()){
             spec = spec.and(DisciplineSpecification.nameContains(name));
         }
-        return disciplineRepository.findAll(spec);
+        return disciplineRepository.findAll(spec, Sort.by(Sort.Direction.ASC,"name"));
     }
 
     @Override
@@ -54,17 +49,12 @@ public class DisciplineServiceImpl implements DisciplineService{
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Integer id, Principal principal) {
         disciplineRepository.deleteById(id);
     }
 
     @Override
-    public void deleteAll() {
-        log.error("Someone decided to delete all Disciplines");
-    }
-
-    @Override
-    public Optional<Discipline> save(Discipline o) {
+    public Optional<Discipline> save(Discipline o, Principal principal) {
         Discipline discipline = disciplineRepository.save(o);
         return findById(discipline.getId());
     }

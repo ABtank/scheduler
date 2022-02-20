@@ -1,11 +1,8 @@
 package ru.team.scheduler.oapi.services;
 
 
-import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.team.scheduler.oapi.dto.DisciplineDto;
-import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.entities.Exercise;
@@ -20,11 +17,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ExerciseServiceImpl implements ExerciseService{
+public class ExerciseServiceImpl implements ExerciseService {
     private final ExercisesRepository exercisesRepository;
     private final DisciplineService disciplineService;
     private final UserRepository userRepository;
-    private final MapperService mapperService;
 
     @Override
     public List<Exercise> findAll() {
@@ -37,59 +33,46 @@ public class ExerciseServiceImpl implements ExerciseService{
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Integer id, Principal principal) {
         exercisesRepository.deleteById(id);
-    }
-
-    @Override
-    public void deleteAll() {
-        exercisesRepository.deleteAll();
-    }
-
-    @Override
-    public Optional<Exercise> save(Exercise o) {
-        return Optional.empty();
     }
 
     @Transactional
     @Override
-    public Optional<Exercise> save(Principal principal, Exercise exercise) {
+    public Optional<Exercise> save(Exercise exercise, Principal principal) {
         String disciplineTitle = exercise.getDiscipline().getName();
         String teachersEmail = principal.getName();
-        Optional <Discipline> discipline = disciplineService.findByName(disciplineTitle);
+        Optional<Discipline> discipline = disciplineService.findByName(disciplineTitle);
         if (discipline.isPresent()) {
             exercise.setDiscipline(discipline.get());
-        }
-        else throw new NotFoundException("Дисциплина не найдена");
+        } else throw new NotFoundException("Дисциплина не найдена");
         if (userRepository.findByEmail(teachersEmail).isPresent()) {
             exercise.setTeacher(userRepository.findByEmail(teachersEmail).get());
-        }
-        else throw new NotFoundException("Учитель не найден");
+        } else throw new NotFoundException("Учитель не найден");
         exercisesRepository.save(exercise);
         return findById(exercise.getId());
     }
 
     @Transactional
     @Override
-    public Optional<Exercise> update(Principal principal, Exercise updatedExercise) {
+    public Optional<Exercise> update(Exercise updatedExercise, Principal principal) {
         Integer updatedExerciseId = updatedExercise.getId();
-       String teachersEmail = principal.getName();
-       Optional<Exercise> exercise = exercisesRepository.findById(updatedExerciseId);
-       if(exercise.isEmpty()) {
-           throw new NotFoundException("Предмета с введенным id не существует!");
-       }
-       Optional<Discipline> discipline = disciplineService.findByName(updatedExercise.getDiscipline().getName());
-       if(discipline.isEmpty()){
-           throw new NotFoundException("Дисциплины с введенным id не существует!");
-       }
+        String teachersEmail = principal.getName();
+        Optional<Exercise> exercise = exercisesRepository.findById(updatedExerciseId);
+        if (exercise.isEmpty()) {
+            throw new NotFoundException("Предмета с введенным id не существует!");
+        }
+        Optional<Discipline> discipline = disciplineService.findByName(updatedExercise.getDiscipline().getName());
+        if (discipline.isEmpty()) {
+            throw new NotFoundException("Дисциплины с введенным id не существует!");
+        }
         updatedExercise.setDiscipline(discipline.get());
         Optional<User> teacher = userRepository.findByEmail(teachersEmail);
         if (teacher.isPresent()) {
             updatedExercise.setTeacher(teacher.get());
-        }
-        else throw new NotFoundException("Учитель не найден");
-         exercisesRepository.save(updatedExercise);
-         return exercisesRepository.findById(updatedExercise.getId());
+        } else throw new NotFoundException("Учитель не найден");
+        exercisesRepository.save(updatedExercise);
+        return exercisesRepository.findById(updatedExercise.getId());
     }
 
     @Override
