@@ -11,6 +11,9 @@ import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.LessonsStudentsService;
+import springfox.documentation.annotations.ApiIgnore;
+
+import java.security.Principal;
 
 @Slf4j
 @RequestMapping("/api/v1/lessonsStudents")
@@ -27,28 +30,27 @@ public class LessonsStudentsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public LessonsStudentsDto create(@RequestBody LessonsStudentsDto lessonsStudentsDto) {
-        return lessonsStudentsService.save(lessonsStudentsDto).orElseThrow(NotFoundException::new);
+    public LessonsStudentsDto create(@RequestBody LessonsStudentsDto lessonsStudentsDto, @ApiIgnore Principal principal) {
+        return lessonsStudentsService.save(lessonsStudentsDto, principal).orElseThrow(NotFoundException::new);
     }
 
     @PutMapping
-    public LessonsStudentsDto updateLessonsStudentsDto(@RequestBody LessonsStudentsDto lessonsStudentsDto) {
+    public LessonsStudentsDto updateLessonsStudentsDto(@RequestBody LessonsStudentsDto lessonsStudentsDto, @ApiIgnore Principal principal) {
         if (lessonsStudentsDto.getId() == null) {
             throw new IllegalArgumentException("Id not found in the update request");
         }
-        return lessonsStudentsService.save(lessonsStudentsDto).orElseThrow(NotFoundException::new);
+        return lessonsStudentsService.save(lessonsStudentsDto, principal).orElseThrow(NotFoundException::new);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteAll() {
-//        lessonsStudentsService.deleteAll();
         return new ResponseEntity<>("-=You cannot delete all disciplines=-", HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Integer id) {
-        lessonsStudentsService.deleteById(id);
+    public void delete(@PathVariable Integer id, @ApiIgnore Principal principal) {
+        lessonsStudentsService.deleteById(id, principal);
         log.info("-=OK=-");
     }
 }

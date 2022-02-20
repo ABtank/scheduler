@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,7 @@ import ru.team.scheduler.oapi.services.ExerciseService;
 import ru.team.scheduler.oapi.services.MapperService;
 import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.entities.Exercise;
-import ru.team.scheduler.persist.entities.User;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
 import java.util.List;
@@ -43,33 +42,32 @@ public class ExercisesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ExerciseDto create(Principal principal, @Validated(New.class) @RequestBody ExerciseDto exerciseDto) {
+    public ExerciseDto create(@ApiIgnore Principal principal, @Validated(New.class) @RequestBody ExerciseDto exerciseDto) {
         Exercise newExercise = mapperService.exerciseDTOtoExercise(exerciseDto);
         newExercise.setDiscipline(new Discipline(exerciseDto.getDiscipline()));
-        return exerciseService.save(principal, newExercise).map(mapperService::exerciseToDto).orElseThrow(NotFoundException::new);
+        return exerciseService.save(newExercise, principal).map(mapperService::exerciseToDto).orElseThrow(NotFoundException::new);
     }
 
     @PutMapping
-    public ExerciseDto updateExercise(Principal principal, @Validated(Update.class) @RequestBody ExerciseDto exerciseDto) {
+    public ExerciseDto updateExercise(@ApiIgnore Principal principal, @Validated(Update.class) @RequestBody ExerciseDto exerciseDto) {
         if (exerciseDto.getId() == null) {
             throw new IllegalArgumentException("Id not found in the update request");
         }
         Exercise exercise = mapperService.exerciseDTOtoExercise(exerciseDto);
         exercise.setDiscipline(new Discipline(exerciseDto.getDiscipline()));
-        Exercise updatedExercise = exerciseService.update(principal, exercise).orElseThrow(NotFoundException::new);
+        Exercise updatedExercise = exerciseService.update(exercise, principal).orElseThrow(NotFoundException::new);
         return mapperService.exerciseToDto(updatedExercise);
     }
 
     @DeleteMapping
     public ResponseEntity<String> deleteAll() {
-        exerciseService.deleteAll();
         return new ResponseEntity<>("-=You cannot delete all exercises=-", HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Integer id) {
-        exerciseService.deleteById(id);
+    public void delete(@PathVariable Integer id,@ApiIgnore Principal principal) {
+        exerciseService.deleteById(id, principal);
         log.info("-=OK=-");
     }
 }

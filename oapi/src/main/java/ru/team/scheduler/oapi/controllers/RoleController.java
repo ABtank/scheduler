@@ -9,13 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
-import ru.team.scheduler.oapi.dto.DisciplineDto;
 import ru.team.scheduler.oapi.dto.RoleDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.RoleService;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.HashMap;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -54,31 +53,30 @@ public class RoleController {
 
     @ApiOperation(value = "Создать Роль.", notes = "Создать новую Роль", response = RoleDto.class)
     @PostMapping()
-    public RoleDto createRole(@RequestBody RoleDto roleDto) {
+    public RoleDto createRole(@RequestBody RoleDto roleDto, @ApiIgnore Principal principal) {
         roleDto.setId(null);
-        return roleService.save(roleDto).orElseThrow(NotFoundException::new);
+        return roleService.save(roleDto, principal).orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Изменить Роль.", notes = "Редактировать существующую Роль", response = RoleDto.class)
     @PutMapping
-    public RoleDto updateRole(@RequestBody RoleDto roleDto) {
+    public RoleDto updateRole(@RequestBody RoleDto roleDto, @ApiIgnore Principal principal) {
         if (roleDto.getId() == null) {
             throw new IllegalArgumentException("Role id must not be null");
         }
-        return roleService.save(roleDto).orElseThrow(NotFoundException::new);
+        return roleService.save(roleDto, principal).orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Удалить Роль.", notes = "Удалить существующую Роль")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteRoleById(@PathVariable("id") Integer roleId) {
-        roleService.deleteById(roleId);
+    public void deleteRoleById(@PathVariable("id") Integer roleId, @ApiIgnore Principal principal) {
+        roleService.deleteById(roleId, principal);
     }
 
     @ApiIgnore
     @DeleteMapping()
     public ResponseEntity<String> deleteRoles() {
-        roleService.deleteAll();
         return new ResponseEntity<>("You cannot delete all Roles", HttpStatus.BAD_REQUEST);
     }
 }
