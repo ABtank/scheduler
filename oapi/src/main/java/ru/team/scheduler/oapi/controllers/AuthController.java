@@ -56,9 +56,10 @@ public class AuthController {
     public UserDto login(@ApiIgnore Principal principal) {
         return userService.findByEmail(principal.getName()).orElseThrow(NotFoundException::new);
     }
+
     @GetMapping("/user")
     public UserResponseDto getUser(Principal principal) {
-        User user = userService.getUserByEmail(principal.getName());
+        User user = securityUserService.getUserByEmail(principal.getName());
 
         return new UserResponseDto(new UserDto(user));
     }
@@ -71,6 +72,7 @@ public class AuthController {
             @ApiResponse(responseCode = "403", description = "Вы не авторизованы. Авторизуйтесь и повторите еще раз."),
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
+
     @PostMapping
     public UserDto create(@RequestBody UserCreationDto userDTO) {
         if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
@@ -81,7 +83,7 @@ public class AuthController {
 
     @PostMapping("/registration")
     public UserResponseDto registration(@RequestBody RegistrationRequestDto requestDto) {
-        User user = userService.registerUser(requestDto);
+        User user = securityUserService.registerUser(requestDto);
 
         return new UserResponseDto(new UserDto(user));
     }

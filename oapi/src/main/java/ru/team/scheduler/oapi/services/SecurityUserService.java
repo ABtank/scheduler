@@ -61,7 +61,7 @@ public class SecurityUserService implements UserDetailsService {
     }
 
     public User registerUser(RegistrationRequestDto dtoUser) {
-        User user = new User(null, dtoUser.getEmail(), passwordEncoder.encode(dtoUser.getPassword()));
+        User user = new User(dtoUser.getEmail(), passwordEncoder.encode(dtoUser.getPassword()));
         user.setLastName(dtoUser.getLast_name());
         user.setFirstName(dtoUser.getFirst_name());
         user.setMiddleName(dtoUser.getMiddle_name());

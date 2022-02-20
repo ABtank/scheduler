@@ -19,7 +19,7 @@
           v-model="data.email"
           v-validate="{ required: true, email: true }"
           :disabled="sending"
-          data-vv-as="' '" />
+          :data-vv-as="' '" />
 
           <span
           v-if="veeErrors.has('email')"
@@ -38,7 +38,7 @@
           v-model="data.last_name"
           v-validate="{ required: true }"
           :disabled="sending"
-          data-vv-as="' '" />
+          :data-vv-as="' '" />
 
           <span
           v-if="veeErrors.has('last_name')"
@@ -57,7 +57,7 @@
           v-model="data.first_name"
           v-validate="{ required: true }"
           :disabled="sending"
-          data-vv-as="' '" />
+          :data-vv-as="' '" />
 
           <span
           v-if="veeErrors.has('first_name')"
@@ -75,7 +75,7 @@
           id="middle_name"
           v-model="data.middle_name"
           :disabled="sending"
-          data-vv-as="' '" />
+          :data-vv-as="' '" />
 
           <span
           v-if="veeErrors.has('middle_name')"
@@ -93,7 +93,7 @@
           id="phone"
           v-model="data.phone"
           :disabled="sending"
-          data-vv-as="' '" />
+          :data-vv-as="' '" />
 
           <span
           v-if="veeErrors.has('phone')"
@@ -130,7 +130,7 @@
           v-validate="{ required: true }"
           :disabled="sending"
           type="password"
-          data-vv-as="' '" />
+          :data-vv-as="' '" />
 
           <span
           v-if="veeErrors.has('password')"
@@ -150,7 +150,7 @@
           v-validate="{ required: true, password_confirmation: data.password }"
           :disabled="sending"
           type="password"
-          data-vv-as="' '" />
+          :data-vv-as="' '" />
 
           <span
           v-if="veeErrors.has('password_confirmation')"
@@ -177,7 +177,7 @@
   :md-active.sync="isRegistrationError"
   md-persistent
   class="md-error">
-    <span v-text="'Логин или пароль не правильный'" />
+    <span v-text="'Зарегистрироватсья не удалось'" />
     <md-button
     @click="isRegistrationError = false"
     v-text="'Хорошо'"
@@ -223,8 +223,9 @@ export default {
       this.sending = true;
       const response = await this.$axios.$post('/auth/registration', this.data);
       this.sending = true;
-      if (response.status) {
-        let response = await this.$auth.loginWith('local', { data: { email: values.email, password: values.password } });
+      debugger;
+      if (response.user) {
+        let response = await this.$auth.loginWith('local', { data: { email: this.data.email, password: this.data.password } });
         window.location.href = '/';
       }
       else {
