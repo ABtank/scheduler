@@ -1,8 +1,6 @@
 package ru.team.scheduler.oapi.controllers;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
@@ -10,9 +8,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
-import ru.team.scheduler.oapi.dto.DisciplineDto;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineCreationDto;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
+import ru.team.scheduler.oapi.dto.transfer.New;
+import ru.team.scheduler.oapi.dto.transfer.Update;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.DisciplineService;
 import ru.team.scheduler.persist.entities.Discipline;
@@ -83,13 +85,19 @@ public class DisciplineController {
             @ApiResponse(responseCode = "403", description = "Вы не авторизованы. Авторизуйтесь и повторите еще раз."),
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(paramType = "header", name = "x-locale", example = "en"),
+//            @ApiImplicitParam(paramType = "body", dataType = "DisciplineDto")
+//    })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DisciplineDto create(
-            @RequestBody DisciplineDto disciplineDto, @ApiIgnore Principal principal) {
-        disciplineDto.setId(null);
+            @ApiParam(name = "Дисциплина", value = "Объект Дисциплина в формате Json", required = true)
+            @Validated(New.class)
+            @RequestBody DisciplineCreationDto creationDto,
+            @ApiIgnore Principal principal) {
         return disciplineService
-                .save(DtoToEntity(disciplineDto), principal)
+                .save(DtoToEntity(new DisciplineDto(null, creationDto.getName())), principal)
                 .map(this::EntityToDto)
                 .orElseThrow(NotFoundException::new);
     }
@@ -104,8 +112,9 @@ public class DisciplineController {
     })
     @PutMapping
     public DisciplineDto updateDiscipline(
-            @ApiParam(name = "name", value = "Объект Дисциплина в формате Json", required = true)
-            @RequestBody DisciplineDto disciplineDto, @ApiIgnore Principal principal) {
+            @ApiParam(name = "Дисциплина", value = "Объект Дисциплина в формате Json", required = true)
+            @Validated(Update.class) @RequestBody DisciplineDto disciplineDto,
+            @ApiIgnore Principal principal) {
         if (disciplineDto.getId() == null) {
             throw new IllegalArgumentException("Id not found in the update request");
         }

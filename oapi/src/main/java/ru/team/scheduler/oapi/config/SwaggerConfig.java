@@ -1,9 +1,12 @@
 package ru.team.scheduler.oapi.config;
 
+import com.fasterxml.classmate.TypeResolver;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineCreationDto;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
@@ -20,6 +23,12 @@ import static springfox.documentation.spi.DocumentationType.SWAGGER_2;
 
 @Configuration
 public class SwaggerConfig {
+    private TypeResolver typeResolver;
+
+    @Autowired
+    public void setTypeResolver(TypeResolver typeResolver) {
+        this.typeResolver = typeResolver;
+    }
 
     @Bean
     public Docket apiDocket(){
@@ -33,6 +42,7 @@ public class SwaggerConfig {
                 .build()
                 .securitySchemes(singletonList(apiKey()))
                 .securityContexts(singletonList(securityContext()))
+//                .additionalModels(typeResolver.resolve(DisciplineCreationDto.class))
                 .tags(new Tag(API_AUTH, "Авторизация и регистрация пользователя."),
                         new Tag(API_DISCIPLINE, "Работа с Дисциплинами."),
                         new Tag(API_EXERCISE, "Работа с Уроками/лекциями/курсами."),

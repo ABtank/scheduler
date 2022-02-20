@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.config.JwtProvider;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.*;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.SecurityUserService;
 import ru.team.scheduler.oapi.services.UserService;
