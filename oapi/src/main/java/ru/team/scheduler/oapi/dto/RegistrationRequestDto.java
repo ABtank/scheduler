@@ -1,8 +1,6 @@
 package ru.team.scheduler.oapi.dto;
 
 import lombok.Data;
-import ru.team.scheduler.persist.entities.Role;
-import ru.team.scheduler.persist.entities.User;
 
 @Data
 public class RegistrationRequestDto { //TODO валидатор

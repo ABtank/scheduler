@@ -9,6 +9,7 @@ import Registration from "@/components/Registration";
 
 export default {
   name: "index",
+  auth: false,
   components: { Registration }
 }
 </script>

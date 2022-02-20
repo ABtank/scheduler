@@ -1,133 +1,236 @@
 <template>
 <div class="registration">
-  <a-card title="Вход" class="registration__card">
-    <a-form
-    @submit="handleSubmit"
-    :form="form">
-      <a-form-item label="E-mail">
-        <a-input
-        placeholder="E-mail"
-        name="email"
-        v-decorator="[
-          'email',
-          { rules: [{ required: true, message: 'Введите свой e-mail' }] },
-        ]"
-        v-model="data.email"/>
-      </a-form-item>
+  <md-card class="registration__card">
+    <md-card-header>
+      <div class="md-title">Регистрация</div>
+    </md-card-header>
+    <md-card-content>
+      <form
+      class="md-layout"
+      @submit.prevent="handleSubmit">
+        <md-field :class="{'md-invalid': veeErrors.has('email')}">
+          <label
+          for="email"
+          v-text="'E-mail'" />
 
-      <a-divider />
+          <md-input
+          name="email"
+          id="email"
+          v-model="data.email"
+          v-validate="{ required: true, email: true }"
+          :disabled="sending"
+          data-vv-as="' '" />
 
-      <a-form-item label="Фамилия">
-        <a-input
-          placeholder="Фамилия"
+          <span
+          v-if="veeErrors.has('email')"
+          v-text="getErrors('email')"
+          class="md-error" />
+        </md-field>
+
+        <md-field :class="{'md-invalid': veeErrors.has('last_name')}">
+          <label
+          for="email"
+          v-text="'Фамилия'" />
+
+          <md-input
           name="last_name"
-          v-decorator="[
-          'last_name',
-          { rules: [{ required: true, message: 'Введите свою фамилию' }] },
-          ]"/>
-      </a-form-item>
-      <a-form-item label="Имя">
-        <a-input
-          placeholder="Имя"
+          id="last_name"
+          v-model="data.last_name"
+          v-validate="{ required: true }"
+          :disabled="sending"
+          data-vv-as="' '" />
+
+          <span
+          v-if="veeErrors.has('last_name')"
+          v-text="getErrors('last_name')"
+          class="md-error" />
+        </md-field>
+
+        <md-field :class="{'md-invalid': veeErrors.has('first_name')}">
+          <label
+          for="first_name"
+          v-text="'Имя'" />
+
+          <md-input
           name="first_name"
-          v-decorator="[
-          'first_name',
-          { rules: [{ required: true, message: 'Введите своё имя' }] },
-          ]"/>
-      </a-form-item>
-      <a-form-item label="Отчество">
-        <a-input
-          placeholder="Отчество"
+          id="first_name"
+          v-model="data.first_name"
+          v-validate="{ required: true }"
+          :disabled="sending"
+          data-vv-as="' '" />
+
+          <span
+          v-if="veeErrors.has('first_name')"
+          v-text="getErrors('first_name')"
+          class="md-error" />
+        </md-field>
+
+        <md-field :class="{'md-invalid': veeErrors.has('middle_name')}">
+          <label
+          for="middle_name"
+          v-text="'Отчество'" />
+
+          <md-input
           name="middle_name"
-          v-decorator="[
-          'middle_name',
-          { rules: [] },
-          ]"/>
-      </a-form-item>
-      <a-form-item label="Телефон">
-        <a-input
-          placeholder="Телефон"
+          id="middle_name"
+          v-model="data.middle_name"
+          :disabled="sending"
+          data-vv-as="' '" />
+
+          <span
+          v-if="veeErrors.has('middle_name')"
+          v-text="getErrors('middle_name')"
+          class="md-error" />
+        </md-field>
+
+        <md-field :class="{'md-invalid': veeErrors.has('phone')}">
+          <label
+          for="phone"
+          v-text="'Телефон'" />
+
+          <md-input
           name="phone"
-          v-decorator="[
-          'phone',
-          { rules: [] },
-          ]"/>
-      </a-form-item>
+          id="phone"
+          v-model="data.phone"
+          :disabled="sending"
+          data-vv-as="' '" />
 
-      <a-divider />
+          <span
+          v-if="veeErrors.has('phone')"
+          v-text="getErrors('phone')"
+          class="md-error" />
+        </md-field>
 
-      <a-radio-group
-      v-decorator="[
-         'user_role',
-         { rules: [{ required: true, message: 'Выберите свою роль' }] },
-       ]"
-      name="user_role">
-        <a-radio-button
-        value="student"
-        v-text="'Студент'" />
-        <a-radio-button
-        value="teacher"
-        v-text="'Преподаватель'" />
-      </a-radio-group>
+        <div :class="{'md-invalid': veeErrors.has('user_role')}">
+          <div
+          v-text="'Кто вы?'"
+          class="registration__field-label"/>
 
-      <a-divider />
+          <md-radio
+          v-for="role in roles"
+          :key="role.id"
+          v-model="data.user_role"
+          :value="role.id">{{role.name}}</md-radio>
 
-      <a-form-item label="Пароль">
-        <a-input-password
-        placeholder="Пароль"
-        v-decorator="[
-          'password',
-          { rules: [{ required: true, message: 'Введите свой пароль' }] },
-        ]"
-        name="password"/>
-      </a-form-item>
-      <a-form-item label="Повторите пароль">
-        <a-input-password
-          placeholder="Повторите пароль"
-          v-decorator="[
-            'password_confirmation',
-            { rules: [{ required: true, message: 'Введите свой пароль' }] },
-          ]"
-          name="password_confirmation"/>
-      </a-form-item>
-      <a-divider />
-      <a-button
-      type="primary"
-      @click="handleSubmit"
-      v-text="'Войти'" />
-    </a-form>
-  </a-card>
+          <span
+          v-if="veeErrors.has('user_role')"
+          v-text="getErrors('user_role')"
+          class="md-error" />
+        </div>
+
+        <md-field :class="{'md-invalid': veeErrors.has('password')}">
+          <label
+          for="password"
+          v-text="'Пароль'" />
+
+          <md-input
+          name="password"
+          id="password"
+          v-model="data.password"
+          v-validate="{ required: true }"
+          :disabled="sending"
+          type="password"
+          data-vv-as="' '" />
+
+          <span
+          v-if="veeErrors.has('password')"
+          v-text="getErrors('password')"
+          class="md-error" />
+        </md-field>
+
+        <md-field :class="{'md-invalid': veeErrors.has('password_confirmation')}">
+          <label
+          for="password_confirmation"
+          v-text="'Повторите пароль'" />
+
+          <md-input
+          name="password_confirmation"
+          id="password_confirmation"
+          v-model="data.password_confirmation"
+          v-validate="{ required: true, password_confirmation: data.password }"
+          :disabled="sending"
+          type="password"
+          data-vv-as="' '" />
+
+          <span
+          v-if="veeErrors.has('password_confirmation')"
+          v-text="getErrors('password_confirmation')"
+          class="md-error" />
+        </md-field>
+
+        <md-progress-bar
+        md-mode="indeterminate"
+        v-if="sending" />
+
+        <md-button
+        type="submit"
+        class="md-raised md-primary registration__button"
+        :disabled="sending"
+        v-text="'Зарегистрироваться'" />
+      </form>
+    </md-card-content>
+  </md-card>
+
+  <md-snackbar
+  md-position="center"
+  :md-duration="4000"
+  :md-active.sync="isRegistrationError"
+  md-persistent
+  class="md-error">
+    <span v-text="'Логин или пароль не правильный'" />
+    <md-button
+    @click="isRegistrationError = false"
+    v-text="'Хорошо'"
+    class="md-primary" />
+  </md-snackbar>
 </div>
 </template>
 
 <script>
 export default {
-  name: "Login",
-  //auth: false,
+  name: "Registration",
   data() {
     return {
-      form: this.$form.createForm(this),
       data: {
         email: null,
+        last_name: null,
+        first_name: null,
+        middle_name: null,
+        phone: null,
+        user_role: 'ROLE_STUDENT',
         password: null,
-      }
+        password_confirmation: null,
+      },
+      value: null,
+      roles: [
+        { id: 'ROLE_STUDENT', name: 'Студент' },
+        { id: 'ROLE_TEACHER', name: 'Преподаватель' },
+      ],
+      sending: false,
+      isRegistrationError: false,
     }
   },
   methods: {
-    handleSubmit(e) {
-      this.form.validateFields((err, values) => {
-          if (!err) {
-            this.sendForm();
-          }
-      });
+    getErrors(field) {
+      return this.veeErrors.collect(field).join('. ')
     },
-    async sendForm() {
-      const values = this.form.getFieldsValue();
-      const response = await this.$axios.$post('/auth/registration', );
+
+    async handleSubmit() {
+      this.isRegistrationError = false;
+      if (!(await this.$validator.validateAll())) {
+        return;
+      }
+      this.sending = true;
+      const response = await this.$axios.$post('/auth/registration', this.data);
+      this.sending = true;
       if (response.status) {
         let response = await this.$auth.loginWith('local', { data: { email: values.email, password: values.password } });
         window.location.href = '/';
       }
+      else {
+        this.isRegistrationError = true;
+      }
+      this.sending = false;
     }
   }
 }
@@ -140,7 +243,15 @@ export default {
   align-items: center;
 
   &__card {
-    min-width: 450px;
+    max-width: 450px;
+  }
+
+  &__field-label {
+    color: #00000089;
+  }
+
+  &__button {
+    padding: 0 10px;
   }
 }
 </style>
