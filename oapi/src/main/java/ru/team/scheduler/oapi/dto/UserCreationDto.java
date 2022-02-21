@@ -23,7 +23,7 @@ public class UserCreationDto {
     private String matchingPassword;
 
     @NonNull
-    @ApiModelProperty(notes = "Адрес электронной почты", example = "[\"ROLE_USER\",\"ROLE_STUDENT\",\"ROLE_TEACHER\",\"ROLE_ADMIN\"]",value = "ROLE_USER",required = true)
+    @ApiModelProperty(notes = "Роли", example = "[\"ROLE_USER\",\"ROLE_STUDENT\",\"ROLE_TEACHER\",\"ROLE_ADMIN\"]",value = "ROLE_USER",required = true)
     private List<String> roles;
 
     public UserCreationDto(String email, String password, String matchingPassword, List<String> roles) {
