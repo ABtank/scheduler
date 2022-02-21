@@ -17,7 +17,7 @@ import java.io.StringWriter;
 @Aspect
 @Configuration
 public class AppAOP {
-    @Value("{app.debug}")
+    @Value("${app.debug}")
     private String DEBUG;
     private EmailService emailService;
 

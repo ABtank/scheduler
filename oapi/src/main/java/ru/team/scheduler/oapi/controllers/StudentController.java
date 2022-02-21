@@ -9,11 +9,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
+import ru.team.scheduler.oapi.controllers.mappers.UserMapper;
 import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.LessonsStudentsServiceImpl;
 import ru.team.scheduler.oapi.services.StudentService;
-import ru.team.scheduler.oapi.services.UserServiceImpl;
+import ru.team.scheduler.oapi.services.UserService;
 import ru.team.scheduler.persist.dto.LessonByIdDto;
 import ru.team.scheduler.persist.dto.StudentScheduleDto;
 import springfox.documentation.annotations.ApiIgnore;
@@ -25,13 +26,18 @@ import java.util.List;
 @Api(tags = {SwaggerConstant.API_USER})
 @RequestMapping("/api/v1/students")
 public class StudentController {
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
     private LessonsStudentsServiceImpl lessonsStudentsService;
     private StudentService studentService;
+    private UserMapper userMapper;
+    @Autowired
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Autowired
-    public void setUserService(UserServiceImpl userService) {
-        this.userServiceImpl = userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
     @Autowired
     public void setLessonsStudentsService(LessonsStudentsServiceImpl lessonsStudentsService) {
@@ -53,14 +59,14 @@ public class StudentController {
     @ApiModelProperty(hidden = true,accessMode = ApiModelProperty.AccessMode.READ_ONLY)
     @GetMapping("/student_info")
     public UserDto personalAccount(@ApiIgnore Principal principal){
-        return userServiceImpl.findByEmail(principal.getName()).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
+        return userService.findByEmail(principal.getName()).map(user -> userMapper.entityToDto(user)).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
     }
 
     //возвращает все лекции по текущему user(студенту)
     @GetMapping("/lessons")
     @Transactional
     public List<StudentScheduleDto> getLessons(@ApiIgnore Principal principal){
-        UserDto userDto = userServiceImpl.findByEmail(principal.getName()).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
+        UserDto userDto = userService.findByEmail(principal.getName()).map(user -> userMapper.entityToDto(user)).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
         return studentService.getScheduleByUser(userDto.getId());
     }
 
@@ -80,7 +86,7 @@ public class StudentController {
     //записаться на лекцию
     @PutMapping("/lessons/{id}")
     public List<StudentScheduleDto> subscribe(@PathVariable(name = "id") Integer lesson_id, @ApiIgnore Principal principal){
-        UserDto userDto = userServiceImpl.findByEmail(principal.getName()).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
+        UserDto userDto = userService.findByEmail(principal.getName()).map(user -> userMapper.entityToDto(user)).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
         return studentService.reserveLecture(lesson_id, userDto);
     }
 
