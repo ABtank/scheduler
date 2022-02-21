@@ -1,6 +1,7 @@
 package ru.team.scheduler.oapi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.team.scheduler.oapi.constants.CRUD;
@@ -17,6 +18,7 @@ import ru.team.scheduler.persist.repositories.StudentRepository;
 import ru.team.scheduler.persist.repositories.LessonRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,6 @@ public class StudentService extends UserServiceImpl {
     private StudentRepository studentRepository;
     private LessonsStudentsRepository lessonsStudentRepository;
     private LessonRepository lessonRepository;
-    //private UserRepository userRepository;
 
     @Autowired
     public void setStudentRepository(StudentRepository studentRepository) {
@@ -57,18 +58,17 @@ public class StudentService extends UserServiceImpl {
     }
 
     @Transactional
-    public LessonsStudent reserveLecture(Integer lesson_id, UserDto userDto) {
-        Optional findLessonStudent = lessonsStudentRepository.findByLessonIdAndStudentId(lesson_id, userDto.getId());
+    public LessonsStudent reserveLecture(Integer lesson_id, Principal principal) {
+        User user = findByEmail(principal.getName()).orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
+        Optional findLessonStudent = lessonsStudentRepository.findByLessonIdAndStudentId(lesson_id, user.getId());
         if (!findLessonStudent.isEmpty()) {
             throw new CrudException("lessons_students", CRUD.CREATE, lesson_id, "Лекция уже добавлена");
         }
         Optional<Lesson> lesson = lessonRepository.findById(lesson_id);
-        Optional<UserDto> userDtoImp = findByEmail(userDto.getEmail());
-        Optional<User> user = findByName(userDto.getFirstName());
-        if (!lesson.isEmpty() & !user.isEmpty()) {
+        if (lesson.isPresent()) {
             LessonsStudent lessonsStudent = new LessonsStudent();
             lessonsStudent.setLesson(lesson.get());
-            lessonsStudent.setStudent(user.get());
+            lessonsStudent.setStudent(user);
             lessonsStudent.setDtCreate();
             lessonsStudent.setDtModify();
             return lessonsStudentRepository.save(lessonsStudent);

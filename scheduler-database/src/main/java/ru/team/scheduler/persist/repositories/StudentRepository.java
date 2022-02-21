@@ -3,12 +3,10 @@ package ru.team.scheduler.persist.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ru.team.scheduler.persist.dto.LessonByIdDto;
 import ru.team.scheduler.persist.dto.StudentScheduleDto;
 import ru.team.scheduler.persist.entities.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT\n" +
@@ -32,6 +30,6 @@ public interface StudentRepository extends JpaRepository<User, Integer> {
             "    ON exercises.discipline_id = disciplines.id\n" +
             "WHERE\n" +
             "    ls.student_id = :user_id", nativeQuery = true)
-    List<StudentScheduleDto> getUserSchedule(@Param("user_id") Integer user_id);
+    List<StudentScheduleDto> getUserSchedule(@Param("user_id") Integer userId);
 
 }

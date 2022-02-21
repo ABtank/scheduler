@@ -11,6 +11,7 @@ import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.LessonsStudentsRepository;
 
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,17 +37,12 @@ public class LessonsStudentsServiceImpl implements LessonsStudentsService {
 
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Integer id, Principal principal) {
         lessonsStudentsRepository.deleteById(id);
     }
 
     @Override
-    public void deleteAll() {
-       lessonsStudentsRepository.deleteAll();
-    }
-
-    @Override
-    public Optional<LessonsStudentsDto> save(LessonsStudentsDto o) {
+    public Optional<LessonsStudentsDto> save(LessonsStudentsDto o, Principal principal) {
         LessonsStudent lessonsStudent = lessonsStudentsRepository.save(modelMapper.map(o, LessonsStudent.class));
         return findById(lessonsStudent.getId());
     }

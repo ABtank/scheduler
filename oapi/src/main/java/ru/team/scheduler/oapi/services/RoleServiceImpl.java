@@ -1,10 +1,8 @@
 package ru.team.scheduler.oapi.services;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.team.scheduler.oapi.dto.RoleDto;
@@ -12,6 +10,7 @@ import ru.team.scheduler.persist.entities.Role;
 import ru.team.scheduler.persist.repositories.RoleRepository;
 import ru.team.scheduler.persist.repositories.specifications.RoleSpecification;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -38,18 +37,13 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public Optional<RoleDto> save(RoleDto o) {
+    public Optional<RoleDto> save(RoleDto o, Principal principal) {
         Role role = roleRepository.save(modelMapper.map(o, Role.class));
         return findById(role.getId());
     }
 
     @Override
-    public void deleteAll() {
-        log.error("Someone decided to delete all Roles");
-    }
-
-    @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Integer id, Principal principal) {
         roleRepository.deleteById(id);
     }
 

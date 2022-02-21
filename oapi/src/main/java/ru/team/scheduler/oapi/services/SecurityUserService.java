@@ -7,21 +7,31 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.team.scheduler.oapi.dto.RegistrationRequestDto;
 import ru.team.scheduler.oapi.models.CustomUserDetails;
 import ru.team.scheduler.persist.entities.Role;
 import ru.team.scheduler.persist.entities.User;
+import ru.team.scheduler.persist.repositories.RoleRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class SecurityUserService implements UserDetailsService {
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setUserRepository(UserRepository repository) {
         this.userRepository = repository;
+    }
+
+    @Autowired
+    public void setUserRepository(RoleRepository repository) {
+        this.roleRepository = repository;
     }
 
     @Autowired
@@ -48,5 +58,20 @@ public class SecurityUserService implements UserDetailsService {
 
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
+    }
+
+    public User registerUser(RegistrationRequestDto dtoUser) {
+        User user = new User(dtoUser.getEmail(), passwordEncoder.encode(dtoUser.getPassword()));
+        user.setLastName(dtoUser.getLast_name());
+        user.setFirstName(dtoUser.getFirst_name());
+        user.setMiddleName(dtoUser.getMiddle_name());
+        user.setPhone(dtoUser.getPhone());
+        Role mainUserRole = roleRepository.findByName(dtoUser.getUser_role()).orElse(null);
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(mainUserRole);
+        user.setRoles(roleSet);
+        userRepository.save(user);
+
+        return user;
     }
 }

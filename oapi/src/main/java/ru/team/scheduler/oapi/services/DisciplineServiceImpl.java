@@ -1,18 +1,17 @@
 package ru.team.scheduler.oapi.services;
 
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.team.scheduler.oapi.dto.DisciplineDto;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
 import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.repositories.DisciplineRepository;
 import ru.team.scheduler.persist.repositories.specifications.DisciplineSpecification;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,14 +19,8 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 @Service
 @NoArgsConstructor
-public class DisciplineServiceImpl implements DisciplineService {
-    private ModelMapper modelMapper;
+public class DisciplineServiceImpl implements DisciplineService{
     private DisciplineRepository disciplineRepository;
-
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
 
     @Autowired
     public void setDisciplineRepository(DisciplineRepository disciplineRepository) {
@@ -35,47 +28,44 @@ public class DisciplineServiceImpl implements DisciplineService {
     }
 
     @Override
-    public List<DisciplineDto> findAll() {
-        return disciplineRepository.findAll().stream().map(obj -> modelMapper.map(obj, DisciplineDto.class)).collect(toList());
+    public List<Discipline> findAll() {
+//        return disciplineRepository.findAll().stream().map(obj -> modelMapper.map(obj, DisciplineDto.class)).collect(toList());
+        return null;
     }
 
     @Override
-    public List<DisciplineDto> findAll(String name) {
+    public Optional<Discipline> findById(Integer id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Discipline> findAll(String name) {
         Specification<Discipline> spec = DisciplineSpecification.trueLiteral();
         if(name != null && !name.isBlank()){
             spec = spec.and(DisciplineSpecification.nameContains(name));
         }
-        return disciplineRepository.findAll(spec).stream().map(obj -> modelMapper.map(obj, DisciplineDto.class)).collect(toList());
+        return disciplineRepository.findAll(spec, Sort.by(Sort.Direction.ASC,"name"));
     }
 
     @Override
-    public Optional<DisciplineDto> findById(Integer id) {
-        return disciplineRepository.findById(id).map(obj -> modelMapper.map(obj, DisciplineDto.class));
+    public Optional<Discipline> findByName(String name) {
+//        return disciplineRepository.findByName(name).map(obj -> modelMapper.map(obj, DisciplineDto.class));
+        return null;
     }
 
-    @Override
-    public Optional<DisciplineDto> findByName(String name) {
-        return disciplineRepository.findByName(name).map(obj -> modelMapper.map(obj, DisciplineDto.class));
-    }
+//    @Override
+//    public Optional<Discipline> findEntityByName(String name){
+//        return disciplineRepository.findByName(name);
+//    }
 
     @Override
-    public Optional<Discipline> findEntityByName(String name){
-        return disciplineRepository.findByName(name);
-    }
-
-    @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Integer id, Principal principal) {
         disciplineRepository.deleteById(id);
     }
 
     @Override
-    public void deleteAll() {
-        log.error("Someone decided to delete all Disciplines");
-    }
-
-    @Override
-    public Optional<DisciplineDto> save(DisciplineDto o) {
-        Discipline discipline = disciplineRepository.save(modelMapper.map(o, Discipline.class));
+    public Optional<Discipline> save(Discipline o, Principal principal) {
+        Discipline discipline = disciplineRepository.save(o);
         return findById(discipline.getId());
     }
 

@@ -1,21 +1,24 @@
 package ru.team.scheduler.oapi.controllers;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
-import ru.team.scheduler.oapi.dto.DisciplineDto;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineCreationDto;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
+import ru.team.scheduler.oapi.dto.transfer.New;
+import ru.team.scheduler.oapi.dto.transfer.Update;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.DisciplineService;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,8 +45,12 @@ public class DisciplineController {
     @GetMapping
     public List<DisciplineDto> getAllDisciplines(
             @ApiParam(name = "name", value = "Название Дисциплины или его часть", allowEmptyValue = true)
-            @RequestParam Optional<String> name) {
-        return disciplineService.findAll(name.orElse(""));
+            @RequestParam Optional<String> name, @ApiIgnore Principal principal) {
+        return null;
+//        return disciplineService.findAll(name.orElse(""))
+//                .stream()
+//                .map(this::EntityToDto)
+//                .collect(toList());
     }
 
     @ApiOperation(value = "Найти Дисциплину по id.", notes = "Дисциплина которую преподает учитель.", response = DisciplineDto.class)
@@ -56,7 +63,8 @@ public class DisciplineController {
     })
     @GetMapping(value = "/{id}")
     public DisciplineDto findById(@PathVariable("id") Integer id) {
-        return disciplineService.findById(id).orElseThrow(NotFoundException::new);
+        return null;
+//        return disciplineService.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Создать новую Дисциплину.", notes = "Дисциплина которую преподает учитель.", response = DisciplineDto.class)
@@ -67,13 +75,22 @@ public class DisciplineController {
             @ApiResponse(responseCode = "403", description = "Вы не авторизованы. Авторизуйтесь и повторите еще раз."),
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(paramType = "header", name = "x-locale", example = "en"),
+//            @ApiImplicitParam(paramType = "body", dataType = "DisciplineDto")
+//    })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DisciplineDto create(
-            @ApiParam(name = "name", value = "Объект Дисциплина в формате Json", required = true)
-            @RequestBody DisciplineDto disciplineDto) {
-        disciplineDto.setId(null);
-        return disciplineService.save(disciplineDto).orElseThrow(NotFoundException::new);
+            @ApiParam(name = "Дисциплина", value = "Объект Дисциплина в формате Json", required = true)
+            @Validated(New.class)
+            @RequestBody DisciplineCreationDto creationDto,
+            @ApiIgnore Principal principal) {
+        return null;
+//        return disciplineService
+//                .save(DtoToEntity(new DisciplineDto(null, creationDto.getName())), principal)
+//                .map(this::EntityToDto)
+//                .orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Изменить существующую Дисциплину.", notes = "Изменить Дисциплину которую преподает учитель.", response = DisciplineDto.class)
@@ -86,18 +103,22 @@ public class DisciplineController {
     })
     @PutMapping
     public DisciplineDto updateDiscipline(
-            @ApiParam(name = "name", value = "Объект Дисциплина в формате Json", required = true)
-            @RequestBody DisciplineDto disciplineDto) {
+            @ApiParam(name = "Дисциплина", value = "Объект Дисциплина в формате Json", required = true)
+            @Validated(Update.class) @RequestBody DisciplineDto disciplineDto,
+            @ApiIgnore Principal principal) {
         if (disciplineDto.getId() == null) {
             throw new IllegalArgumentException("Id not found in the update request");
         }
-        return disciplineService.save(disciplineDto).orElseThrow(NotFoundException::new);
+        return null;
+//        return disciplineService
+//                .save(DtoToEntity(disciplineDto), principal)
+//                .map(this::EntityToDto)
+//                .orElseThrow(NotFoundException::new);
     }
 
     @ApiIgnore
     @DeleteMapping
-    public ResponseEntity<String> deleteAll() {
-        disciplineService.deleteAll();
+    public ResponseEntity<String> deleteAll(@ApiIgnore Principal principal) {
         return new ResponseEntity<>("-=You cannot delete all disciplines=-", HttpStatus.BAD_REQUEST);
     }
 
@@ -110,9 +131,10 @@ public class DisciplineController {
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void delete(@PathVariable Integer id) {
-        disciplineService.deleteById(id);
-        log.info("-=OK=-");
+    public ResponseEntity<HttpStatus> delete(@PathVariable Integer id,@ApiIgnore Principal principal) {
+        disciplineService.deleteById(id, principal);
+        //Discipline discipline = disciplineService.findById(id).orElse(null);
+        //return ResponseEntity.ok((discipline != null)?HttpStatus.CONFLICT:HttpStatus.OK);
+        return null;
     }
 }

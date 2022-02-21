@@ -1,9 +1,9 @@
 INSERT into users  ( email, phone, first_name, middle_name, last_name, password)
 VALUES
-( 'student1@mail.ru', '9-111-111-11-11', 'Иван', 'Петрович', 'Иванов', '$2a$12$enta8hA4lniGoSeiTkLXK.0EP9hDRhJggn7jys0Hg4cW0gACmU5.u'),
-( 'student2@mail.ru','9-222-111-11-11', 'Сергей', 'Сергеевич', 'Новиков', '$2y$10$U95eOxjOhkDzMB9dBh9dROypArcE0HhUEgDtfP80APw6jXlGg9qZ.'),
-( 'teacher1@mail.ru', '9-333-111-11-11','Виктор', 'Петрович', 'Сидоров', '$2y$10$Zp8i.GEKAEYmgV5cHBxbuuEdQQkOmMd3IMqtqvxMN4Q6PszQl7wta'),
-( 'teacher2@mail.ru', '9-444-111-11-11','Леонид', 'Петрович', 'Леонов', '$2y$10$8YCyedrqvRlh9IqFjoV/Aujrt0YVwxLMXgVb.wd2vLX9yPTBSi5l6');
+( 'student1@mail.ru', '9-111-111-11-11', 'Иван', 'Петрович', 'Иванов', '$2y$10$o31XeIhBgxyWecEaHgjRV.eNLWfETe/lHrpfYhztaaDVG6IQkeWf2'),
+( 'student2@mail.ru','9-222-111-11-11', 'Сергей', 'Сергеевич', 'Новиков', '$2y$10$7BCzrcWL/Je9a5RFftCisOp7s1D7LS63zPGvsrBvrqFOHm7zvapCK'),
+( 'teacher1@mail.ru', '9-333-111-11-11','Виктор', 'Петрович', 'Сидоров', '$2y$10$FZSTTycr7kyL6BtV.A37tuW.TeD9q5Mn535Q.SAZnOOblQkFGL/bu'),
+( 'teacher2@mail.ru', '9-444-111-11-11','Леонид', 'Петрович', 'Леонов', '$2y$10$58mBHrd2opywMPa5hFOy9O5UoM/tRugP.VcxsZx7oA69RIy1ozVL6');
 
 INSERT into exercises (name, is_personal, duration, quantity, teacher_id, discipline_id )
 VALUES

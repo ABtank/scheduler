@@ -5,16 +5,20 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.config.JwtProvider;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
+import ru.team.scheduler.oapi.controllers.mappers.UserMapper;
 import ru.team.scheduler.oapi.dto.*;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.SecurityUserService;
 import ru.team.scheduler.oapi.services.UserService;
 import ru.team.scheduler.persist.entities.User;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
 
@@ -25,9 +29,14 @@ public class AuthController {
     private SecurityUserService securityUserService;
     private UserService userService;
     private JwtProvider jwtProvider;
+    private UserMapper userMapper;
 
     @Autowired
-//    @Qualifier("userServiceImpl")
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
@@ -53,9 +62,21 @@ public class AuthController {
     }
 
     @ApiOperation(value = "Кто я.", notes = "Информация авторизовавшегося пользователя", response = DisciplineDto.class)
+    @GetMapping("/whoami")
+    public ResponseEntity<UserDto> login(@ApiIgnore Principal principal) {
+        return (principal != null) ?
+                new ResponseEntity<>
+                        (userService
+                                .findByEmail(principal.getName())
+                                .map(userMapper::userToDto)
+                                .orElseThrow(NotFoundException::new), HttpStatus.OK)
+                : new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+    }
+
     @GetMapping("/user")
-    public UserResponseDto login(Principal principal) {
+    public UserResponseDto getUser(Principal principal) {
         User user = securityUserService.getUserByEmail(principal.getName());
+
         return new UserResponseDto(new UserDto(user));
     }
 
@@ -67,11 +88,20 @@ public class AuthController {
             @ApiResponse(responseCode = "403", description = "Вы не авторизованы. Авторизуйтесь и повторите еще раз."),
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
+
     @PostMapping
     public UserDto create(@RequestBody UserCreationDto userDTO) {
         if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
             throw new IllegalArgumentException("password not matching");
         }
-        return userService.save(userDTO).orElseThrow(NotFoundException::new);
+        return userService.registration(userDTO)
+                .map(user -> userMapper.entityToDto(user))
+                .orElseThrow(NotFoundException::new);
+    }
+
+    @PostMapping("/registration")
+    public UserResponseDto registration(@RequestBody RegistrationRequestDto requestDto) {
+        User user = securityUserService.registerUser(requestDto);
+        return new UserResponseDto(new UserDto(user));
     }
 }

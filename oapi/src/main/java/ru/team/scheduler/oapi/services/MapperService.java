@@ -2,11 +2,11 @@ package ru.team.scheduler.oapi.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.team.scheduler.oapi.dto.*;
-import ru.team.scheduler.persist.entities.*;
+import ru.team.scheduler.oapi.dto.ExerciseDto;
+import ru.team.scheduler.oapi.dto.TeacherWorkingDayDto;
+import ru.team.scheduler.persist.entities.Exercise;
+import ru.team.scheduler.persist.entities.TeacherWorkingDay;
 import ru.team.scheduler.persist.repositories.ExercisesRepository;
 import ru.team.scheduler.persist.repositories.WeekdaysRepository;
 
@@ -14,48 +14,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static java.util.stream.Collectors.toList;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class MapperService {
-    private final PasswordEncoder passwordEncoder;
-    private final ModelMapper modelMapper;
     private final WeekdaysRepository weekdaysRepository;
     private final ExercisesRepository exercisesRepository;
-
-
-    public UserDto userToDto(User user) {
-        return new UserDto(user.getId(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getFirstName(),
-                user.getMiddleName(),
-                user.getLastName(),
-                user.getRoles()
-                        .stream()
-                        .map(Role::getName)
-                        .collect(toList()),
-                user.getDtCreate(),
-                user.getDtModify());
-    }
-
-    public User userDtoToUser(UserDto userDto, User user) {
-        user.setEmail(userDto.getEmail());
-        user.setPhone(userDto.getPhone());
-        user.setFirstName(userDto.getFirstName());
-        user.setMiddleName(userDto.getMiddleName());
-        user.setLastName(userDto.getLastName());
-        return user;
-    }
-
-    public User userCreationDTOtoUser(UserCreationDto userCreationDTO) {
-        return new User(
-                userCreationDTO.getEmail(),
-                passwordEncoder.encode(userCreationDTO.getPassword())
-        );
-    }
 
     public ExerciseDto exerciseToDto(Exercise exercise) {
         return new ExerciseDto(
@@ -65,19 +29,21 @@ public class MapperService {
                 exercise.getDuration(),
                 exercise.getQuantity(),
                 exercise.getTeacher().getId(),
-                exercise.getTeacher().getFirstName(),
+                exercise.getTeacher().getFirstName() + " " + exercise.getTeacher().getMiddleName() + " " +
+                exercise.getTeacher().getLastName(),
                 exercise.getDiscipline().getId(),
                 exercise.getDiscipline().getName()
         );
     }
 
-    public Exercise exerciseDtoToExercise(ExerciseDto exerciseDto) {
+    public Exercise exerciseDTOtoExercise(ExerciseDto exerciseDto) {
         return new Exercise(
                 exerciseDto.getId(),
                 exerciseDto.getName(),
                 exerciseDto.getIsPersonal(),
                 exerciseDto.getDuration(),
-                exerciseDto.getQuantity());
+                exerciseDto.getQuantity()
+        );
     }
 
     public TeacherWorkingDay teacherWorkingDayDtoToTeacherWorkingDay(TeacherWorkingDayDto teacherWorkingDaysDto) {
