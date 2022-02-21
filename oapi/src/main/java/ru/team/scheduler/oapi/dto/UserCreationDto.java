@@ -4,15 +4,17 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import ru.team.scheduler.oapi.dto.transfer.Update;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 public class UserCreationDto {
-    @NonNull
-    @Email
+    @Email(groups = {Update.class})
+    @NotNull(groups = {Update.class})
     @ApiModelProperty(notes = "Адрес электронной почты", example = "email@mail.com",required = true)
     private String email;
     @NonNull

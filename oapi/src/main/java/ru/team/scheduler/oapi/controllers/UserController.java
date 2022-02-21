@@ -7,10 +7,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.controllers.mappers.UserMapper;
 import ru.team.scheduler.oapi.dto.UserDto;
+import ru.team.scheduler.oapi.dto.transfer.Update;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.UserService;
 import springfox.documentation.annotations.ApiIgnore;
@@ -69,7 +71,8 @@ public class UserController {
             @ApiResponse(responseCode = "403", description = "Вы не авторизованы. Авторизуйтесь и повторите еще раз."),
             @ApiResponse(responseCode = "401", description = "У вас не достаточно прав доступа."),
     })
-    public UserDto updateUser(@RequestBody UserDto userDTO, @ApiIgnore Principal principal) {
+    public UserDto updateUser(
+            @Validated(Update.class) @RequestBody UserDto userDTO, @ApiIgnore Principal principal) {
         if (userDTO.getId() == null && userService.checkIsUnique(userDTO.getEmail(), userDTO.getId())) {
             throw new IllegalArgumentException("Id not found in the update request or email not unique");
         }

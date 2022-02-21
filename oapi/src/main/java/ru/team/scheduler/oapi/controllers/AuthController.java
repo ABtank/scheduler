@@ -8,18 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.config.JwtProvider;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.controllers.mappers.UserMapper;
 import ru.team.scheduler.oapi.dto.*;
 import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
+import ru.team.scheduler.oapi.dto.transfer.Update;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
-import ru.team.scheduler.oapi.services.MapperService;
 import ru.team.scheduler.oapi.services.SecurityUserService;
 import ru.team.scheduler.oapi.services.UserService;
 import ru.team.scheduler.persist.entities.User;
-import ru.team.scheduler.persist.repositories.RoleRepository;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
@@ -92,7 +92,7 @@ public class AuthController {
     })
 
     @PostMapping
-    public UserDto create(@RequestBody UserCreationDto userDTO) {
+    public UserDto create(@Validated(Update.class) @RequestBody UserCreationDto userDTO) {
         if (!userDTO.getPassword().equals(userDTO.getMatchingPassword())) {
             throw new IllegalArgumentException("password not matching");
         }
@@ -101,6 +101,7 @@ public class AuthController {
                 .orElseThrow(NotFoundException::new);
     }
 
+    @ApiOperation(value = "Зарегистрировать нового Пользователя с ФИО и 1 ролью.", notes = "Зарегистрировать нового Пользователя (учитель, студент).")
     @PostMapping("/registration")
     public UserResponseDto registration(@RequestBody RegistrationRequestDto requestDto) {
         User user = securityUserService.registerUser(requestDto);
