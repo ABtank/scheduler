@@ -1,33 +1,38 @@
-        DROP TABLE IF EXISTS users_roles;
-        DROP TABLE IF EXISTS teachers_disciplines;
-        DROP TABLE IF EXISTS lessons_students;
-        DROP TABLE IF EXISTS teachers_students;
-        DROP TABLE IF EXISTS disciplines;
-        DROP TABLE IF EXISTS lessons;
-        DROP TABLE IF EXISTS exercises;
-        DROP TABLE IF EXISTS roles;
-        DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users_roles;
+DROP TABLE IF EXISTS teachers_disciplines;
+DROP TABLE IF EXISTS lessons_students;
+DROP TABLE IF EXISTS teachers_students;
+DROP TABLE IF EXISTS disciplines;
+DROP TABLE IF EXISTS lessons;
+DROP TABLE IF EXISTS exercises;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS users;
+
+DROP TABLE IF EXISTS weekdays;
+DROP TABLE IF EXISTS teacher_working_days;
+DROP TABLE IF EXISTS calendar_days;
 
 -- пользовательские роли (ADMIN, USER,TEACHER)
 CREATE TABLE roles
 (
-    id   int auto_increment primary key,
-    name varchar(255) not null,
+    id          int auto_increment primary key,
+    name        varchar(255) not null,
+    description varchar(255) null,
     CONSTRAINT UK_role_name unique (name)
 );
 
 
-CREATE TABLE users  -- not null только те поля, которые нужны при регистрации
+CREATE TABLE users -- not null только те поля, которые нужны при регистрации
 (
-    id         int auto_increment primary key,
-    email      varchar(255) not null,
-    phone      varchar(128) null,
+    id          int auto_increment primary key,
+    email       varchar(255) not null,
+    phone       varchar(128) null,
     first_name  varchar(50)  null,
     middle_name varchar(50)  null,
     last_name   varchar(50)  null,
-    password   varchar(128) not null,
-    dt_create  timestamp    NOT NULL DEFAULT NOW(),
-    dt_modify  timestamp    NOT NULL DEFAULT NOW(),
+    password    varchar(128) not null,
+    dt_create   timestamp    NOT NULL DEFAULT NOW(),
+    dt_modify   timestamp    NOT NULL DEFAULT NOW(),
     CONSTRAINT UK_user_email UNIQUE (email)
 );
 
@@ -46,9 +51,8 @@ CREATE TABLE users_roles
 );
 
 
-
 -- преподаваемые предметы
-CREATE TABLE disciplines  -- subjects очень размытое понятие и боюсь получить конфликты имен Классов в Java
+CREATE TABLE disciplines -- subjects очень размытое понятие и боюсь получить конфликты имен Классов в Java
 (
     id   int auto_increment primary key,
     name VARCHAR(50) NOT NULL,
@@ -89,11 +93,11 @@ CREATE TABLE exercises
 CREATE TABLE lessons -- из них и формируется рассписание
 (
     id          INT auto_increment primary key,
-    name        VARCHAR(128)   NOT NULL, -- название сеанса, если пусто, то ставится название урока
-    link        VARCHAR(256)   NOT NULL, -- ссыль на вебинар
-    exercise_id INT            NOT NULL,
+    name        VARCHAR(128) NOT NULL, -- название сеанса, если пусто, то ставится название урока
+    link        VARCHAR(256) NOT NULL, -- ссыль на вебинар
+    exercise_id INT          NOT NULL,
 --    price       decimal(19, 2) NULL,     -- цена (ну а вдруг)
-    dt_start    timestamp      NOT NULL, -- время начала урока(сеанса)
+    dt_start    timestamp    NOT NULL, -- время начала урока(сеанса)
     CONSTRAINT lessons_exercise_id
         FOREIGN KEY (exercise_id) REFERENCES exercises (id)
 );
@@ -107,7 +111,7 @@ CREATE TABLE lessons_students -- можно обозвать (tickets)
     is_attend  BOOLEAN   not null DEFAULT (1), -- присутствовал или нет. Изначально ставиться присутствовал. Если поздно отменил, то прогул = 0. Если вовремя отменил запись, то удаление записи.
     dt_create  timestamp NOT NULL DEFAULT NOW(),
     dt_modify  timestamp NOT NULL DEFAULT NOW(),
-    CONSTRAINT UK_lesson_id_student_id UNIQUE(lesson_id, student_id),
+    CONSTRAINT UK_lesson_id_student_id UNIQUE (lesson_id, student_id),
     CONSTRAINT tickets_lesson_id
         FOREIGN KEY (lesson_id) REFERENCES lessons (id),
     constraint tickets_student_id
@@ -123,27 +127,47 @@ CREATE TABLE teachers_students
     archive    Boolean            DEFAULT 0,     -- поместить ученика в архив (типа удалить)
     dt_create  timestamp NOT NULL DEFAULT NOW(), -- так, для аудита когда присоединился
     dt_modify  timestamp NOT NULL DEFAULT NOW(), -- когда ушел в архив или вернулся из него
-    CONSTRAINT UK_teacher_id_student_id UNIQUE  (teacher_id, student_id),
+    CONSTRAINT UK_teacher_id_student_id UNIQUE (teacher_id, student_id),
     CONSTRAINT teachers_students_teacher_id
         FOREIGN KEY (teacher_id) REFERENCES users (id),
     constraint teachers_students_student_id
         FOREIGN KEY (student_id) REFERENCES users (id)
 );
 
-INSERT INTO roles (name)
-VALUES ('ROLE_USER'),
-       ('ROLE_TEACHER'),
-       ('ROLE_ADMIN');
 
-INSERT INTO disciplines (name)
-VALUES ('Физика'),
-       ('Химия'),
-       ('Психология'),
-       ('Математика'),
-       ('Литература'),
-       ('Английский язык'),
-       ('Природоведение'),
-       ('Информатика'),
-       ('История');
+
+CREATE TABLE weekdays -- дни недели
+(
+    id   INT auto_increment primary key,
+    name VARCHAR(128) NOT NULL, -- день недели
+    CONSTRAINT UK_day_name unique (name)
+);
+
+
+CREATE TABLE teacher_working_days -- дни и часы работы учителя
+(
+    id          INT auto_increment primary key,
+    weekday_id  INT  NOT NULL,
+    exercise_id INT  NOT NULL,
+    time_start  time NOT NULL, -- время начала рабочего дня
+    time_end    time NOT NULL, -- время окончания рабочего дня
+    CONSTRAINT w_id
+        FOREIGN KEY (weekday_id) REFERENCES weekdays (id),
+    constraint ex_id
+        FOREIGN KEY (exercise_id) REFERENCES exercises (id)
+);
+
+
+CREATE TABLE calendar_days -- даты и дни недели , праздники, в базе должен быть заполнен на фиксированный период (год, полугодие)
+(
+    id         INT auto_increment primary key,
+    day_date   date    NOT NULL,
+    weekday_id INT     NOT NULL,
+    is_holiday BOOLEAN NOT NULL,
+    constraint weekday_id
+        FOREIGN KEY (weekday_id) REFERENCES weekdays (id)
+);
+
+
 
 
