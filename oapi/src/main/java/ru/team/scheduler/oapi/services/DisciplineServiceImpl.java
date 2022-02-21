@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
 import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.repositories.DisciplineRepository;
 import ru.team.scheduler.persist.repositories.specifications.DisciplineSpecification;
@@ -14,8 +13,6 @@ import ru.team.scheduler.persist.repositories.specifications.DisciplineSpecifica
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 @Slf4j
 @Service
 @NoArgsConstructor
@@ -29,13 +26,7 @@ public class DisciplineServiceImpl implements DisciplineService{
 
     @Override
     public List<Discipline> findAll() {
-//        return disciplineRepository.findAll().stream().map(obj -> modelMapper.map(obj, DisciplineDto.class)).collect(toList());
-        return null;
-    }
-
-    @Override
-    public Optional<Discipline> findById(Integer id) {
-        return Optional.empty();
+        return disciplineRepository.findAll();
     }
 
     @Override
@@ -48,15 +39,14 @@ public class DisciplineServiceImpl implements DisciplineService{
     }
 
     @Override
-    public Optional<Discipline> findByName(String name) {
-//        return disciplineRepository.findByName(name).map(obj -> modelMapper.map(obj, DisciplineDto.class));
-        return null;
+    public Optional<Discipline> findById(Integer id) {
+        return disciplineRepository.findById(id);
     }
 
-//    @Override
-//    public Optional<Discipline> findEntityByName(String name){
-//        return disciplineRepository.findByName(name);
-//    }
+    @Override
+    public Optional<Discipline> findByName(String name) {
+        return disciplineRepository.findByName(name);
+    }
 
     @Override
     public void deleteById(Integer id, Principal principal) {
