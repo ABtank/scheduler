@@ -17,7 +17,7 @@ public final class RoleSpecification {
         return (root, quary, builder) -> builder.like(root.get("name"), "%" + name + "%");
     }
     public static Specification<Role> descriptionContains(String descr) {
-        return (root, quary, builder) -> builder.like(root.get("name"), "%" + descr + "%");
+        return (root, quary, builder) -> builder.like(root.get("description"), "%" + descr + "%");
     }
 
 }
