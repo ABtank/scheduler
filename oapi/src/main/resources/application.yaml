@@ -7,9 +7,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/scheduler
-    username: postgres
-    password: 123
+    url: jdbc:postgresql://ec2-54-170-212-187.eu-west-1.compute.amazonaws.com:5432/dcfq9v2dlv3fhi
+    username: pruuhbqgbdzdmm
+    password: 45711699fd20b60ee2e85f845493cd1a43bde2d55c50dc7d4878b31b0a4e3247
 
   mvc:
     hiddenmethod:
