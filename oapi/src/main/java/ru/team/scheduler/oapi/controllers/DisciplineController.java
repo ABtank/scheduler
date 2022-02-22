@@ -58,7 +58,7 @@ public class DisciplineController {
             @RequestParam Optional<String> name, @ApiIgnore Principal principal) {
         return disciplineService.findAll(name.orElse(""))
                 .stream()
-                .map(this::EntityToDto)
+                .map(this::entityToDto)
                 .collect(toList());
     }
 
@@ -73,7 +73,7 @@ public class DisciplineController {
     @GetMapping(value = "/{id}")
     public DisciplineDto findById(@PathVariable("id") Integer id) {
         return disciplineService.findById(id)
-                .map(this::EntityToDto)
+                .map(this::entityToDto)
                 .orElseThrow(NotFoundException::new);
     }
 
@@ -97,8 +97,8 @@ public class DisciplineController {
             @RequestBody DisciplineCreationDto creationDto,
             @ApiIgnore Principal principal) {
         return disciplineService
-                .save(DtoToEntity(new DisciplineDto(null, creationDto.getName())), principal)
-                .map(this::EntityToDto)
+                .save(dtoToEntity(new DisciplineDto(null, creationDto.getName())), principal)
+                .map(this::entityToDto)
                 .orElseThrow(NotFoundException::new);
     }
 
@@ -119,8 +119,8 @@ public class DisciplineController {
             throw new IllegalArgumentException("Id not found in the update request");
         }
         return disciplineService
-                .save(DtoToEntity(disciplineDto), principal)
-                .map(this::EntityToDto)
+                .save(dtoToEntity(disciplineDto), principal)
+                .map(this::entityToDto)
                 .orElseThrow(NotFoundException::new);
     }
 
@@ -146,11 +146,11 @@ public class DisciplineController {
     }
 
 
-    private Discipline DtoToEntity(DisciplineDto dto) {
+    private Discipline dtoToEntity(DisciplineDto dto) {
         return modelMapper.map(dto, Discipline.class);
     }
 
-    private DisciplineDto EntityToDto(Discipline dto) {
+    private DisciplineDto entityToDto(Discipline dto) {
         return modelMapper.map(dto, DisciplineDto.class);
     }
 }
