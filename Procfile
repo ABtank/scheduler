@@ -1,1 +1,1 @@
-java -jar target/oapi-0.0.1-SNAPSHOT.jar
+java -jar oapi/target/oapi-0.0.1-SNAPSHOT.jar
