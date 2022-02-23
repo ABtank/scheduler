@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 import ru.team.scheduler.persist.dto.LessonByIdDto;
 import ru.team.scheduler.persist.entities.Lesson;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 import java.util.Optional;
 
 public interface LessonRepository extends JpaRepository<Lesson, Integer> {
@@ -29,5 +31,10 @@ public interface LessonRepository extends JpaRepository<Lesson, Integer> {
             "    ON exercises.discipline_id = disciplines.id\n" +
             "WHERE\n" +
             "    lessons.id = :lessons_id", nativeQuery = true)
+
     Optional<LessonByIdDto> getLessonById(@Param("lessons_id") Integer lessons_id);
+
+    List<Lesson> findAll();
+
+    Optional<Lesson> findByExerciseId(Integer exerciseId);
 }

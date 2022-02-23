@@ -24,7 +24,7 @@ public class TeacherWorkingDaysController {
    private final TeacherWorkingDaysService teacherWorkingDaysService;
 
     @GetMapping
-    public List<TeacherWorkingDayDto> getAllDisciplines() {
+    public List<TeacherWorkingDayDto> getAllTeacherWorkingDays() {
         return teacherWorkingDaysService.findAll();
     }
 
