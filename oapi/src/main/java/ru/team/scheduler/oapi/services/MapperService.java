@@ -5,11 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.dto.TeacherWorkingDayDto;
+import ru.team.scheduler.oapi.dto.lesson.LessonDto;
+import ru.team.scheduler.oapi.utils.DateFormatter;
 import ru.team.scheduler.persist.entities.Exercise;
+import ru.team.scheduler.persist.entities.Lesson;
 import ru.team.scheduler.persist.entities.TeacherWorkingDay;
 import ru.team.scheduler.persist.repositories.ExercisesRepository;
 import ru.team.scheduler.persist.repositories.WeekdaysRepository;
 
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +24,7 @@ import java.util.Date;
 public class MapperService {
     private final WeekdaysRepository weekdaysRepository;
     private final ExercisesRepository exercisesRepository;
+    private final DateFormatter dateFormatter;
 
     public ExerciseDto exerciseToDto(Exercise exercise) {
         return new ExerciseDto(
@@ -77,4 +82,26 @@ public class MapperService {
                 teacherWorkingDay.getTime_end().toString()
         );
     }
+
+    public LessonDto lessonToDto(Lesson lesson) {
+        return new LessonDto(
+                lesson.getId(),
+                lesson.getName(),
+                lesson.getLink(),
+                lesson.getExercise().getId(),
+                lesson.getExercise().getName(),
+                lesson.getDtStart().toString()
+        );
+    }
+
+    public Lesson lessonDtoToLesson(LessonDto lessonDto) {
+        return new Lesson(
+                lessonDto.getId(),
+                lessonDto.getLesson(),
+                lessonDto.getLink(),
+                exercisesRepository.findById(lessonDto.getExerciseId()).get(),
+                dateFormatter.stringToDateTime(lessonDto.getDtStart())
+        );
+    }
+
 }
