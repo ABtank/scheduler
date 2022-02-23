@@ -18,18 +18,18 @@
           </md-list-item>
 
           <md-list-item>
-            <md-icon>login</md-icon>
-            <span class="md-list-item-text"><router-link to="/login">Login</router-link></span>
-          </md-list-item>
-
-          <md-list-item>
             <md-icon>person_add</md-icon>
             <span class="md-list-item-text"><router-link to="/registration">Регистрация</router-link></span>
           </md-list-item>
 
           <md-list-item>
+            <md-icon>login</md-icon>
+            <span class="md-list-item-text"><router-link to="/login">Login</router-link></span>
+          </md-list-item>
+
+          <md-list-item>
             <md-icon>person_off</md-icon>
-            <span class="md-list-item-text"><router-link to="/registration">Login of</router-link></span>
+            <span class="md-list-item-text"><router-link to="/registration">Logoff</router-link></span>
           </md-list-item>
 
           <md-list-item>
