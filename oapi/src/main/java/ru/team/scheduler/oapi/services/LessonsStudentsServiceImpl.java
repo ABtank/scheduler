@@ -5,16 +5,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.LessonsStudentsRepository;
 
-
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Data
 @RequiredArgsConstructor
@@ -24,15 +21,16 @@ public class LessonsStudentsServiceImpl implements LessonsStudentsService {
 
     private final ModelMapper modelMapper;
     private final LessonsStudentsRepository lessonsStudentsRepository;
+    private final MapperService mapperService;
 
     @Override
-    public List<LessonsStudentsDto> findAll() {
-        return lessonsStudentsRepository.findAll().stream().map(LessonsStudentsDto::new).collect(Collectors.toList());
+    public List<LessonsStudent> findAll() {
+        return lessonsStudentsRepository.findAll();
     }
 
     @Override
-    public Optional<LessonsStudentsDto> findById(Integer id) {
-        return lessonsStudentsRepository.findById(id).map(LessonsStudentsDto::new);
+    public Optional<LessonsStudent> findById(Integer id) {
+        return lessonsStudentsRepository.findById(id);
     }
 
 
@@ -42,10 +40,10 @@ public class LessonsStudentsServiceImpl implements LessonsStudentsService {
     }
 
     @Override
-    public Optional<LessonsStudentsDto> save(LessonsStudentsDto o, Principal principal) {
-        LessonsStudent lessonsStudent = lessonsStudentsRepository.save(modelMapper.map(o, LessonsStudent.class));
-        return findById(lessonsStudent.getId());
+    public Optional<LessonsStudent> save(LessonsStudent lessonsStudent, Principal principal) {
+        return Optional.of(lessonsStudentsRepository.save(lessonsStudent));
     }
+
 
     @Override
     public long count() {

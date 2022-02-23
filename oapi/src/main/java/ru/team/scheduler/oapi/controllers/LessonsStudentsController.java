@@ -1,6 +1,5 @@
 package ru.team.scheduler.oapi.controllers;
 
-
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +10,9 @@ import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.LessonsStudentsService;
+import ru.team.scheduler.oapi.services.MapperService;
+import ru.team.scheduler.persist.entities.LessonsStudent;
 import springfox.documentation.annotations.ApiIgnore;
-
 import java.security.Principal;
 
 @Slf4j
@@ -22,16 +22,20 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class LessonsStudentsController {
     private final LessonsStudentsService lessonsStudentsService;
+    private final MapperService mapperService;
 
     @GetMapping(value = "/{id}")
     public LessonsStudentsDto findById(@PathVariable("id") Integer id) {
-        return lessonsStudentsService.findById(id).orElseThrow(NotFoundException::new);
+        LessonsStudent ls = lessonsStudentsService.findById(id).orElseThrow(NotFoundException::new);
+        return new LessonsStudentsDto(ls);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LessonsStudentsDto create(@RequestBody LessonsStudentsDto lessonsStudentsDto, @ApiIgnore Principal principal) {
-        return lessonsStudentsService.save(lessonsStudentsDto, principal).orElseThrow(NotFoundException::new);
+        LessonsStudent lessonsStudent = mapperService.lessonsStudentDtoToLessonsStudent(lessonsStudentsDto);
+        LessonsStudent ls = lessonsStudentsService.save(lessonsStudent, principal).orElseThrow(NotFoundException::new);
+        return mapperService.LessonsStudentToLessonsStudentDto(ls);
     }
 
     @PutMapping
@@ -39,7 +43,9 @@ public class LessonsStudentsController {
         if (lessonsStudentsDto.getId() == null) {
             throw new IllegalArgumentException("Id not found in the update request");
         }
-        return lessonsStudentsService.save(lessonsStudentsDto, principal).orElseThrow(NotFoundException::new);
+        LessonsStudent lessonsStudent = mapperService.lessonsStudentDtoToLessonsStudent(lessonsStudentsDto);
+        LessonsStudent ls = lessonsStudentsService.save(lessonsStudent, principal).orElseThrow(NotFoundException::new);
+        return mapperService.LessonsStudentToLessonsStudentDto(ls);
     }
 
     @DeleteMapping

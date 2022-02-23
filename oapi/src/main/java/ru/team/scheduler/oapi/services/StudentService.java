@@ -12,6 +12,7 @@ import ru.team.scheduler.persist.dto.LessonByIdDto;
 import ru.team.scheduler.persist.dto.StudentScheduleDto;
 import ru.team.scheduler.persist.entities.Lesson;
 import ru.team.scheduler.persist.entities.LessonsStudent;
+import ru.team.scheduler.persist.entities.TeachersStudent;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.LessonsStudentsRepository;
 import ru.team.scheduler.persist.repositories.StudentRepository;
@@ -27,20 +28,23 @@ public class StudentService extends UserServiceImpl {
     private StudentRepository studentRepository;
     private LessonsStudentsRepository lessonsStudentRepository;
     private LessonRepository lessonRepository;
+    private TeachersStudentService teachersStudentService;
 
     @Autowired
     public void setStudentRepository(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
-
     @Autowired
     public void setLessonsStudentRepository(LessonsStudentsRepository lessonsStudentRepository) {
         this.lessonsStudentRepository = lessonsStudentRepository;
     }
-
     @Autowired
     public void setLessonRepository(LessonRepository lessonRepository) {
         this.lessonRepository = lessonRepository;
+    }
+    @Autowired
+    public void setTeachersStudentService(TeachersStudentService teachersStudentService) {
+        this.teachersStudentService = teachersStudentService;
     }
 
     public List<StudentScheduleDto> getScheduleByUser(Integer user_id) {
@@ -71,6 +75,14 @@ public class StudentService extends UserServiceImpl {
             lessonsStudent.setStudent(user);
             lessonsStudent.setDtCreate();
             lessonsStudent.setDtModify();
+
+            //проверка на существование и запись в таблицу teachers_students
+            User teacher = lesson.get().getExercise().getTeacher();
+            Optional<TeachersStudent> recordStudentAndTeacher = teachersStudentService.findByStudentAndTeacher(user, teacher);
+            if (recordStudentAndTeacher.isEmpty()){
+                teachersStudentService.save(user, teacher);
+            }
+
             return lessonsStudentRepository.save(lessonsStudent);
         }
 

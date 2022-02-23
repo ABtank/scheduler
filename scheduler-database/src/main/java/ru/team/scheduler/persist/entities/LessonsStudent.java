@@ -1,7 +1,9 @@
 package ru.team.scheduler.persist.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,6 +14,7 @@ import java.util.Date;
 @Table(name = "lessons_students")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class LessonsStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

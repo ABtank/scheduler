@@ -4,14 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
+import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.dto.TeacherWorkingDayDto;
 import ru.team.scheduler.oapi.dto.lesson.LessonDto;
 import ru.team.scheduler.oapi.utils.DateFormatter;
 import ru.team.scheduler.persist.entities.Exercise;
 import ru.team.scheduler.persist.entities.Lesson;
+import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.TeacherWorkingDay;
-import ru.team.scheduler.persist.repositories.ExercisesRepository;
-import ru.team.scheduler.persist.repositories.WeekdaysRepository;
+import ru.team.scheduler.persist.repositories.*;
 
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
@@ -25,6 +26,8 @@ public class MapperService {
     private final WeekdaysRepository weekdaysRepository;
     private final ExercisesRepository exercisesRepository;
     private final DateFormatter dateFormatter;
+    private final LessonRepository lessonRepository;
+    private final UserRepository userRepository;
 
     public ExerciseDto exerciseToDto(Exercise exercise) {
         return new ExerciseDto(
@@ -102,6 +105,20 @@ public class MapperService {
                 exercisesRepository.findById(lessonDto.getExerciseId()).get(),
                 dateFormatter.stringToDateTime(lessonDto.getDtStart())
         );
+    }
+
+    public LessonsStudent lessonsStudentDtoToLessonsStudent(LessonsStudentsDto lessonsStudentsDto){
+        return new LessonsStudent(
+                lessonsStudentsDto.getId(),
+                lessonRepository.findById(lessonsStudentsDto.getLessonId()).get(),
+                userRepository.findById(lessonsStudentsDto.getStudentId()).get(),
+                true,
+                lessonsStudentsDto.getDtCreate(),
+                lessonsStudentsDto.getDtCreate()
+        );
+    }
+    public LessonsStudentsDto LessonsStudentToLessonsStudentDto(LessonsStudent lessonsStudent){
+        return new LessonsStudentsDto(lessonsStudent);
     }
 
 }
