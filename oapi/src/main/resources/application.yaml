@@ -31,7 +31,7 @@ spring:
     #    host: smtp.mail.ru
     port: 587
     #    port: 465
-    username: schedulerfreeapp@gmail.com
+    username: schedulerfreeapp
     # spprtscheduler
     #    username: scheduler@internet.ru
     password: tfeyskjgkdsjpfet
@@ -49,8 +49,7 @@ spring:
             enable: true
 
 mail:
-  name:
-#  name: schedulerfreeapp@gmail.com
+  name: schedulerfreeapp@gmail.com
   # spprtscheduler@gmail.com
   #  name: scheduler@internet.ru
   debug: true
