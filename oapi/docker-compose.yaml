@@ -1,5 +1,9 @@
 version: '3'
 services:
+  scheduler-frontend-vue:
+    image: frontend-vue:latest
+    ports:
+      - 3000:3000
   scheduler-oapi-backend:
     image: registry.heroku.com/team-scheduler-oapi/web:latest
     ports:
