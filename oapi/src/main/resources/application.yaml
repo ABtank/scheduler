@@ -1,5 +1,5 @@
 server:
-  port: 8189
+  port: ${PORT:8189}
   servlet:
     context-path: /sh
 
@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/scheduler
     username: root
-    password: root
+    password: 12345678
 
   mvc:
     hiddenmethod:
