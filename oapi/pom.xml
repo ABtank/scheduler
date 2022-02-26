@@ -18,7 +18,7 @@
         <springfox.version>3.0.0</springfox.version>
         <jsonwebtoken.version>0.11.2</jsonwebtoken.version>
         <modelmapper.version>2.4.5</modelmapper.version>
-        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
 
     <dependencies>
@@ -150,5 +150,5 @@
             </plugin>
         </plugins>
     </build>
-
+<!--    https://team-scheduler-oapi.herokuapp.com/ | https://git.heroku.com/team-scheduler-oapi.git-->
 </project>
