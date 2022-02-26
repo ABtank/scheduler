@@ -1,6 +1,7 @@
 package ru.team.scheduler.oapi.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.LessonsStudentsService;
+import ru.team.scheduler.oapi.services.LessonsStudentsServiceImpl;
 import ru.team.scheduler.oapi.services.MapperService;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 import springfox.documentation.annotations.ApiIgnore;
@@ -21,7 +23,7 @@ import java.security.Principal;
 @Api(tags = {SwaggerConstant.API_EXERCISE})
 @RequiredArgsConstructor
 public class LessonsStudentsController {
-    private final LessonsStudentsService lessonsStudentsService;
+    private final LessonsStudentsServiceImpl lessonsStudentsService;
     private final MapperService mapperService;
 
     @GetMapping(value = "/{id}")
@@ -59,4 +61,5 @@ public class LessonsStudentsController {
         lessonsStudentsService.deleteById(id, principal);
         log.info("-=OK=-");
     }
+
 }

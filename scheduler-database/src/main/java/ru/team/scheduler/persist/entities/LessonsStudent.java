@@ -32,6 +32,9 @@ public class LessonsStudent {
     @Column(name = "is_attend", nullable = false)
     private Boolean isAttend = false;
 
+    @Column(name = "is_accepted", nullable = false)
+    private Boolean isAccepted = false;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_create", updatable = false)

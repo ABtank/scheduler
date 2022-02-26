@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.LessonsStudentsRepository;
@@ -52,5 +54,16 @@ public class LessonsStudentsServiceImpl implements LessonsStudentsService {
 
     public List<LessonsStudent> findAllByStudent(User student){
         return lessonsStudentsRepository.findAllByStudent(student);
+    }
+
+    @Transactional
+    public LessonsStudentsDto accept(Integer id, Principal principal) {
+        Optional<LessonsStudent> lessonsStudentOpt = lessonsStudentsRepository.findById(id);
+        if (lessonsStudentOpt.get().getIsAccepted()){
+            throw new IllegalArgumentException("Запись уже подтверждена!");
+        }
+        lessonsStudentOpt.get().setIsAccepted(true);
+        Optional<LessonsStudent> updatedLessonsStudentOpt = save(lessonsStudentOpt.get(), principal);
+        return mapperService.LessonsStudentToLessonsStudentDto(updatedLessonsStudentOpt.get());
     }
 }

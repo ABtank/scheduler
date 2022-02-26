@@ -83,6 +83,7 @@ CREATE TABLE exercises
     quantity      INT          NOT NULL DEFAULT (1), -- если не персоналка, то указывается кол-во народу
     teacher_id    INT          NOT NULL,             -- учитель
     discipline_id INT          NOT NULL,             -- дисциплина
+    is_validate   BOOLEAN      NOT NULL DEFAULT (0), -- необходимость подтверждения учениками присутствия на занятии
     CONSTRAINT FK_exercises_teacher_id
         FOREIGN KEY (teacher_id) REFERENCES users (id),
     CONSTRAINT FK_exercises_discipline_id
@@ -109,6 +110,7 @@ CREATE TABLE lessons_students -- можно обозвать (tickets)
     lesson_id  int       not null,
     student_id int       not null,
     is_attend  BOOLEAN   not null DEFAULT (1), -- присутствовал или нет. Изначально ставиться присутствовал. Если поздно отменил, то прогул = 0. Если вовремя отменил запись, то удаление записи.
+    is_accepted BOOLEAN  not null DEFAULT (0), -- подтверждение присутствия на занятии (ставится 1, если учитель требует обязательного подтверждения по предмету)
     dt_create  timestamp NOT NULL DEFAULT NOW(),
     dt_modify  timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT UK_lesson_id_student_id UNIQUE (lesson_id, student_id),

@@ -96,4 +96,11 @@ public class StudentController {
         return new LessonsStudentsDto(lessonsStudent);
     }
 
+    //нужно будет запустить счетчик на отсылку писем студентам, если запись на урок надо подтверждать
+    @ApiOperation(value = "Подтверждение записи на урок, если этого требует преподаватель", notes = "Подтвердить запись на урок")
+    @PutMapping("/accept/{id}")
+    public LessonsStudentsDto accept(@PathVariable("id") Integer lessonsStudentsId, Principal principal){
+        return lessonsStudentsService.accept(lessonsStudentsId, principal);
+    }
+
 }

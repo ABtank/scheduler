@@ -112,7 +112,8 @@ public class MapperService {
                 lessonsStudentsDto.getId(),
                 lessonRepository.findById(lessonsStudentsDto.getLessonId()).get(),
                 userRepository.findById(lessonsStudentsDto.getStudentId()).get(),
-                true,
+                lessonsStudentsDto.getIsAttend(),
+                lessonsStudentsDto.getAccepted(),
                 lessonsStudentsDto.getDtCreate(),
                 lessonsStudentsDto.getDtCreate()
         );
