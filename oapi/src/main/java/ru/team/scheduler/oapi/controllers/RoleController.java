@@ -4,20 +4,28 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.RoleDto;
+import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
+import ru.team.scheduler.oapi.dto.transfer.New;
+import ru.team.scheduler.oapi.dto.transfer.Update;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.RoleService;
+import ru.team.scheduler.persist.entities.Discipline;
+import ru.team.scheduler.persist.entities.Role;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequestMapping("/api/v1/roles")
@@ -26,6 +34,13 @@ import java.util.Optional;
 public class RoleController {
 
     private RoleService roleService;
+
+    private ModelMapper modelMapper;
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @Autowired
     public void setRoleService(RoleService roleService) {
@@ -42,29 +57,42 @@ public class RoleController {
         Map<String, String> params = Map.of(
                 "name", name.orElse(""),
                 "descr", descr.orElse(""));
-        return roleService.findAll(params);
+        return roleService.findAll(params)
+                .stream()
+                .map(this::EntityToDto)
+                .collect(Collectors.toList());
     }
 
     @ApiOperation(value = "Найти Роль по id.", notes = "Получение одной Роли по id", response = RoleDto.class)
     @GetMapping("/{id}")
     public RoleDto getRoleById(@PathVariable("id") Integer roleId) {
-        return roleService.findById(roleId).orElseThrow(NotFoundException::new);
+        return roleService.findById(roleId)
+                .map(this::EntityToDto)
+                .orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Создать Роль.", notes = "Создать новую Роль", response = RoleDto.class)
     @PostMapping()
-    public RoleDto createRole(@RequestBody RoleDto roleDto, @ApiIgnore Principal principal) {
+    public RoleDto createRole(@RequestBody
+                                  @Validated(New.class)
+                                          RoleDto roleDto, @ApiIgnore Principal principal) {
         roleDto.setId(null);
-        return roleService.save(roleDto, principal).orElseThrow(NotFoundException::new);
+        return roleService.save(DtoToEntity(roleDto), principal)
+                .map(this::EntityToDto)
+                .orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Изменить Роль.", notes = "Редактировать существующую Роль", response = RoleDto.class)
     @PutMapping
-    public RoleDto updateRole(@RequestBody RoleDto roleDto, @ApiIgnore Principal principal) {
+    public RoleDto updateRole(@RequestBody
+                                  @Validated(Update.class)
+                                          RoleDto roleDto, @ApiIgnore Principal principal) {
         if (roleDto.getId() == null) {
             throw new IllegalArgumentException("Role id must not be null");
         }
-        return roleService.save(roleDto, principal).orElseThrow(NotFoundException::new);
+        return roleService.save(DtoToEntity(roleDto), principal)
+                .map(this::EntityToDto)
+                .orElseThrow(NotFoundException::new);
     }
 
     @ApiOperation(value = "Удалить Роль.", notes = "Удалить существующую Роль")
@@ -78,5 +106,13 @@ public class RoleController {
     @DeleteMapping()
     public ResponseEntity<String> deleteRoles() {
         return new ResponseEntity<>("You cannot delete all Roles", HttpStatus.BAD_REQUEST);
+    }
+
+    private Role DtoToEntity(RoleDto dto) {
+        return modelMapper.map(dto, Role.class);
+    }
+
+    private RoleDto EntityToDto(Role dto) {
+        return modelMapper.map(dto, RoleDto.class);
     }
 }
