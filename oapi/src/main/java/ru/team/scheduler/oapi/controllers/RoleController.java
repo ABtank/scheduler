@@ -12,12 +12,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.RoleDto;
-import ru.team.scheduler.oapi.dto.discipline.DisciplineDto;
 import ru.team.scheduler.oapi.dto.transfer.New;
 import ru.team.scheduler.oapi.dto.transfer.Update;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.RoleService;
-import ru.team.scheduler.persist.entities.Discipline;
 import ru.team.scheduler.persist.entities.Role;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -59,7 +57,7 @@ public class RoleController {
                 "descr", descr.orElse(""));
         return roleService.findAll(params)
                 .stream()
-                .map(this::EntityToDto)
+                .map(this::entityToDto)
                 .collect(Collectors.toList());
     }
 
@@ -67,7 +65,7 @@ public class RoleController {
     @GetMapping("/{id}")
     public RoleDto getRoleById(@PathVariable("id") Integer roleId) {
         return roleService.findById(roleId)
-                .map(this::EntityToDto)
+                .map(this::entityToDto)
                 .orElseThrow(NotFoundException::new);
     }
 
@@ -77,8 +75,8 @@ public class RoleController {
                                   @Validated(New.class)
                                           RoleDto roleDto, @ApiIgnore Principal principal) {
         roleDto.setId(null);
-        return roleService.save(DtoToEntity(roleDto), principal)
-                .map(this::EntityToDto)
+        return roleService.save(dtoToEntity(roleDto), principal)
+                .map(this::entityToDto)
                 .orElseThrow(NotFoundException::new);
     }
 
@@ -90,8 +88,8 @@ public class RoleController {
         if (roleDto.getId() == null) {
             throw new IllegalArgumentException("Role id must not be null");
         }
-        return roleService.save(DtoToEntity(roleDto), principal)
-                .map(this::EntityToDto)
+        return roleService.save(dtoToEntity(roleDto), principal)
+                .map(this::entityToDto)
                 .orElseThrow(NotFoundException::new);
     }
 
@@ -108,11 +106,11 @@ public class RoleController {
         return new ResponseEntity<>("You cannot delete all Roles", HttpStatus.BAD_REQUEST);
     }
 
-    private Role DtoToEntity(RoleDto dto) {
+    private Role dtoToEntity(RoleDto dto) {
         return modelMapper.map(dto, Role.class);
     }
 
-    private RoleDto EntityToDto(Role dto) {
-        return modelMapper.map(dto, RoleDto.class);
+    private RoleDto entityToDto(Role role) {
+        return modelMapper.map(role, RoleDto.class);
     }
 }
