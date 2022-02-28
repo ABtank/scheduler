@@ -50,6 +50,7 @@ VALUES ('История', 'no', 1, '2022-02-13 09:15:00'),
 
 INSERT INTO lessons_students (lesson_id, student_id)
 VALUES (1, 1),
+       (2, 1),
        (2, 2);
 
 INSERT INTO teachers_students (teacher_id, student_id)
