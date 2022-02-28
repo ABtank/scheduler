@@ -111,6 +111,7 @@ CREATE TABLE lessons_students -- можно обозвать (tickets)
     student_id int       not null,
     is_attend  BOOLEAN   not null DEFAULT (1), -- присутствовал или нет. Изначально ставиться присутствовал. Если поздно отменил, то прогул = 0. Если вовремя отменил запись, то удаление записи.
     is_accepted BOOLEAN  not null DEFAULT (0), -- подтверждение присутствия на занятии (ставится 1, если учитель требует обязательного подтверждения по предмету)
+    is_confirmation_request_sent BOOLEAN  not null DEFAULT (0), -- отправлен запрос на подтверждение присутствия на занятии (на почту, смс и т.п.)
     dt_create  timestamp NOT NULL DEFAULT NOW(),
     dt_modify  timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT UK_lesson_id_student_id UNIQUE (lesson_id, student_id),

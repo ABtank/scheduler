@@ -33,9 +33,9 @@ INSERT INTO teachers_disciplines (teacher_id, discipline_id)
 VALUES (1, 6),
        (4, 1);
 
-INSERT into exercises (name, is_personal, duration, quantity, teacher_id, discipline_id)
-VALUES ('Урок истории', true, 45, 1, 3, 9),
-       ('Урок физики', true, 45, 1, 4, 1);
+INSERT into exercises (name, is_personal, duration, quantity, teacher_id, discipline_id, is_validate)
+VALUES ('Урок истории', true, 45, 1, 3, 9, false),
+       ('Урок физики', true, 45, 1, 4, 1, true);
 
 INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 4),
