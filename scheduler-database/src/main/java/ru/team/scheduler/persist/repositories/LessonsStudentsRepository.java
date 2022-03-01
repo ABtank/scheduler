@@ -37,6 +37,6 @@ public interface LessonsStudentsRepository extends JpaRepository<LessonsStudent,
             "    WHERE\n" +
             "        exercises.is_validate\n" +
             "        AND NOT lessons_students.is_confirmation_request_sent\n" +
-            "        AND TIMESTAMPDIFF(hour, :curDate, lessons.dt_start) <= 24", nativeQuery = true)
+            "        AND DATE_PART('hour',:curDate - lessons.dt_start) <= 24", nativeQuery = true)
     List<DataToSendNotification> getStudentsToSendNotification(@Param("curDate") Date curDate);
 }
