@@ -84,6 +84,6 @@ VALUES ('2022-02-14', 1, false),
        ('2022-02-26', 6, false),
        ('2022-02-27', 7, false);
 
-INSERT INTO teacher_working_days (weekday_id, exercise_id, time_start, time_end)
+INSERT INTO teacher_working_days (weekday_id, exercise_id, t_start, t_end)
 VALUES ('1', '1', '09:00:00', '11:00:00'),
        ('2', '1', '09:00:00', '11:00:00');
