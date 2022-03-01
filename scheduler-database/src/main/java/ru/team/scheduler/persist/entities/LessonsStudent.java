@@ -32,6 +32,12 @@ public class LessonsStudent {
     @Column(name = "is_attend", nullable = false)
     private Boolean isAttend = false;
 
+    @Column(name = "is_accepted", nullable = false)
+    private Boolean isAccepted = false;
+
+    @Column(name = "is_confirmation_request_sent", nullable = false)
+    private Boolean isСonfirmationRequestSent = false;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dt_create", updatable = false)
@@ -58,5 +64,15 @@ public class LessonsStudent {
     @PreUpdate
     public void setDtModify() {
         this.dtModify = new Date();
+    }
+
+    public LessonsStudent(Integer id, Lesson lesson, User student, Boolean isAttend, Boolean isAccepted, Date dtCreate, Date dtModify) {
+        this.id = id;
+        this.lesson = lesson;
+        this.student = student;
+        this.isAttend = isAttend;
+        this.isAccepted = isAccepted;
+        this.dtCreate = dtCreate;
+        this.dtModify = dtModify;
     }
 }

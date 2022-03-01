@@ -31,8 +31,7 @@ public interface LessonRepository extends JpaRepository<Lesson, Integer> {
             "    ON exercises.discipline_id = disciplines.id\n" +
             "WHERE\n" +
             "    lessons.id = :lessons_id", nativeQuery = true)
-
-    Optional<LessonByIdDto> getLessonById(@Param("lessons_id") Integer lessons_id);
+    Optional<LessonByIdDto> getLessonById(@Param("lessons_id") Integer lessonsId);
 
     List<Lesson> findAll();
 
