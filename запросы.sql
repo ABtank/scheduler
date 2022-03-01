@@ -36,8 +36,8 @@ FROM
     WHERE
         exercises.is_validate
         AND NOT lessons_students.is_confirmation_request_sent
-        AND TIMESTAMPDIFF(hour, '2022-02-13 09:15:00', lessons.dt_start) <= 24) as ls;
---        AND TIMESTAMPDIFF(hour, :curDate, lessons.dt_start) <= 24) as ls;
+         AND DATE_PART('hour', '2022-02-13 09:15:00' - lessons.dt_start) <= 24) as ls;
+--        AND DATE_PART('hour', :curDate - lessons.dt_start) <= 24) as ls;
 
 
    @Query("UPDATE Person p SET p.name = :name WHERE p.id = :id")
