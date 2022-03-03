@@ -1,5 +1,5 @@
 server:
-  port: 8189
+  port: ${PORT:8189}
   servlet:
     context-path: /sh
 
@@ -7,12 +7,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/scheduler
-    username: postgres
-    password: 123
-
-  profiles:
-    active:
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
 
   mvc:
     hiddenmethod:
@@ -27,19 +24,11 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
         ddl-auto: validate
 
-  # spprtscheduler@gmail.com
-  # iRIIYtpu6e1&
   mail:
     host: smtp.gmail.com
-    #    host: smtp.mail.ru
     port: 587
-    #    port: 465
     username: schedulerfreeapp
-    # spprtscheduler
-    #    username: scheduler@internet.ru
     password: tfeyskjgkdsjpfet
-    # cxlqdyrubemqswzn
-    #    password: WmfjcKa8aSvYvkhQBm0H
     properties:
       mail:
         transport:
@@ -53,9 +42,7 @@ spring:
 
 mail:
   name: schedulerfreeapp@gmail.com
-  # spprtscheduler@gmail.com
-  #  name: scheduler@internet.ru
-  debug: true
+  debug: false
 
 app:
   debug: true
@@ -67,7 +54,7 @@ logging:
     ru:
       team:
         scheduler:
-          oapi: INFO
+          oapi: ERROR
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

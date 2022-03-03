@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
+import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.dto.TeacherWorkingDayDto;
 import ru.team.scheduler.oapi.dto.lesson.LessonDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
@@ -11,10 +12,12 @@ import ru.team.scheduler.oapi.utils.DateFormatterInstantToString;
 import ru.team.scheduler.oapi.utils.DateFormatterStringToInstant;
 import ru.team.scheduler.persist.entities.Exercise;
 import ru.team.scheduler.persist.entities.Lesson;
+import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.TeacherWorkingDay;
 import ru.team.scheduler.persist.entities.Weekday;
 import ru.team.scheduler.persist.repositories.ExercisesRepository;
 import ru.team.scheduler.persist.repositories.WeekdaysRepository;
+import ru.team.scheduler.persist.repositories.*;
 
 import javax.transaction.Transactional;
 import java.text.ParseException;
@@ -30,6 +33,9 @@ public class MapperService {
     private final ExercisesRepository exercisesRepository;
     private final DateFormatterStringToInstant dateFormatterStringToInstant;
     private final DateFormatterInstantToString dateFormatterInstantToString;
+    private final DateFormatter dateFormatter;
+    private final LessonRepository lessonRepository;
+    private final UserRepository userRepository;
 
     public ExerciseDto exerciseToDto(Exercise exercise) {
         return new ExerciseDto(
@@ -110,6 +116,21 @@ public class MapperService {
                 exercisesRepository.findById(lessonDto.getExerciseId()).get(),
                 dateFormatterStringToInstant.stringToDateTime(lessonDto.getDtStart())
         );
+    }
+
+    public LessonsStudent lessonsStudentDtoToLessonsStudent(LessonsStudentsDto lessonsStudentsDto){
+        return new LessonsStudent(
+                lessonsStudentsDto.getId(),
+                lessonRepository.findById(lessonsStudentsDto.getLessonId()).get(),
+                userRepository.findById(lessonsStudentsDto.getStudentId()).get(),
+                lessonsStudentsDto.getIsAttend(),
+                lessonsStudentsDto.getIsAccepted(),
+                lessonsStudentsDto.getDtCreate(),
+                lessonsStudentsDto.getDtCreate()
+        );
+    }
+    public LessonsStudentsDto LessonsStudentToLessonsStudentDto(LessonsStudent lessonsStudent){
+        return new LessonsStudentsDto(lessonsStudent);
     }
 
 }

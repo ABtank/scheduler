@@ -24,22 +24,19 @@ public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
     @Override
-    public List<RoleDto> findAll() {
-        return roleRepository.findAll().stream()
-                .map(RoleDto::new)
-                .collect(Collectors.toList());
+    public List<Role> findAll() {
+        return roleRepository.findAll();
     }
 
     @Override
-    public Optional<RoleDto> findById(Integer id) {
-        return roleRepository.findById(id).map(RoleDto::new);
+    public Optional<Role> findById(Integer id) {
+        return roleRepository.findById(id);
     }
 
 
     @Override
-    public Optional<RoleDto> save(RoleDto o, Principal principal) {
-        Role role = roleRepository.save(modelMapper.map(o, Role.class));
-        return findById(role.getId());
+    public Optional<Role> save(Role o, Principal principal) {
+        return Optional.of(roleRepository.save(o));
     }
 
     @Override
@@ -53,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<RoleDto> findAll(Map<String, String> params) {
+    public List<Role> findAll(Map<String, String> params) {
         Specification<Role> spec = RoleSpecification.trueLiteral();
         if(!params.get("name").isBlank()){
             spec = spec.and(RoleSpecification.nameContains(params.get("name")));
@@ -61,8 +58,6 @@ public class RoleServiceImpl implements RoleService {
         if(!params.get("descr").isBlank()){
             spec = spec.and(RoleSpecification.descriptionContains(params.get("descr")));
         }
-        return roleRepository.findAll(spec).stream()
-                .map(RoleDto::new)
-                .collect(Collectors.toList());
+        return roleRepository.findAll(spec);
     }
 }

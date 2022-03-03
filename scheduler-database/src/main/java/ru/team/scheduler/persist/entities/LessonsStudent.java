@@ -1,7 +1,9 @@
 package ru.team.scheduler.persist.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,6 +14,7 @@ import java.util.Date;
 @Table(name = "lessons_students")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class LessonsStudent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +31,12 @@ public class LessonsStudent {
 
     @Column(name = "is_attend", nullable = false)
     private Boolean isAttend = false;
+
+    @Column(name = "is_accepted", nullable = false)
+    private Boolean isAccepted = false;
+
+    @Column(name = "is_confirmation_request_sent", nullable = false)
+    private Boolean isСonfirmationRequestSent = false;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,5 +64,15 @@ public class LessonsStudent {
     @PreUpdate
     public void setDtModify() {
         this.dtModify = new Date();
+    }
+
+    public LessonsStudent(Integer id, Lesson lesson, User student, Boolean isAttend, Boolean isAccepted, Date dtCreate, Date dtModify) {
+        this.id = id;
+        this.lesson = lesson;
+        this.student = student;
+        this.isAttend = isAttend;
+        this.isAccepted = isAccepted;
+        this.dtCreate = dtCreate;
+        this.dtModify = dtModify;
     }
 }

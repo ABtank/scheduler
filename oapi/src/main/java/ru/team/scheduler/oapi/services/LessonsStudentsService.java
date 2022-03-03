@@ -1,6 +1,6 @@
 package ru.team.scheduler.oapi.services;
 
-import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
+import ru.team.scheduler.persist.entities.LessonsStudent;
 
-public interface LessonsStudentsService extends BasicService<LessonsStudentsDto, Integer> {
+public interface LessonsStudentsService extends BasicService<LessonsStudent, Integer> {
 }
