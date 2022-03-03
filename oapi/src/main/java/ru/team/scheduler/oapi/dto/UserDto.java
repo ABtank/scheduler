@@ -58,4 +58,15 @@ public class UserDto {
         this.middleName = user.getMiddleName();
         this.lastName = user.getLastName();
     }
+
+    public String getInfo(){
+        StringBuilder sb = new StringBuilder();
+        if(this.firstName != null && !this.firstName.isBlank())sb.append(this.firstName).append(" ");
+        if(this.middleName != null && !this.middleName.isBlank())sb.append(this.middleName).append(" ");
+        if(this.lastName != null && !this.lastName.isBlank())sb.append(this.lastName);
+        sb.append("\n");
+        if(this.phone != null && !this.phone.isBlank())sb.append("Phone: ").append(this.phone).append("\n");
+        sb.append("Email: ").append(this.email).append("\n");
+        return sb.toString();
+    }
 }
