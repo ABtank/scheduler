@@ -32,8 +32,6 @@ public class MapperService {
     private final WeekdaysRepository weekdaysRepository;
     private final ExercisesRepository exercisesRepository;
     private final DateFormatterStringToInstant dateFormatterStringToInstant;
-    private final DateFormatterInstantToString dateFormatterInstantToString;
-    private final DateFormatter dateFormatter;
     private final LessonRepository lessonRepository;
     private final UserRepository userRepository;
 

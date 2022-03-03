@@ -16,10 +16,10 @@ public class TeacherWorkingDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (name ="tStart")
+    @Column (name ="t_start")
     private Instant timeStart;
 
-    @Column (name ="tEnd")
+    @Column (name ="t_end")
     private Instant timeEnd;
 
     @ManyToOne(optional = false)
