@@ -91,7 +91,7 @@ public class StudentController {
     @ApiOperation(value = "Записаться на урок", notes = "Добавиться в указанную группу")
     @PostMapping("/lessons/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public LessonsStudentsDto subscribe(@PathVariable("id") Integer lesson_id, Principal principal) {
+    public LessonsStudentsDto subscribe(@PathVariable("id") Integer lesson_id, @ApiIgnore Principal principal) {
         LessonsStudent lessonsStudent = studentService.reserveLecture(lesson_id, principal);
         return new LessonsStudentsDto(lessonsStudent);
     }
@@ -99,7 +99,7 @@ public class StudentController {
     //нужно будет запустить счетчик на отсылку писем студентам, если запись на урок надо подтверждать
     @ApiOperation(value = "Подтверждение записи на урок, если этого требует преподаватель", notes = "Подтвердить запись на урок")
     @PutMapping("/accept/{id}")
-    public LessonsStudentsDto accept(@PathVariable("id") Integer lessonsStudentsId, Principal principal){
+    public LessonsStudentsDto accept(@PathVariable("id") Integer lessonsStudentsId, @ApiIgnore Principal principal){
         return lessonsStudentsService.accept(lessonsStudentsId, principal);
     }
 
