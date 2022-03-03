@@ -20,12 +20,12 @@ public class RoleDto {
     @NotNull(groups = {Update.class})
     private Integer id;
 
-    @NonNull()
     @NotNull(groups = {New.class, Update.class})
-    @ApiModelProperty(notes = "Уникальное название роли", example = "ROLE_USER",required = true)
+    @ApiModelProperty(notes = "Уникальное название роли", example = "ROLE_DISPATCHER",required = true)
     private String name;
 
     @NotNull(groups = {New.class, Update.class})
+    @ApiModelProperty(notes = "Описание роли", example = "Диспетчер",required = true)
     private String description;
 
     public RoleDto(Role role) {
