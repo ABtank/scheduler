@@ -1,23 +1,21 @@
 package ru.team.scheduler.oapi.utils;
 
-import io.swagger.models.auth.In;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
-import java.util.TimeZone;
 
 @Component
-public class DateFormatter {
+public class DateFormatterStringToInstant {
     private final SimpleDateFormat simpleDateFormatForDateAndTime;
     private final SimpleDateFormat simpleDateFormatForDate;
     private final SimpleDateFormat simpleDateFormatForTime;
 
-    public DateFormatter() {
-        this.simpleDateFormatForTime = new SimpleDateFormat("hh:mm");
-        this.simpleDateFormatForDateAndTime = new SimpleDateFormat("yy-MM-dd hh:mm");
+    public DateFormatterStringToInstant() {
+        this.simpleDateFormatForTime = new SimpleDateFormat("HH:mm");
+        this.simpleDateFormatForDateAndTime = new SimpleDateFormat("yy-MM-dd HH:mm");
         this.simpleDateFormatForDate = new SimpleDateFormat("yy-MM-dd");
 //        simpleDateFormatForDate.setTimeZone(TimeZone.getTimeZone("Novosibirsk"));
 //        simpleDateFormatForDateAndTime.setTimeZone(TimeZone.getTimeZone("Novosibirsk"));

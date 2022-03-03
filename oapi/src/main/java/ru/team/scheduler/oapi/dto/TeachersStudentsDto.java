@@ -15,7 +15,7 @@ public class TeachersStudentsDto {
   private Integer studentId;
   private String studentFirstName;
   private Boolean archive;
-  private Date dtCreate;
+  private String dtCreate;
   private Date dtModify;
 
 }
