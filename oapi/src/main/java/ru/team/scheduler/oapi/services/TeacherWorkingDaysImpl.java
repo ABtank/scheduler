@@ -6,6 +6,7 @@ import ru.team.scheduler.oapi.dto.TeacherWorkingDayDto;
 import ru.team.scheduler.persist.entities.TeacherWorkingDay;
 import ru.team.scheduler.persist.repositories.TeacherWorkingDaysRepository;
 
+import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -17,14 +18,13 @@ public class TeacherWorkingDaysImpl implements TeacherWorkingDaysService {
     private final MapperService mapperService;
 
     @Override
-    public List<TeacherWorkingDayDto> findAll() {
-        return teacherWorkingDaysRepository.findAll()
-                .stream().map(mapperService::teacherWorkingDayToTeacherWorkingDayDto).toList();
+    public List<TeacherWorkingDay> findAll() {
+        return teacherWorkingDaysRepository.findAll();
     }
 
     @Override
-    public Optional<TeacherWorkingDayDto> findById(Integer id) {
-        return teacherWorkingDaysRepository.findById(id). map(mapperService::teacherWorkingDayToTeacherWorkingDayDto);
+    public Optional<TeacherWorkingDay> findById(Integer id) {
+        return teacherWorkingDaysRepository.findById(id);
     }
 
     @Override
@@ -33,14 +33,20 @@ public class TeacherWorkingDaysImpl implements TeacherWorkingDaysService {
     }
 
     @Override
-    public Optional<TeacherWorkingDayDto> save(TeacherWorkingDayDto o, Principal principal) {
+    @Transactional
+    public Optional<TeacherWorkingDay> save(TeacherWorkingDay o, Principal principal) {
         TeacherWorkingDay teacherWorkingDay = teacherWorkingDaysRepository
-                .save(mapperService.teacherWorkingDayDtoToTeacherWorkingDay(o));
+                .save(o);
         return findById(teacherWorkingDay.getId());
     }
 
     @Override
     public long count() {
         return teacherWorkingDaysRepository.count();
+    }
+
+    @Override
+    public Optional<TeacherWorkingDay> update(TeacherWorkingDay teacherWorkingDay) {
+        return Optional.empty();
     }
 }

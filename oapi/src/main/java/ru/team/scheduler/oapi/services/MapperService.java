@@ -6,17 +6,21 @@ import org.springframework.stereotype.Component;
 import ru.team.scheduler.oapi.dto.ExerciseDto;
 import ru.team.scheduler.oapi.dto.TeacherWorkingDayDto;
 import ru.team.scheduler.oapi.dto.lesson.LessonDto;
+import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.utils.DateFormatterInstantToString;
 import ru.team.scheduler.oapi.utils.DateFormatterStringToInstant;
 import ru.team.scheduler.persist.entities.Exercise;
 import ru.team.scheduler.persist.entities.Lesson;
 import ru.team.scheduler.persist.entities.TeacherWorkingDay;
+import ru.team.scheduler.persist.entities.Weekday;
 import ru.team.scheduler.persist.repositories.ExercisesRepository;
 import ru.team.scheduler.persist.repositories.WeekdaysRepository;
 
+import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -52,23 +56,26 @@ public class MapperService {
         );
     }
 
+    @Transactional
     public TeacherWorkingDay teacherWorkingDayDtoToTeacherWorkingDay(TeacherWorkingDayDto teacherWorkingDaysDto) {
-        Date dateStart = null;
-        Date dateEnd = null;
-        try {
-            dateStart = new SimpleDateFormat("hh:mm").parse(teacherWorkingDaysDto.getTimeStart());
-            dateEnd = new SimpleDateFormat("hh:mm").parse(teacherWorkingDaysDto.getTimeEnd());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        assert dateStart != null;
         TeacherWorkingDay teacherWorkingDay = new TeacherWorkingDay(
-                dateStart.toInstant(),
-                dateEnd.toInstant()
+                dateFormatterStringToInstant.stringToTime(teacherWorkingDaysDto.getTimeStart()),
+                dateFormatterStringToInstant.stringToTime(teacherWorkingDaysDto.getTimeEnd())
         );
-        teacherWorkingDay.setExercise(exercisesRepository.findByName(teacherWorkingDaysDto.getExerciseName()).get());
-        teacherWorkingDay.setWeekday(weekdaysRepository.findByName(teacherWorkingDaysDto.getWeekDayName()).get());
+        Optional<Exercise> exercise = exercisesRepository.findById(teacherWorkingDaysDto.getExerciseId());
+        if(exercise.isEmpty()){
+            throw new NotFoundException("Exercise not found");
+        }
+        else{
+            teacherWorkingDay.setExercise(exercise.get());
+        }
+        Optional<Weekday> weekday = weekdaysRepository.findById(teacherWorkingDaysDto.getWeekdayId());
+        if(weekday.isEmpty()){
+            throw new NotFoundException("Weekday with such name is not found");
+        }
+        else {
+            teacherWorkingDay.setWeekday(weekday.get());
+        }
         return teacherWorkingDay;
     }
 
@@ -79,8 +86,8 @@ public class MapperService {
                 teacherWorkingDay.getExercise().getId(),
                 teacherWorkingDay.getWeekday().getName(),
                 teacherWorkingDay.getExercise().getName(),
-                teacherWorkingDay.getTime_start().toString(),
-                teacherWorkingDay.getTime_end().toString()
+                teacherWorkingDay.getTimeStart().toString(),
+                teacherWorkingDay.getTimeEnd().toString()
         );
     }
 

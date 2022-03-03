@@ -14,8 +14,8 @@ public class DateFormatterStringToInstant {
     private final SimpleDateFormat simpleDateFormatForTime;
 
     public DateFormatterStringToInstant() {
-        this.simpleDateFormatForTime = new SimpleDateFormat("hh:mm");
-        this.simpleDateFormatForDateAndTime = new SimpleDateFormat("yy-MM-dd hh:mm");
+        this.simpleDateFormatForTime = new SimpleDateFormat("HH:mm");
+        this.simpleDateFormatForDateAndTime = new SimpleDateFormat("yy-MM-dd HH:mm");
         this.simpleDateFormatForDate = new SimpleDateFormat("yy-MM-dd");
 //        simpleDateFormatForDate.setTimeZone(TimeZone.getTimeZone("Novosibirsk"));
 //        simpleDateFormatForDateAndTime.setTimeZone(TimeZone.getTimeZone("Novosibirsk"));
