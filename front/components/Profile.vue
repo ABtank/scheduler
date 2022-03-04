@@ -1,8 +1,8 @@
 <template>
-<div class="registration">
-  <md-card class="registration__card">
+<div class="profile">
+  <md-card class="profile__card">
     <md-card-header>
-      <div class="md-title">Регистрация</div>
+      <div class="md-title">Профиль пользователя</div>
     </md-card-header>
     <md-card-content>
       <form
@@ -101,90 +101,98 @@
           class="md-error" />
         </md-field>
 
-        <div :class="{'md-invalid': veeErrors.has('user_role')}">
-          <div
-          v-text="'Кто вы?'"
-          class="registration__field-label"/>
-
-          <md-radio
-          v-for="role in roles"
-          :key="role.id"
-          v-model="data.user_role"
-          :value="role.id">{{role.name}}</md-radio>
-
-          <span
-          v-if="veeErrors.has('user_role')"
-          v-text="getErrors('user_role')"
-          class="md-error" />
-        </div>
-
-        <md-field :class="{'md-invalid': veeErrors.has('password')}">
-          <label
-          for="password"
-          v-text="'Пароль'" />
-
-          <md-input
-          name="password"
-          id="password"
-          v-model="data.password"
-          v-validate="{ required: true }"
-          :disabled="sending"
-          type="password"
-          :data-vv-as="' '" />
-
-          <span
-          v-if="veeErrors.has('password')"
-          v-text="getErrors('password')"
-          class="md-error" />
-        </md-field>
-
-        <md-field :class="{'md-invalid': veeErrors.has('password_confirmation')}">
-          <label
-          for="password_confirmation"
-          v-text="'Повторите пароль'" />
-
-          <md-input
-          name="password_confirmation"
-          id="password_confirmation"
-          v-model="data.password_confirmation"
-          v-validate="{ required: true, password_confirmation: data.password }"
-          :disabled="sending"
-          type="password"
-          :data-vv-as="' '" />
-
-          <span
-          v-if="veeErrors.has('password_confirmation')"
-          v-text="getErrors('password_confirmation')"
-          class="md-error" />
-        </md-field>
-
         <md-progress-bar
         md-mode="indeterminate"
         v-if="sending" />
 
         <md-button
         type="submit"
-        class="md-raised md-primary registration__button"
+        class="md-raised md-primary profile__button"
         :disabled="sending"
         v-text="'Зарегистрироваться'" />
-
-        <NuxtLink
-        tag="md-button"
-        to="/registration"
-        v-text="'Войти'" />
       </form>
+    </md-card-content>
+  </md-card>
+
+  <md-card class="profile__card">
+    <md-card-header>
+      <div class="md-title">Изменение пароля</div>
+    </md-card-header>
+    <md-card-content>
+      <md-field :class="{'md-invalid': veeErrors.has('old_password')}">
+        <label
+          for="old_password"
+          v-text="'Старый пароль'" />
+
+        <md-input
+          name="old_password"
+          id="old_password"
+          v-model="dataPassword.old_password"
+          v-validate="{ required: true }"
+          :disabled="sending"
+          type="old_password"
+          data-vv-scope="passwordForm"
+          :data-vv-as="' '" />
+
+        <span
+          v-if="veeErrors.has('password')"
+          v-text="getErrors('password')"
+          class="md-error" />
+      </md-field>
+
+      <md-field :class="{'md-invalid': veeErrors.has('password')}">
+        <label
+          for="password"
+          v-text="'Новый пароль'" />
+
+        <md-input
+          name="password"
+          id="password"
+          v-model="dataPassword.password"
+          v-validate="{ required: true }"
+          :disabled="sending"
+          type="password"
+          data-vv-scope="passwordForm"
+          :data-vv-as="' '" />
+
+        <span
+          v-if="veeErrors.has('password')"
+          v-text="getErrors('password')"
+          class="md-error" />
+      </md-field>
+
+      <md-field :class="{'md-invalid': veeErrors.has('password_confirmation')}">
+        <label
+          for="password_confirmation"
+          v-text="'Повторите пароль'" />
+
+        <md-input
+          name="password_confirmation"
+          id="password_confirmation"
+          v-model="dataPassword.password_confirmation"
+          v-validate="{ required: true, password_confirmation: dataPassword.password }"
+          :disabled="sending"
+          type="password"
+          data-vv-scope="passwordForm"
+          :data-vv-as="' '" />
+
+        <span
+          v-if="veeErrors.has('password_confirmation')"
+          v-text="getErrors('password_confirmation')"
+          class="md-error" />
+      </md-field>
     </md-card-content>
   </md-card>
 
   <md-snackbar
   md-position="center"
   :md-duration="4000"
-  :md-active.sync="isRegistrationError"
+  :md-active.sync="isProfileError"
   md-persistent
   class="md-error">
     <span v-text="'Зарегистрироватсья не удалось'" />
     <md-button
-    @click="isRegistrationError = false"
+    @click="isProfileError = false"
     v-text="'Хорошо'"
     class="md-primary" />
   </md-snackbar>
@@ -193,7 +201,7 @@
 
 <script>
 export default {
-  name: "Registration",
+  name: "Profile",
   data() {
     return {
       data: {
@@ -203,16 +211,16 @@ export default {
         middle_name: null,
         phone: null,
         user_role: 'ROLE_STUDENT',
+
+      },
+      dataPassword: {
+        old_password: null,
         password: null,
         password_confirmation: null,
       },
       value: null,
-      roles: [
-        { id: 'ROLE_STUDENT', name: 'Студент' },
-        { id: 'ROLE_TEACHER', name: 'Преподаватель' },
-      ],
       sending: false,
-      isRegistrationError: false,
+      isProfileError: false,
     }
   },
   methods: {
@@ -221,12 +229,12 @@ export default {
     },
 
     async handleSubmit() {
-      this.isRegistrationError = false;
+      this.isProfileError = false;
       if (!(await this.$validator.validateAll())) {
         return;
       }
       this.sending = true;
-      const response = await this.$axios.$post('/auth/registration', this.data);
+      const response = await this.$axios.$post('/profile', this.data);
       this.sending = true;
       debugger;
       if (response.user) {

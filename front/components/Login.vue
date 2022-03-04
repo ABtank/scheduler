@@ -56,6 +56,11 @@
         class="md-raised md-primary"
         :disabled="sending"
         v-text="'Войти'" />
+
+        <NuxtLink
+        tag="md-button"
+        to="/registration"
+        v-text="'Регистрация'" />
       </form>
     </md-card-content>
   </md-card>

@@ -8,7 +8,7 @@
 import Login from "~/components/Login";
 export default {
   components: { Login },
-  name: "index"
+  name: "LoginPage"
 }
 </script>
 
