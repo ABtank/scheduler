@@ -1,16 +1,16 @@
 <template>
 <div>
-  <Registration/>
+  <Profile/>
 </div>
 </template>
 
 <script>
-import Registration from "@/components/Registration";
+import Profile from "@/components/Profile";
 
 export default {
   name: "ProfilePage",
   auth: false,
-  components: { Registration }
+  components: { Profile }
 }
 </script>
 
