@@ -18,6 +18,7 @@ public class LessonsStudentsDto {
   private String studentMiddleName;
   private String studentLastName;
   private Boolean isAttend;
+  private Boolean isAccepted;
   private Date dtCreate;
   private Date dtModify;
 
@@ -29,6 +30,7 @@ public class LessonsStudentsDto {
     this.studentMiddleName = lessonsStudent.getStudent().getMiddleName();
     this.studentLastName = lessonsStudent.getStudent().getLastName();
     this.isAttend = lessonsStudent.getIsAttend();
+    this.isAccepted = lessonsStudent.getIsAccepted();
     this.dtCreate = lessonsStudent.getDtCreate();
     this.dtModify = lessonsStudent.getDtModify();
   }

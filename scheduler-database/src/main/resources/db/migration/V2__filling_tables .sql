@@ -33,9 +33,9 @@ INSERT INTO teachers_disciplines (teacher_id, discipline_id)
 VALUES (1, 6),
        (4, 1);
 
-INSERT into exercises (name, is_personal, duration, quantity, teacher_id, discipline_id)
-VALUES ('Урок истории', true, 45, 1, 3, 9),
-       ('Урок физики', true, 45, 1, 4, 1);
+INSERT into exercises (name, is_personal, duration, quantity, teacher_id, discipline_id, is_validate, dt_modify)
+VALUES ('Урок истории', true, 45, 1, 3, 9, false, '2022-03-05 07:53:00'),
+       ('Урок физики', true, 45, 1, 4, 1, true, '2022-02-13 09:15:00');
 
 INSERT INTO users_roles (user_id, role_id)
 VALUES (1, 4),
@@ -84,6 +84,6 @@ VALUES ('2022-02-14', 1, false),
        ('2022-02-26', 6, false),
        ('2022-02-27', 7, false);
 
-INSERT INTO teacher_working_days (weekday_id, exercise_id, time_start, time_end)
+INSERT INTO teacher_working_days (weekday_id, exercise_id, t_start, t_end)
 VALUES ('1', '1', '09:00:00', '11:00:00'),
        ('2', '1', '09:00:00', '11:00:00');

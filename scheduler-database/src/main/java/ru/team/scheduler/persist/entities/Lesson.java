@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -36,6 +38,11 @@ public class Lesson {
 
     @Column(name = "dt_start", nullable = false)
     private Instant dtStart;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "dt_modify", nullable = false)
+    private Date dtModify;
 
     public Lesson(Integer id, String name, String link,  Exercise exercise, Instant dtStart) {
         this.id = id;

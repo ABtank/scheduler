@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/v1/students/**",
             "/api/v1/users/**",
             "/api/v1/roles/**",
+            "/api/v1/support/**",
     };
 
     @Autowired

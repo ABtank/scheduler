@@ -16,11 +16,11 @@ public class TeacherWorkingDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    private Instant time_start;
+    @Column (name ="t_start")
+    private Instant timeStart;
 
-    @Column
-    private Instant time_end;
+    @Column (name ="t_end")
+    private Instant timeEnd;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "exercise_id", nullable = false)
@@ -30,8 +30,8 @@ public class TeacherWorkingDay {
     @JoinColumn(name = "weekday_id", nullable = false)
     private Weekday weekday;
 
-    public TeacherWorkingDay(Instant time_start, Instant time_end) {
-        this.time_start = time_start;
-        this.time_end = time_end;
+    public TeacherWorkingDay(Instant timeStart, Instant timeEnd) {
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
     }
 }
