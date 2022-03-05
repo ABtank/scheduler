@@ -37,10 +37,6 @@ public class EmailServiceImpl implements EmailService {
         emailSender.send(message);
     }
 
-    public void sendMessage(String to, String text) {
-        sendSimpleMessage(new String[]{to}, from, text);
-    }
-
     @Override
     public void sendMessageWithAttachment(
             String[] to, String subject, String text, String pathToAttachment) throws MessagingException {

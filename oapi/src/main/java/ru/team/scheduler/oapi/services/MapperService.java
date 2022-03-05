@@ -40,7 +40,8 @@ public class MapperService {
                 exercise.getTeacher().getFirstName() + " " + exercise.getTeacher().getMiddleName() + " " +
                 exercise.getTeacher().getLastName(),
                 exercise.getDiscipline().getId(),
-                exercise.getDiscipline().getName()
+                exercise.getDiscipline().getName(),
+                exercise.getDtModify()
         );
     }
 
