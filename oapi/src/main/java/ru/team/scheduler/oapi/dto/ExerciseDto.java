@@ -9,6 +9,7 @@ import ru.team.scheduler.oapi.dto.transfer.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -64,4 +65,9 @@ public class ExerciseDto {
     @NotNull(groups = {Update.class, New.class})
     @JsonView({Details.class, AdminDetails.class})
     private String discipline;
+
+    @ApiModelProperty(notes = "Дата последнего изменения расписания")
+    @NotNull(groups = {Update.class, New.class})
+    @JsonView({Details.class, AdminDetails.class})
+    private Date dtModify;
 }

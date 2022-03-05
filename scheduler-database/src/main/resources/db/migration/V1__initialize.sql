@@ -83,6 +83,7 @@ CREATE TABLE exercises
     teacher_id    INT          NOT NULL,             -- учитель
     discipline_id INT          NOT NULL,             -- дисциплина
     is_validate   BOOLEAN      NOT NULL DEFAULT (false), -- необходимость подтверждения учениками присутствия на занятии
+    dt_modify  timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT FK_exercises_teacher_id
         FOREIGN KEY (teacher_id) REFERENCES users (id),
     CONSTRAINT FK_exercises_discipline_id
@@ -98,6 +99,7 @@ CREATE TABLE lessons -- из них и формируется рассписан
     exercise_id INT          NOT NULL,
 --    price       decimal(19, 2) NULL,     -- цена (ну а вдруг)
     dt_start    timestamp    NOT NULL, -- время начала урока(сеанса)
+    dt_modify  timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT lessons_exercise_id
         FOREIGN KEY (exercise_id) REFERENCES exercises (id)
 );

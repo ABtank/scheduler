@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -42,6 +44,11 @@ public class Exercise {
     @OneToMany(mappedBy = "exercise")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Lesson> lessons;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "dt_modify", nullable = false)
+    private Date dtModify;
 
     public Exercise(Integer id, String name, Boolean isPersonal,
                     Integer duration, Integer quantity) {

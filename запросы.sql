@@ -20,23 +20,36 @@ WHERE
     ls.student_id = :user_id
 
 SELECT
-    ls.email,
-    ls.lessons_students_id
-FROM
-    (SELECT
-        users.email,
-        lessons_students.id as lessons_students_id
-    FROM exercises as exercises
-        INNER JOIN lessons as lessons
-        ON lessons.exercise_id = exercises.id
-        INNER JOIN lessons_students as lessons_students
-        ON lessons.id = lessons_students.lesson_id
-        INNER JOIN users as users
-        ON lessons_students.student_id = users.id
-    WHERE
-        exercises.is_validate
-        AND NOT lessons_students.is_confirmation_request_sent
-         AND DATE_PART('hour', '2022-02-13 09:15:00' - lessons.dt_start) <= 24) as ls;
+      exercises.id as exerciseId,
+      exercises.duration as exerciseDuration,
+      lessons.id as lessonId,
+      lessons.name as lessonName,
+      lessons.dt_start as lessonsDt_start,
+      disciplines.name as disciplineName,
+      CONCAT(teachers.last_name, ' ', teachers.first_name, ' ', teachers.middle_name) as teacherFullName,
+      students.email as studentEmail
+FROM exercises as exercises
+    INNER JOIN lessons as lessons
+    ON lessons.exercise_id = exercises.id
+    INNER JOIN lessons_students as lessons_students
+    ON lessons.id = lessons_students.lesson_id
+    INNER JOIN users as students
+    ON lessons_students.student_id = students.id
+    INNER JOIN users as teachers
+    ON exercises.teacher_id = teachers.id
+    INNER JOIN disciplines as disciplines
+    ON exercises.discipline_id = disciplines.id
+WHERE
+    (lessons.dt_modify  >= (NOW () - INTERVAL '73 MINUTE')
+    AND
+    lessons.dt_modify  <= (NOW () - INTERVAL '60 MINUTE') )
+    OR
+    (exercises.dt_modify  >= (NOW () - INTERVAL '73 MINUTE')
+    AND
+    exercises.dt_modify  <= (NOW () - INTERVAL '60 MINUTE') );
+
+
+        DATE_PART('hour', '2022-03-05 08:01:00' - exercises.dt_modify) <= 24;
 --        AND DATE_PART('hour', :curDate - lessons.dt_start) <= 24) as ls;
 
 
