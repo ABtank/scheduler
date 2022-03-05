@@ -53,13 +53,13 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-
   generate: {
-    dir: 'target/dist/sh'
+    dir: 'target/dist'
   },
 
   //router
   router: {
+    base: "/sh/",
     middleware: ['auth']
   },
 
