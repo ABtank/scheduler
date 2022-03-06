@@ -1,0 +1,154 @@
+2022-03-06 17:25:47 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 16144 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
+2022-03-06 17:25:47 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
+2022-03-06 17:25:48 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-06 17:25:48 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-06 17:25:50 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-03-06 17:25:50 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 262 ms. Found 11 JPA repository interfaces.
+2022-03-06 17:25:53 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
+2022-03-06 17:25:53 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-06 17:25:53 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-03-06 17:25:53 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
+2022-03-06 17:25:53 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5563 ms
+2022-03-06 17:25:54 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 7.7.3 by Redgate
+2022-03-06 17:25:54 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-03-06 17:25:54 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-03-06 17:25:54 [restartedMain] INFO  o.f.c.i.database.base.DatabaseType - Database: jdbc:postgresql://localhost:5432/scheduler (PostgreSQL 10.19)
+2022-03-06 17:25:54 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.112s)
+2022-03-06 17:25:54 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2022-03-06 17:25:54 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2022-03-06 17:25:55 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-03-06 17:25:55 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.33
+2022-03-06 17:25:55 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-03-06 17:25:55 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2022-03-06 17:25:57 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-03-06 17:25:57 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-03-06 17:25:59 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-06 17:26:02 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6911ba92, org.springframework.security.web.context.SecurityContextPersistenceFilter@51f147eb, org.springframework.security.web.header.HeaderWriterFilter@1b0d345f, org.springframework.security.web.authentication.logout.LogoutFilter@4590ca06, ru.team.scheduler.oapi.config.JwtFilter@281aa8a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@c4775b0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1cfebfb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@19d4ffdc, org.springframework.security.web.session.SessionManagementFilter@19414325, org.springframework.security.web.access.ExceptionTranslationFilter@59bbf24a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@57a80a9]
+2022-03-06 17:26:02 [restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2022-03-06 17:26:03 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-03-06 17:26:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8189 (http) with context path '/sh'
+2022-03-06 17:26:05 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Started OapiApplication in 18.474 seconds (JVM running for 19.845)
+2022-03-06 17:26:05 [scheduling-1] ERROR o.s.s.s.TaskUtils$LoggingErrorHandler - Unexpected error occurred in scheduled task
+java.lang.NullPointerException: date must not be null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Calendar.setTime(Calendar.java:1792)
+	at java.base/java.text.SimpleDateFormat.format(SimpleDateFormat.java:978)
+	at java.base/java.text.SimpleDateFormat.format(SimpleDateFormat.java:971)
+	at java.base/java.text.DateFormat.format(DateFormat.java:378)
+	at ru.team.scheduler.oapi.utils.PlannerTasks.sendNotificationOfScheduleChangesByMail(PlannerTasks.java:80)
+	at ru.team.scheduler.oapi.utils.PlannerTasks$$FastClassBySpringCGLIB$$f7f7e123.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
+	at ru.team.scheduler.oapi.utils.PlannerTasks$$EnhancerBySpringCGLIB$$c32f4a47.sendNotificationOfScheduleChangesByMail(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-03-06 17:26:15 [scheduling-1] ERROR o.s.s.s.TaskUtils$LoggingErrorHandler - Unexpected error occurred in scheduled task
+java.lang.NullPointerException: date must not be null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Calendar.setTime(Calendar.java:1792)
+	at java.base/java.text.SimpleDateFormat.format(SimpleDateFormat.java:978)
+	at java.base/java.text.SimpleDateFormat.format(SimpleDateFormat.java:971)
+	at java.base/java.text.DateFormat.format(DateFormat.java:378)
+	at ru.team.scheduler.oapi.utils.PlannerTasks.sendNotificationOfScheduleChangesByMail(PlannerTasks.java:80)
+	at ru.team.scheduler.oapi.utils.PlannerTasks$$FastClassBySpringCGLIB$$f7f7e123.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
+	at ru.team.scheduler.oapi.utils.PlannerTasks$$EnhancerBySpringCGLIB$$c32f4a47.sendNotificationOfScheduleChangesByMail(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-03-06 17:26:25 [scheduling-1] ERROR o.s.s.s.TaskUtils$LoggingErrorHandler - Unexpected error occurred in scheduled task
+java.lang.NullPointerException: date must not be null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Calendar.setTime(Calendar.java:1792)
+	at java.base/java.text.SimpleDateFormat.format(SimpleDateFormat.java:978)
+	at java.base/java.text.SimpleDateFormat.format(SimpleDateFormat.java:971)
+	at java.base/java.text.DateFormat.format(DateFormat.java:378)
+	at ru.team.scheduler.oapi.utils.PlannerTasks.sendNotificationOfScheduleChangesByMail(PlannerTasks.java:80)
+	at ru.team.scheduler.oapi.utils.PlannerTasks$$FastClassBySpringCGLIB$$f7f7e123.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:689)
+	at ru.team.scheduler.oapi.utils.PlannerTasks$$EnhancerBySpringCGLIB$$c32f4a47.sendNotificationOfScheduleChangesByMail(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-03-06 17:26:28 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-03-06 17:26:28 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-03-06 17:26:28 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2022-03-06 17:26:56 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Starting OapiApplication using Java 17 on LAPTOP-SMSUBHMJ with PID 15708 (D:\Java\scheduler\oapi\target\classes started by Дом in D:\Java\scheduler)
+2022-03-06 17:26:56 [restartedMain] INFO  ru.team.scheduler.OapiApplication - No active profile set, falling back to default profiles: default
+2022-03-06 17:26:56 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-03-06 17:26:56 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-03-06 17:26:58 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-03-06 17:26:58 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 257 ms. Found 11 JPA repository interfaces.
+2022-03-06 17:27:01 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8189 (http)
+2022-03-06 17:27:01 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-03-06 17:27:01 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-03-06 17:27:01 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/sh] - Initializing Spring embedded WebApplicationContext
+2022-03-06 17:27:01 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5278 ms
+2022-03-06 17:27:02 [restartedMain] INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 7.7.3 by Redgate
+2022-03-06 17:27:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-03-06 17:27:02 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-03-06 17:27:02 [restartedMain] INFO  o.f.c.i.database.base.DatabaseType - Database: jdbc:postgresql://localhost:5432/scheduler (PostgreSQL 10.19)
+2022-03-06 17:27:02 [restartedMain] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.062s)
+2022-03-06 17:27:02 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 2
+2022-03-06 17:27:02 [restartedMain] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+2022-03-06 17:27:02 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-03-06 17:27:02 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.33
+2022-03-06 17:27:03 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-03-06 17:27:03 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL9Dialect
+2022-03-06 17:27:05 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-03-06 17:27:05 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-03-06 17:27:06 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-06 17:27:09 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6bf6854a, org.springframework.security.web.context.SecurityContextPersistenceFilter@3f2d91fd, org.springframework.security.web.header.HeaderWriterFilter@16738621, org.springframework.security.web.authentication.logout.LogoutFilter@ec0ae21, ru.team.scheduler.oapi.config.JwtFilter@2e8f551e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3603d3ca, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2aab2c6e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1bd34250, org.springframework.security.web.session.SessionManagementFilter@3f9f79f7, org.springframework.security.web.access.ExceptionTranslationFilter@2fa6ba25, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@539af788]
+2022-03-06 17:27:09 [restartedMain] WARN  o.s.s.c.a.web.builders.WebSecurity - 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2022-03-06 17:27:10 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2022-03-06 17:27:10 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8189 (http) with context path '/sh'
+2022-03-06 17:27:12 [restartedMain] INFO  ru.team.scheduler.OapiApplication - Started OapiApplication in 16.981 seconds (JVM running for 18.224)
+2022-03-06 17:27:25 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-03-06 17:27:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2022-03-06 17:27:25 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

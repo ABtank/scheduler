@@ -67,18 +67,18 @@ public class PlannerTasks {
     //проверяем каждые 10 мин, есть ли изменения в расписании (exercise)
     // и отправляем результат на почту студентам, которые подписаны
     //после изменения должно пройти от 60 до 73 минут (если преподаватель надумает в течение часа что-то поменять ещё в записи)
-    @Scheduled(fixedRate = 10_000)
+    @Scheduled(fixedRate = 600_000)
     public void sendNotificationOfScheduleChangesByMail(){
         List<ExerciseLessonDto> exerciseLessonDtoList = exercisesRepository.getLastExercisesChanges();
-        for (ExerciseLessonDto el_Dto : exerciseLessonDtoList) {
+        for (ExerciseLessonDto elDto : exerciseLessonDtoList) {
             String theme = "Изменения в расписании";
             StringBuilder text = new StringBuilder();
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm d-MM-yyyy");
-            text.append("Произошли изменения в расписании по предмету ").append(el_Dto.getDisciplineName())
-                    .append(", преподаватель - ").append(el_Dto.getTeacherFullName()).append(". ")
-                    .append("Занятие ").append("'").append(el_Dto.getLessonName()).append("'")
-                    .append(" состоится в " + dateFormat.format(el_Dto.getLessonsDt_start())).append(".");
-            //emailService.sendSimpleMessage(new String[]{el_Dto.getStudentEmail()}, theme, text.toString());
+            text.append("Произошли изменения в расписании по предмету ").append(elDto.getDisciplineName())
+                    .append(", преподаватель - ").append(elDto.getTeacherFullName()).append(". ")
+                    .append("Занятие ").append("'").append(elDto.getLessonName()).append("'")
+                    .append(" состоится в " + dateFormat.format(elDto.getLessonsDt_start())).append(".");
+            //emailService.sendSimpleMessage(new String[]{elDto.getStudentEmail()}, theme, text.toString());
             System.out.println(text);
         }
     }
