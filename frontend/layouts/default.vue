@@ -15,7 +15,7 @@
         <md-list>
           <md-list-item>
             <md-icon>home</md-icon>
-            <span class="md-list-item-text"><a target='_blank' href="/swagger-ui/">Scheduler Open API</a></span>
+            <span class="md-list-item-text"><a target='_blank' href="sh/swagger-ui/">Scheduler Open API</a></span>
           </md-list-item>
 
           <md-list-item>

@@ -3,7 +3,7 @@
   <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center sm:pt-0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-      <a class="md-display-4 leading-7 font-semibold flex justify-center pt-8 sm:pt-0" href="/swagger-ui/" target="_blank">
+      <a class="md-display-4 leading-7 font-semibold flex justify-center pt-8 sm:pt-0" href="sh/swagger-ui/" target="_blank">
         Scheduler
       </a>
       <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg p-6">
@@ -11,7 +11,7 @@
           Welcome to Scheduler Application
         </h2>
         <p class="mt-3 text-gray-600">
-          Приложение <a target='_blank' href="/swagger-ui/">Sheduler</a>
+          Приложение <a target='_blank' href="sh/swagger-ui/">Sheduler</a>
           для составления/корректировки расписания индивидуальных занятий(уроков) преподавателей/тренеров с учениками/клиентами.<br>
         </p>
         <p class="mt-4 pt-4 text-gray-800 border-t border-dashed">
