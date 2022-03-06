@@ -102,7 +102,7 @@ export default {
       this.sending = true;
       try {
         let response = await this.$auth.loginWith('local', { data: this.data });
-        window.location.href = data.basedir;
+        window.location.href = "/sh";
       }
       catch (e) {
         this.isLoginError = true;

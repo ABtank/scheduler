@@ -6,6 +6,7 @@
         <md-icon>menu</md-icon>
       </md-button>
         <span class="md-title">SCHEDULER</span>
+        <md-button class="md-primary md-raised" @click="logout">Logout</md-button>
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
@@ -14,22 +15,22 @@
         <md-list>
           <md-list-item>
             <md-icon>home</md-icon>
-            <span class="md-list-item-text"><a target='_blank' href="http://localhost:8189/sh/swagger-ui/">Scheduler Open API</a></span>
+            <span class="md-list-item-text"><a target='_blank' href="/swagger-ui/">Scheduler Open API</a></span>
           </md-list-item>
 
           <md-list-item>
             <md-icon>person_add</md-icon>
-            <span class="md-list-item-text"><router-link to="/registration">Регистрация</router-link></span>
+            <span class="md-list-item-text"><NuxtLink to="/registration">Регистрация</NuxtLink></span>
           </md-list-item>
 
           <md-list-item>
             <md-icon>login</md-icon>
-            <span class="md-list-item-text"><router-link to="/login">Login</router-link></span>
+            <span class="md-list-item-text"><NuxtLink to="/login">Login</NuxtLink></span>
           </md-list-item>
 
           <md-list-item>
             <md-icon>person_off</md-icon>
-            <span class="md-list-item-text"><router-link to="/registration">Logoff</router-link></span>
+            <span class="md-list-item-text"><NuxtLink to="/test">Logoff</NuxtLink></span>
           </md-list-item>
 
           <md-list-item>
@@ -77,16 +78,29 @@
 </template>
 
 
+<style lang="scss" scoped>
+.md-app {
+  max-height: 100%;
+  border: 1px solid rgba(#000, .12);
+}
 
+// Demo purposes only
+.md-drawer {
+  width: 230px;
+  max-width: calc(100vw - 125px);
+}
+</style>
 <script>
 export default {
   name: 'Reveal',
   data: () => ({
     menuVisible: false
-  })
+  }),
+  methods: {
+    logout(){
+      this.$auth.logout();
+      window.location = "/sh"
+    }
+  }
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>
