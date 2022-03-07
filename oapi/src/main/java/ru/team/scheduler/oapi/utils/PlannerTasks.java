@@ -77,7 +77,7 @@ public class PlannerTasks {
             text.append("Произошли изменения в расписании по предмету ").append(elDto.getDisciplineName())
                     .append(", преподаватель - ").append(elDto.getTeacherFullName()).append(". ")
                     .append("Занятие ").append("'").append(elDto.getLessonName()).append("'")
-                    .append(" состоится в " + dateFormat.format(elDto.getLessonsDt_start())).append(".");
+                    .append(" состоится в " + dateFormat.format(elDto.getLessonsDtstart())).append(".");
             //emailService.sendSimpleMessage(new String[]{elDto.getStudentEmail()}, theme, text.toString());
             System.out.println(text);
         }

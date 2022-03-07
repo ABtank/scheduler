@@ -20,7 +20,7 @@ public interface ExercisesRepository extends JpaRepository<Exercise, Integer> {
             "      exercises.duration as exerciseDuration,\n" +
             "      lessons.id as lessonId,\n" +
             "      lessons.name as lessonName,\n" +
-            "      lessons.dt_start as lessonsDt_start,\n" +
+            "      lessons.dt_start as lessonsDtstart,\n" +
             "      disciplines.name as disciplineName,\n" +
             "      CONCAT(teachers.last_name, ' ', teachers.first_name, ' ', teachers.middle_name) as teacherFullName,\n" +
             "      students.email as studentEmail\n" +

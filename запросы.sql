@@ -49,7 +49,7 @@ WHERE
     exercises.dt_modify  <= (NOW () - INTERVAL '60 MINUTE') );
 
 
-        DATE_PART('hour', '2022-03-06 16:24:00' - exercises.dt_modify) <= 24;
+        DATE_PART('hour', '2022-03-06 13:00:00' - exercises.dt_modify) <= 24;
 --        AND DATE_PART('hour', :curDate - lessons.dt_start) <= 24) as ls;
 
 

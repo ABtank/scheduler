@@ -7,7 +7,7 @@ public interface ExerciseLessonDto {
     Integer getExerciseDuration();
     Integer getLessonId();
     String getLessonName();
-    Date getLessonsDt_start();
+    Date getLessonsDtstart();
     String getDisciplineName();
     String getTeacherFullName();
     String getStudentEmail();
