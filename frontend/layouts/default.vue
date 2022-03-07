@@ -2,11 +2,20 @@
   <div class="page-container">
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
-        <<md-button class="md-icon-button" @click="menuVisible = !menuVisible">
-        <md-icon>menu</md-icon>
-      </md-button>
-        <span class="md-title">SCHEDULER</span>
+        <
+        <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+          <md-icon>menu</md-icon>
+        </md-button>
+        <NuxtLink to="/">
+          <md-avatar class="md-avatar-icon md-small">
+            <md-icon>home</md-icon>
+          </md-avatar>
+          <span class="md-title">SCHEDULER</span>
+        </NuxtLink>
+        <NuxtLink to="tables"><md-button class="md-primary md-raised">tables</md-button></NuxtLink>
+        <NuxtLink to="login"><md-button class="md-primary md-raised">Login</md-button></NuxtLink>
         <md-button class="md-primary md-raised" @click="logout">Logout</md-button>
+<!--        <span v-model:accesskey="$auth">WELCOME user=#{{ $auth.user.id }} email={{ $auth.user.email }}</span>-->
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
@@ -71,7 +80,7 @@
       </md-app-drawer>
 
       <md-app-content>
-        <Nuxt />
+        <Nuxt/>
       </md-app-content>
     </md-app>
   </div>
@@ -93,11 +102,13 @@
 <script>
 export default {
   name: 'Reveal',
+  components: {},
+
   data: () => ({
     menuVisible: false
   }),
   methods: {
-    logout(){
+    logout() {
       this.$auth.logout();
       window.location = "/sh"
     }

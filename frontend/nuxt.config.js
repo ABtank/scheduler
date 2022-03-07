@@ -70,6 +70,7 @@ export default {
         token: {
           property: 'accessToken',
           global: true,
+          type: 'Bearer'
         },
         user: {
           property: 'user',
@@ -78,8 +79,7 @@ export default {
         endpoints: {
           login: { url: '/v1/auth/login', method: 'post' },
           logout: { url: '/v1/auth/logout', method: 'post' },
-          user: { url: '/v1/auth/user', method: 'get' },
-          users: { url: '/v1/users', method: 'get' }
+          user: { url: '/v1/auth/user', method: 'get' }
         }
       }
     }
