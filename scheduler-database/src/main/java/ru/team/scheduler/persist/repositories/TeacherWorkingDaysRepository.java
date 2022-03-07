@@ -12,4 +12,5 @@ public interface TeacherWorkingDaysRepository extends JpaRepository<TeacherWorki
     List<TeacherWorkingDay> findByExerciseId(Integer id);
 
     Optional<TeacherWorkingDay> findById(Integer id);
+    List<TeacherWorkingDay> findAllByExerciseId(Integer exerciseId);
 }

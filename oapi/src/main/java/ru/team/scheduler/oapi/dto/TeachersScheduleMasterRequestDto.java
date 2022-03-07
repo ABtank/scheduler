@@ -10,6 +10,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeachersScheduleMasterRequestDto {
-    private ExerciseDto exerciseDto;
-    private List<TeacherWorkingDayDto> teacherWorkingDaysDtos;
+    private Integer exerciseId;
 }

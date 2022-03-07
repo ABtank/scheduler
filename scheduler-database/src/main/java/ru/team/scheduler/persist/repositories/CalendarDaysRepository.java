@@ -15,4 +15,5 @@ public interface CalendarDaysRepository extends JpaRepository<CalendarDay, Integ
     Optional<CalendarDay> findByDayDate(Instant dayDate);
 
     List<CalendarDay> findByWeekdayId(Integer id);
+
 }
