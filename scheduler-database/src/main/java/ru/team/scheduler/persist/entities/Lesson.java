@@ -51,4 +51,11 @@ public class Lesson {
         this.exercise = exercise;
         this.dtStart = dtStart;
     }
+
+    public Lesson(String name, String link, Exercise exercise, Instant dtStart) {
+        this.name = name;
+        this.link = link;
+        this.exercise = exercise;
+        this.dtStart = dtStart;
+    }
 }

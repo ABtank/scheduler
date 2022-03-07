@@ -34,11 +34,19 @@ public class TeacherWorkingDayDto {
     @ApiModelProperty(notes = "название урока/курса", example = "Физика ч.1")
     private String exerciseName;
 
+    @ApiModelProperty (notes = "Продолжительность перемены")
+    @NotNull(groups = {Update.class, New.class})
+    private Integer breakDuration;
+
+    @ApiModelProperty (notes = "Количество уроков в день")
+    @NotNull(groups = {Update.class, New.class})
+    private Integer lessonsQuantity;
+
     @ApiModelProperty(notes = "время начала рабочего дня по данному уроку", example = "09:00", required = true)
     @NotNull(groups = {Update.class, New.class})
     private String timeStart;
 
-    @ApiModelProperty(notes = "время окончания рабочего дня по данному уроку", example = "11:00", required = true)
-    @NotNull(groups = {Update.class, New.class})
+    @ApiModelProperty(notes = "время окончания рабочего дня по данному уроку")
+    @Null(groups = {Update.class, New.class})
     private String timeEnd;
 }

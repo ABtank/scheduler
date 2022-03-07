@@ -69,21 +69,21 @@ VALUES ('Monday'),
        ('Sunday');
 
 INSERT INTO calendar_days (day_date, weekday_id, is_holiday)
-VALUES ('2022-02-14', 1, false),
-       ('2022-02-15', 2, false),
-       ('2022-02-16', 3, false),
-       ('2022-02-17', 4, false),
-       ('2022-02-18', 5, false),
-       ('2022-02-19', 6, false),
-       ('2022-02-20', 7, false),
-       ('2022-02-21', 1, false),
-       ('2022-02-22', 2, false),
-       ('2022-02-23', 3, false),
-       ('2022-02-24', 4, false),
-       ('2022-02-25', 5, false),
-       ('2022-02-26', 6, false),
-       ('2022-02-27', 7, false);
+VALUES ('2022-03-14', 1, false),
+       ('2022-03-15', 2, false),
+       ('2022-03-16', 3, false),
+       ('2022-03-17', 4, false),
+       ('2022-03-18', 5, false),
+       ('2022-03-19', 6, false),
+       ('2022-03-20', 7, false),
+       ('2022-03-21', 1, false),
+       ('2022-03-22', 2, false),
+       ('2022-03-23', 3, false),
+       ('2022-03-24', 4, false),
+       ('2022-03-25', 5, false),
+       ('2022-03-26', 6, false),
+       ('2022-03-27', 7, false);
 
-INSERT INTO teacher_working_days (weekday_id, exercise_id, t_start, t_end)
-VALUES ('1', '1', '09:00:00', '11:00:00'),
-       ('2', '1', '09:00:00', '11:00:00');
+INSERT INTO teacher_working_days (weekday_id, exercise_id, break_duration, lessons_quantity, t_start, t_end)
+VALUES ('1', '1', '15', '2', '09:00:00', '11:00:00'),
+       ('2', '1', '15', '2', '09:00:00', '11:00:00');

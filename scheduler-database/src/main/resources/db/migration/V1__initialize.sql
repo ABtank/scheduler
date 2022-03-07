@@ -153,6 +153,8 @@ CREATE TABLE teacher_working_days -- дни и часы работы учите�
     id          serial primary key,
     weekday_id  INT  NOT NULL,
     exercise_id INT  NOT NULL,
+    break_duration INT NOT NULL,
+    lessons_quantity INT NOT NULL,
     t_start  time NOT NULL, -- время начала рабочего дня
     t_end    time NOT NULL, -- время окончания рабочего дня
     CONSTRAINT teacher_working_days_weekday_id

@@ -6,22 +6,21 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
 @Component
 public class DateFormatterInstantToString {
-    private final DateTimeFormatter dateTimeFormatter;
+    private final  DateTimeFormatter dateTimeFormatter;
 
     public DateFormatterInstantToString() {
-        this.dateTimeFormatter =  DateTimeFormatter.ofLocalizedDateTime( FormatStyle.SHORT )
-                .withLocale(Locale.getDefault())
-                .withZone( ZoneId.systemDefault());
+        this.dateTimeFormatter =  DateTimeFormatter.ISO_LOCAL_TIME.withZone(ZoneId.from(ZoneOffset.UTC));
     }
 
-    public String timeFromInstant (Instant instantDate) {
-        return dateTimeFormatter.ofPattern("HH:mm:ss").format(instantDate);
+    public String timeFromInstant (Instant instant) {
+        return dateTimeFormatter.format(instant).substring(0,5);
 
     }
 }

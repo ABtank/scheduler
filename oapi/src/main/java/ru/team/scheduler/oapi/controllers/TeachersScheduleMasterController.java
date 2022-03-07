@@ -14,23 +14,21 @@ import ru.team.scheduler.oapi.services.MapperService;
 import ru.team.scheduler.oapi.services.TeachersScheduleMasterService;
 import ru.team.scheduler.persist.repositories.TeacherWorkingDaysRepository;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/teachersScheduleMaster")
-@Api(tags = {SwaggerConstant.API_USER})
+@Api(tags = {SwaggerConstant.API_TEACHER_SCHEDULE_MASTER})
 @RequiredArgsConstructor
 public class TeachersScheduleMasterController {
     private final TeachersScheduleMasterService teachersScheduleMasterService;
-//    private final TeacherWorkingDaysRepository teacherWorkingDaysRepository;
-//    private final ExerciseService exerciseService;
-//    private final MapperService mapperService;
 
     @PostMapping
     public void createNewTeacherSchedule
-            (@RequestBody TeachersScheduleMasterRequestDto teachersScheduleMasterRequestDto){
-            teachersScheduleMasterService.creteNewTeachersSchedule(teachersScheduleMasterRequestDto);
+            (@RequestBody TeachersScheduleMasterRequestDto teachersScheduleMasterRequestDto, Principal principal){
+            teachersScheduleMasterService.creteNewTeachersSchedule(teachersScheduleMasterRequestDto, principal);
     }
 
 //    @GetMapping

@@ -16,6 +16,12 @@ public class TeacherWorkingDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column (name = "break_duration")
+    private Integer breakDuration;
+
+    @Column(name ="lessons_quantity")
+    private Integer lessonsQuantity;
+
     @Column (name ="t_start")
     private Instant timeStart;
 
