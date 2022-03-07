@@ -15,6 +15,7 @@
         <NuxtLink to="tables"><md-button class="md-primary md-raised">tables</md-button></NuxtLink>
         <NuxtLink to="login"><md-button class="md-primary md-raised">Login</md-button></NuxtLink>
         <md-button class="md-primary md-raised" @click="logout">Logout</md-button>
+        <md-button class="md-primary md-raised" ><a target='_blank' href="../sh/swagger-ui/">OAPI</a></md-button>
 <!--        <span v-model:accesskey="$auth">WELCOME user=#{{ $auth.user.id }} email={{ $auth.user.email }}</span>-->
       </md-app-toolbar>
 
@@ -24,7 +25,7 @@
         <md-list>
           <md-list-item>
             <md-icon>home</md-icon>
-            <span class="md-list-item-text"><a target='_blank' href="sh/swagger-ui/">Scheduler Open API</a></span>
+            <span class="md-list-item-text"><a target='_blank' href="../sh/swagger-ui/">Scheduler Open API</a></span>
           </md-list-item>
 
           <md-list-item>
