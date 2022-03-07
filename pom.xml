@@ -17,6 +17,7 @@
     <description>Scheduler for teachers and students</description>
 
     <modules>
+        <module>frontend</module>
         <module>scheduler-database</module>
         <module>oapi</module>
     </modules>

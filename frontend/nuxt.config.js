@@ -13,7 +13,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '../sh/favicon.ico' },
       { rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,700,400italic|Material+Icons' }
     ]
   },
@@ -47,7 +47,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://localhost:8189/sh/api/v1/',
+    baseURL: 'https://scheduler-team.herokuapp.com/sh/api/',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -55,11 +55,12 @@ export default {
   },
 
   generate: {
-    dir: 'target/dist/sh'
+    dir: 'target/dist'
   },
 
   //router
   router: {
+    base: "/sh/",
     middleware: ['auth']
   },
 
@@ -69,15 +70,16 @@ export default {
         token: {
           property: 'accessToken',
           global: true,
+          type: 'Bearer'
         },
         user: {
           property: 'user',
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/auth/login', method: 'post' },
-          logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/auth/user', method: 'get' }
+          login: { url: '/v1/auth/login', method: 'post' },
+          logout: { url: '/v1/auth/logout', method: 'post' },
+          user: { url: '/v1/auth/user', method: 'get' }
         }
       }
     }
