@@ -60,7 +60,8 @@
         <NuxtLink
         tag="md-button"
         to="/registration"
-        v-text="'Регистрация'" />
+        v-text="'Регистрация'"
+        class="login__button" />
       </form>
     </md-card-content>
   </md-card>
@@ -126,6 +127,10 @@ export default {
 
   &__content {
     max-width: 300px;
+  }
+
+  &__button {
+    padding: 0 10px;
   }
 }
 </style>

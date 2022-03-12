@@ -170,8 +170,9 @@
 
         <NuxtLink
         tag="md-button"
-        to="/registration"
-        v-text="'Войти'" />
+        to="/login"
+        v-text="'Войти'"
+        class="registration__button" />
       </form>
     </md-card-content>
   </md-card>
@@ -227,8 +228,7 @@ export default {
       }
       this.sending = true;
       const response = await this.$axios.$post('/auth/registration', this.data);
-      this.sending = true;
-      debugger;
+      this.sending = false;
       if (response.user) {
         let response = await this.$auth.loginWith('local', { data: { email: this.data.email, password: this.data.password } });
         window.location.href = '/';
@@ -236,7 +236,6 @@ export default {
       else {
         this.isRegistrationError = true;
       }
-      this.sending = false;
     }
   }
 }

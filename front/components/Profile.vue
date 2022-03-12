@@ -28,62 +28,62 @@
           class="md-error" />
         </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('last_name')}">
+        <md-field :class="{'md-invalid': veeErrors.has('lastName')}">
           <label
-          for="email"
+          for="lastName"
           v-text="'Фамилия'" />
 
           <md-input
-          name="last_name"
-          id="last_name"
-          v-model="profileData.last_name"
+          name="lastName"
+          id="lastName"
+          v-model="profileData.lastName"
           v-validate="{ required: true }"
           :disabled="profileSending"
           data-vv-scope="profileForm"
           :data-vv-as="' '" />
 
           <span
-          v-if="veeErrors.has('last_name')"
-          v-text="getErrors('last_name', 'profileForm')"
+          v-if="veeErrors.has('lastName')"
+          v-text="getErrors('lastName', 'profileForm')"
           class="md-error" />
         </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('first_name')}">
+        <md-field :class="{'md-invalid': veeErrors.has('firstName')}">
           <label
-          for="first_name"
+          for="firstName"
           v-text="'Имя'" />
 
           <md-input
-          name="first_name"
-          id="first_name"
-          v-model="profileData.first_name"
+          name="firstName"
+          id="firstName"
+          v-model="profileData.firstName"
           v-validate="{ required: true }"
           :disabled="profileSending"
           data-vv-scope="profileForm"
           :data-vv-as="' '" />
 
           <span
-          v-if="veeErrors.has('first_name')"
-          v-text="getErrors('first_name', 'profileForm')"
+          v-if="veeErrors.has('firstName')"
+          v-text="getErrors('firstName', 'profileForm')"
           class="md-error" />
         </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('middle_name')}">
+        <md-field :class="{'md-invalid': veeErrors.has('middleName')}">
           <label
-          for="middle_name"
+          for="middleName"
           v-text="'Отчество'" />
 
           <md-input
-          name="middle_name"
-          id="middle_name"
-          v-model="profileData.middle_name"
+          name="middleName"
+          id="middleName"
+          v-model="profileData.middleName"
           :disabled="profileSending"
           data-vv-scope="profileForm"
           :data-vv-as="' '" />
 
           <span
-          v-if="veeErrors.has('middle_name')"
-          v-text="getErrors('middle_name', 'profileForm')"
+          v-if="veeErrors.has('middleName')"
+          v-text="getErrors('middleName', 'profileForm')"
           class="md-error" />
         </md-field>
 
@@ -118,7 +118,8 @@
 
         <md-button
         :disabled="profileSending"
-        v-text="'Сбосить'" />
+        v-text="'Сбосить'"
+        class="profile__button" />
       </form>
     </md-card-content>
   </md-card>
@@ -131,18 +132,18 @@
       <form
         class="md-layout"
         @submit.prevent="handlePasswordSubmit">
-        <md-field :class="{'md-invalid': veeErrors.has('old_password')}">
+        <md-field :class="{'md-invalid': veeErrors.has('oldPassword')}">
           <label
-          for="old_password"
+          for="oldPassword"
           v-text="'Старый пароль'" />
 
           <md-input
-          name="old_password"
-          id="old_password"
-          v-model="dataPassword.old_password"
+          name="oldPassword"
+          id="oldPassword"
+          v-model="dataPassword.oldPassword"
           v-validate="{ required: true }"
           :disabled="passwordSending"
-          type="old_password"
+          type="password"
           data-vv-scope="passwordForm"
           :data-vv-as="' '" />
 
@@ -173,15 +174,15 @@
           class="md-error" />
         </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('password_confirmation')}">
+        <md-field :class="{'md-invalid': veeErrors.has('passwordConfirmation')}">
           <label
-          for="password_confirmation"
+          for="passwordConfirmation"
           v-text="'Повторите пароль'" />
 
           <md-input
-          name="password_confirmation"
-          id="password_confirmation"
-          v-model="dataPassword.password_confirmation"
+          name="passwordConfirmation"
+          id="passwordConfirmation"
+          v-model="dataPassword.passwordConfirmation"
           v-validate="{ required: true, password_confirmation: dataPassword.password }"
           :disabled="passwordSending"
           type="password"
@@ -189,8 +190,8 @@
           :data-vv-as="' '" />
 
           <span
-          v-if="veeErrors.has('password_confirmation')"
-          v-text="getErrors('password_confirmation', 'passwordForm')"
+          v-if="veeErrors.has('passwordConfirmation')"
+          v-text="getErrors('passwordConfirmation', 'passwordForm')"
           class="md-error" />
         </md-field>
 
@@ -200,13 +201,14 @@
 
         <md-button
         type="submit"
-        class="md-raised md-primary profile__button"
+        class="md-raised md-primary profile__button profile__button"
         :disabled="passwordSending"
-        v-text="'Зарегистрироваться'" />
+        v-text="'Сохранить'" />
 
         <md-button
         :disabled="profileSending"
-        v-text="'Сбосить'" />
+        v-text="'Сбосить'"
+        class="profile__button" />
       </form>
     </md-card-content>
   </md-card>
@@ -223,6 +225,19 @@
     v-text="'ОК'"
     class="md-primary" />
   </md-snackbar>
+
+  <md-snackbar
+    md-position="center"
+    :md-duration="4000"
+    :md-active.sync="isSuccess"
+    md-persistent
+    class="md-primary">
+    <span v-text="successText" />
+    <md-button
+      @click="isSuccess = false"
+      v-text="'ОК'"
+      class="md-primary" />
+  </md-snackbar>
 </div>
 </template>
 
@@ -234,54 +249,103 @@ export default {
       defaultData: {},
       profileData: {
         email: null,
-        last_name: null,
-        first_name: null,
-        middle_name: null,
+        lastName: null,
+        firstName: null,
+        middleName: null,
         phone: null,
       },
       dataPassword: {
-        old_password: null,
+        oldPassword: null,
         password: null,
-        password_confirmation: null,
+        passwordConfirmation: null,
       },
       value: null,
       profileSending: false,
       passwordSending: false,
       isError: false,
-      errorText: false,
+      errorText: null,
+      isSuccess: false,
+      successText: null,
     }
   },
+
+  beforeMount() {
+    this.init();
+  },
+
   methods: {
     getErrors(field, scope) {
       return this.veeErrors.collect(field, scope).join('. ')
     },
 
+    async init() {
+      this.profileSending = true;
+      try {
+        const response = await this.$axios.$get('/users/' + this.$auth.user.id);
+        this.defaultData = response;
+        this.profileData = { ...this.profileData, ...response };
+      }
+      catch (e) {
+        this.isError = true;
+        this.errorText = 'Получить профиль не удалось';
+      }
+      finally {
+        this.profileSending = false;
+      }
+    },
+
     async handleProfileSubmit() {
-      if (!(await this.$validator.validateAll('profile'))) {
+      if (!(await this.$validator.validateAll('profileForm'))) {
         return;
       }
-      this.sending = true;
-      const response = await this.$axios.$post('/profile', this.data);
-      this.sending = true;
-      debugger;
-      if (response.user) {
-        let response = await this.$auth.loginWith('local', { data: { email: this.data.email, password: this.data.password } });
-        window.location.href = '/';
+      this.profileSending = true;
+      try {
+        const response = await this.$axios.$put('/users', this.profileData);
+        this.defaultData = response;
+        this.isSuccess = true;
+        this.successText = 'Ваши данные изменены';
       }
-      else {
-        this.isRegistrationError = true;
+      catch (e) {
+        this.isError = true;
+        this.errorText = 'Изменить профиль не удалось';
       }
-      this.sending = false;
+      finally {
+        this.profileSending = false;
+      }
+    },
+
+    async handlePasswordSubmit() { //TODO
+      if (!(await this.$validator.validateAll('passwordForm'))) {
+        return;
+      }
+      this.passwordSending = true;
+      try {
+        const response = await this.$axios.$put('/auth/change_password', this.dataPassword);
+        this.isSuccess = true;
+        this.successText = 'Ваш пароль изменён';
+      }
+      catch (e) {
+        this.isError = true;
+        this.errorText = 'Изменить пароль не удалось';
+      }
+      finally {
+        this.passwordSending = false;
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.registration {
+.profile {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  > * + * {
+    margin-top: 20px;
+  }
 
   &__card {
     max-width: 450px;

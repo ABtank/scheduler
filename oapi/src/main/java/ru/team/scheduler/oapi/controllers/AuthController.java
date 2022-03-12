@@ -107,4 +107,17 @@ public class AuthController {
         User user = securityUserService.registerUser(requestDto);
         return new UserResponseDto(new UserDto(user));
     }
+
+    @ApiOperation(value = "Сменить пароль.", notes = "Сменить со старого пароля на новый.", response = Boolean.class)
+    @ApiResponses({@ApiResponse(responseCode = "201", description = "Пароль изменён."),
+            @ApiResponse(responseCode = "500", description = "Ошибка на сервере."),
+            @ApiResponse(responseCode = "400", description = "Запрос неверный."),
+            @ApiResponse(responseCode = "404", description = "Адрес URL не найден."),
+            @ApiResponse(responseCode = "403", description = "У вас не достаточно прав доступа."),
+            @ApiResponse(responseCode = "401", description = "Вы не авторизованы. Авторизуйтесь и повторите еще раз."),
+    })
+    @PutMapping("/change_password")
+    public Boolean create(@Validated(Update.class) @RequestBody ChangePasswordDto passwordDto, @ApiIgnore Principal principal) {
+        return securityUserService.changePassword(principal.getName(), passwordDto);
+    }
 }
