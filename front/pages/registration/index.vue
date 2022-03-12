@@ -8,7 +8,7 @@
 import Registration from "@/components/Registration";
 
 export default {
-  name: "index",
+  name: "RegistrationPage",
   auth: false,
   components: { Registration }
 }

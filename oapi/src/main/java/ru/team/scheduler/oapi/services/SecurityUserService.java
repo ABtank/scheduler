@@ -7,14 +7,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.team.scheduler.oapi.dto.ChangePasswordDto;
 import ru.team.scheduler.oapi.dto.RegistrationRequestDto;
+import ru.team.scheduler.oapi.exceptions.MatchPasswordException;
 import ru.team.scheduler.oapi.models.CustomUserDetails;
 import ru.team.scheduler.persist.entities.Role;
 import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.RoleRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
-
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -73,5 +73,15 @@ public class SecurityUserService implements UserDetailsService {
         userRepository.save(user);
 
         return user;
+    }
+
+    public boolean changePassword(String email, ChangePasswordDto passwordDto) {
+        User user = userRepository.findByEmail(email).orElse(null);
+        if (user == null || !passwordEncoder.matches(passwordDto.getOldPassword(), user.getPassword())) {
+            throw new MatchPasswordException("Пароль пользователя не совпадает");
+        }
+        user.setPassword(passwordEncoder.encode(passwordDto.getPassword()));
+        userRepository.save(user);
+        return true;
     }
 }

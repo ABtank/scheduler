@@ -1,70 +1,41 @@
 <template>
   <div class="page-container">
-    <md-app md-waterfall md-mode="fixed">
+    <md-app md-mode="fixed">
       <md-app-toolbar class="md-primary">
-        <<md-button class="md-icon-button" @click="menuVisible = !menuVisible">
-        <md-icon>menu</md-icon>
-      </md-button>
-        <span class="md-title">SCHEDULER</span>
+        <div class="md-toolbar-section-start">
+          <md-button class="md-icon-button" v-if="$auth.loggedIn && !menuVisible" @click="toggleMenu">
+            <md-icon>menu</md-icon>
+          </md-button>
+          <span class="md-title">SCHEDULER</span>
+        </div>
+        <div class="md-toolbar-section-end" v-if="$auth.loggedIn">
+          <span>{{ userFio }}</span>
+        </div>
       </md-app-toolbar>
 
-      <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
+      <md-app-drawer v-if="$auth.loggedIn" md-persistent="mini" :md-active.sync="menuVisible">
+        <md-toolbar class="md-transparent" md-elevation="0">
+          <span>Меню</span>
+          <div class="md-toolbar-section-end">
+            <md-button class="md-icon-button md-dense" @click="toggleMenu">
+              <md-icon>keyboard_arrow_left</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
 
         <md-list>
-          <md-list-item>
-            <md-icon>home</md-icon>
-            <span class="md-list-item-text"><a target='_blank' href="http://localhost:8189/sh/swagger-ui/">Scheduler Open API</a></span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>person_add</md-icon>
-            <span class="md-list-item-text"><router-link to="/registration">Регистрация</router-link></span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>login</md-icon>
-            <span class="md-list-item-text"><router-link to="/login">Login</router-link></span>
-          </md-list-item>
-
-          <md-list-item>
+          <NuxtLink
+          v-for="item in menu"
+          :key="item.link"
+          tag="md-list-item"
+          :to="item.link">
+            <md-icon>{{ item.icon }}</md-icon>
+            <span class="md-list-item-text">{{ item.text }}</span>
+          </NuxtLink>
+          <md-divider></md-divider>
+          <md-list-item @click="logout">
             <md-icon>person_off</md-icon>
-            <span class="md-list-item-text"><router-link to="/registration">Logoff</router-link></span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>send</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>dynamic_feed</md-icon>
-            <span class="md-list-item-text">Дисциплина</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>record_voice_over</md-icon>
-            <span class="md-list-item-text">Лекции</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>groups</md-icon>
-            <span class="md-list-item-text">Пользователи</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>edit_calendar</md-icon>
-            <span class="md-list-item-text">Расписание лекций</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>safety_divider</md-icon>
-            <span class="md-list-item-text">Роли</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>settings</md-icon>
-            <span class="md-list-item-text">Settings</span>
+            <span class="md-list-item-text">Выход</span>
           </md-list-item>
         </md-list>
       </md-app-drawer>
@@ -76,14 +47,47 @@
   </div>
 </template>
 
-
-
 <script>
 export default {
-  name: 'Reveal',
-  data: () => ({
-    menuVisible: false
-  })
+  components: {  },
+  name: "default",
+  data() {
+    return {
+      menuVisible: this.$auth.loggedIn
+    };
+  },
+  computed: {
+    menu() {
+      let menuItems = [
+        { text: 'Профиль', link: '/profile', icon: 'person' },
+        { text: 'Дисциплина', link: '/', icon: 'dynamic_feed' },
+        { text: 'Лекции', link: '/', icon: 'record_voice_over' },
+        { text: 'Пользователи', link: '/', icon: 'groups' },
+        { text: 'Расписание лекций', link: '/', icon: 'edit_calendar' },
+      ];
+
+      //TODO разделение по ролям
+      return menuItems;
+    },
+
+    userFio() {
+      if (this.$auth.loggedIn) {
+        const user = this.$auth.user;
+        return user.firstName + ' ' + user.lastName.substring(0, 1).toUpperCase() + '.';
+      }
+
+      return '';
+    }
+  },
+  methods: {
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible
+    },
+
+    logout() {
+      this.$auth.logout();
+    }
+  }
 }
 </script>
 
