@@ -1,15 +1,31 @@
 package ru.team.scheduler.persist.dto;
 
+import lombok.Data;
+import ru.team.scheduler.persist.responsesOfDataBase.LessonByIdResponse;
+
 import java.util.Date;
 
-public interface LessonByIdDto {
-    Integer getLessons_id();
-    String getLesson_name();
-    Date getTime_start();
-    Integer getDuration();
-    String getTeacher_first_name();
-    String getTeacher_middle_name();
-    String getTeacher_last_name();
-    String getDiscipline_name();
+@Data
+public class LessonByIdDto {
+    Integer lessonsId;
+    String lessonName;
+    Date timeStart;
+    Integer duration;
+    String teacherFirstName;
+    String teacherMiddleName;
+    String teacherLastName;
+    String disciplineName;
+    Boolean studentRegistered;
 
+    public LessonByIdDto(LessonByIdResponse lessonByIdResponse) {
+        this.lessonsId = lessonByIdResponse.getLessonsId();
+        this.lessonName = lessonByIdResponse.getLessonName();
+        this.timeStart = lessonByIdResponse.getTimeStart();
+        this.duration = lessonByIdResponse.getDuration();
+        this.teacherFirstName = lessonByIdResponse.getTeacherFirstName();
+        this.teacherMiddleName = lessonByIdResponse.getTeacherMiddleName();
+        this.teacherLastName = lessonByIdResponse.getTeacherLastName();
+        this.disciplineName = lessonByIdResponse.getDisciplineName();
+        this.studentRegistered = false;
+    }
 }

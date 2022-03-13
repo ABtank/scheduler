@@ -5,18 +5,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ru.team.scheduler.oapi.services.EmailServiceImpl;
-import ru.team.scheduler.persist.dto.DataToSendNotification;
-import ru.team.scheduler.persist.dto.ExerciseLessonDto;
-import ru.team.scheduler.persist.entities.LessonsStudent;
-import ru.team.scheduler.persist.entities.User;
+import ru.team.scheduler.persist.responsesOfDataBase.DataToSendNotification;
+import ru.team.scheduler.persist.responsesOfDataBase.ExerciseLessonResponse;
 import ru.team.scheduler.persist.repositories.ExercisesRepository;
 import ru.team.scheduler.persist.repositories.LessonsStudentsRepository;
-import ru.team.scheduler.persist.repositories.UserRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class PlannerTasks {
@@ -69,8 +65,8 @@ public class PlannerTasks {
     //после изменения должно пройти от 60 до 73 минут (если преподаватель надумает в течение часа что-то поменять ещё в записи)
     @Scheduled(fixedRate = 600_000)
     public void sendNotificationOfScheduleChangesByMail(){
-        List<ExerciseLessonDto> exerciseLessonDtoList = exercisesRepository.getLastExercisesChanges();
-        for (ExerciseLessonDto elDto : exerciseLessonDtoList) {
+        List<ExerciseLessonResponse> exerciseLessonResponseList = exercisesRepository.getLastExercisesChanges();
+        for (ExerciseLessonResponse elDto : exerciseLessonResponseList) {
             String theme = "Изменения в расписании";
             StringBuilder text = new StringBuilder();
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm d-MM-yyyy");

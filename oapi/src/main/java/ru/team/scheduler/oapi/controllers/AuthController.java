@@ -60,6 +60,7 @@ public class AuthController {
         if (user == null) {
             throw new UsernameNotFoundException("Неверные логин или пароль");
         }
+//        securityUserService.loadUserByUsername(requestDto.getEmail());
         return new LoginResponseDto(jwtProvider.createToken(user.getEmail()));
     }
 

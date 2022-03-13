@@ -14,14 +14,18 @@ import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.oapi.services.LessonsStudentsServiceImpl;
+import ru.team.scheduler.oapi.services.SecurityUserService;
 import ru.team.scheduler.oapi.services.StudentService;
 import ru.team.scheduler.oapi.services.UserService;
 import ru.team.scheduler.persist.dto.LessonByIdDto;
-import ru.team.scheduler.persist.dto.StudentScheduleDto;
+import ru.team.scheduler.persist.responsesOfDataBase.LessonByIdResponse;
+import ru.team.scheduler.persist.responsesOfDataBase.StudentScheduleResponse;
 import ru.team.scheduler.persist.entities.LessonsStudent;
+import ru.team.scheduler.persist.entities.User;
 import springfox.documentation.annotations.ApiIgnore;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Api(tags = {SwaggerConstant.API_USER})
@@ -31,11 +35,16 @@ public class StudentController {
     private LessonsStudentsServiceImpl lessonsStudentsService;
     private StudentService studentService;
     private UserMapper userMapper;
+    private SecurityUserService securityUserService;
+
+    @Autowired
+    public void setSecurityUserService(SecurityUserService service) {
+        this.securityUserService = service;
+    }
     @Autowired
     public void setUserMapper(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
-
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -67,7 +76,7 @@ public class StudentController {
     @ApiOperation(value = "Лекции, на которые записан студент", notes = "Список лекций студента")
     @GetMapping("/lessons")
     @Transactional
-    public List<StudentScheduleDto> getLessons(@ApiIgnore Principal principal){
+    public List<StudentScheduleResponse> getLessons(@ApiIgnore Principal principal){
         UserDto userDto = userService.findByEmail(principal.getName()).map(user -> userMapper.entityToDto(user)).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден в БД !!!"));
         return studentService.getScheduleByUser(userDto.getId());
     }
@@ -75,8 +84,15 @@ public class StudentController {
     //возвращает расписание учителя по предоставленной ссылке
     @ApiOperation(value = "Расписание учителя по предоставленной от него ссылке", notes = "Список занятий, запланированных учителем")
     @GetMapping("/lessons/{id}")
-    public LessonByIdDto getLessons(@PathVariable Integer id){
-        return studentService.getLessonById(id).orElseThrow(NotFoundException::new);
+    public LessonByIdDto getLessons(@PathVariable Integer id, @ApiIgnore Principal principal){
+        LessonByIdResponse lessonByIdResponse = studentService.getLessonById(id).orElseThrow(NotFoundException::new);
+        User user = securityUserService.getUserByEmail(principal.getName());
+        Optional<LessonsStudent> lessonsStudent = lessonsStudentsService.getScheduleByUserAndLesson(lessonByIdResponse.getLessonsId(), user.getId());
+        LessonByIdDto lessonByIdDto = new LessonByIdDto(lessonByIdResponse);
+        if (lessonsStudent.isPresent()){
+            lessonByIdDto.setStudentRegistered(true);
+        }
+        return lessonByIdDto;
     }
 
     //удалить запись на урок (освободить место)

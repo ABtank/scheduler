@@ -3,11 +3,9 @@ package ru.team.scheduler.persist.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.team.scheduler.persist.dto.ExerciseLessonDto;
+import ru.team.scheduler.persist.responsesOfDataBase.ExerciseLessonResponse;
 import ru.team.scheduler.persist.entities.Exercise;
-import ru.team.scheduler.persist.entities.User;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +41,7 @@ public interface ExercisesRepository extends JpaRepository<Exercise, Integer> {
             "    (exercises.dt_modify  >= (NOW () - INTERVAL '73 MINUTE')\n" +
             "    AND\n" +
             "    exercises.dt_modify  <= (NOW () - INTERVAL '60 MINUTE') )", nativeQuery = true)
-    List<ExerciseLessonDto> getLastExercisesChanges();
+    List<ExerciseLessonResponse> getLastExercisesChanges();
 
     Optional<Exercise> findByName(String name);
 }
