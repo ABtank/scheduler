@@ -1,7 +1,9 @@
 package ru.team.scheduler.oapi.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
     private static final String[] AUTH_URLS = {
             "/api/v1/disciplines/**",
-            "/api/v1/students/**",
+//            "/api/v1/students/**",
             "/api/v1/users/**",
             "/api/v1/roles/**",
             "/api/v1/support/**",
@@ -40,6 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/api/v1/students/**").permitAll()
                 .antMatchers(AUTH_URLS).authenticated()
                 .antMatchers(PUBLIC_URLS).permitAll()
                 //.antMatchers("/api/v1/score/get/{\\d+}").hasAnyAuthority("ADMIN")
@@ -47,4 +51,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
 }

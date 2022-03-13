@@ -5,11 +5,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.team.scheduler.oapi.constants.CRUD;
-import ru.team.scheduler.oapi.dto.UserDto;
 import ru.team.scheduler.oapi.exceptions.CrudException;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
 import ru.team.scheduler.persist.dto.LessonByIdDto;
-import ru.team.scheduler.persist.dto.StudentScheduleDto;
+import ru.team.scheduler.persist.responsesOfDataBase.LessonByIdResponse;
+import ru.team.scheduler.persist.responsesOfDataBase.StudentScheduleResponse;
 import ru.team.scheduler.persist.entities.Lesson;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.TeachersStudent;
@@ -17,8 +17,6 @@ import ru.team.scheduler.persist.entities.User;
 import ru.team.scheduler.persist.repositories.LessonsStudentsRepository;
 import ru.team.scheduler.persist.repositories.StudentRepository;
 import ru.team.scheduler.persist.repositories.LessonRepository;
-import ru.team.scheduler.persist.repositories.UserRepository;
-
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
@@ -47,11 +45,11 @@ public class StudentService extends UserServiceImpl {
         this.teachersStudentService = teachersStudentService;
     }
 
-    public List<StudentScheduleDto> getScheduleByUser(Integer user_id) {
+    public List<StudentScheduleResponse> getScheduleByUser(Integer user_id) {
         return studentRepository.getUserSchedule(user_id);
     }
 
-    public Optional<LessonByIdDto> getLessonById(Integer id) {
+    public Optional<LessonByIdResponse> getLessonById(Integer id) {
         return lessonRepository.getLessonById(id);
     }
 

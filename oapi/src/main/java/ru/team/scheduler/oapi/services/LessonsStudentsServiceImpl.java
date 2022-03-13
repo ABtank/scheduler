@@ -56,6 +56,10 @@ public class LessonsStudentsServiceImpl implements LessonsStudentsService {
         return lessonsStudentsRepository.findAllByStudent(student);
     }
 
+    public Optional<LessonsStudent> getScheduleByUserAndLesson(Integer lessonId, Integer userId) {
+        return lessonsStudentsRepository.findByLessonIdAndStudentId(lessonId, userId);
+    }
+
     @Transactional
     public LessonsStudentsDto accept(Integer id, Principal principal) {
         Optional<LessonsStudent> lessonsStudentOpt = lessonsStudentsRepository.findById(id);

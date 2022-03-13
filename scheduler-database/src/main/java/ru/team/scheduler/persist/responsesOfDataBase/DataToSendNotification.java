@@ -1,4 +1,4 @@
-package ru.team.scheduler.persist.dto;
+package ru.team.scheduler.persist.responsesOfDataBase;
 
 
 import java.util.Date;

@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.team.scheduler.persist.dto.DataToSendNotification;
+import ru.team.scheduler.persist.responsesOfDataBase.DataToSendNotification;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.User;
 
@@ -39,4 +39,5 @@ public interface LessonsStudentsRepository extends JpaRepository<LessonsStudent,
             "        AND NOT lessons_students.is_confirmation_request_sent\n" +
             "        AND DATE_PART('hour',:curDate - lessons.dt_start) <= 24", nativeQuery = true)
     List<DataToSendNotification> getStudentsToSendNotification(@Param("curDate") Date curDate);
+
 }
