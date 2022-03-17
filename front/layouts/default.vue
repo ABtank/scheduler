@@ -60,9 +60,10 @@ export default {
     menu() {
       let menuItems = [
         { text: 'Профиль', link: '/profile', icon: 'person' },
-        { text: 'Дисциплина', link: '/', icon: 'dynamic_feed' },
-        { text: 'Лекции', link: '/', icon: 'record_voice_over' },
-        { text: 'Пользователи', link: '/', icon: 'groups' },
+        { text: 'Дисциплина', link: '/disciplines', icon: 'dynamic_feed' },
+        { text: 'Таблицы', link: '/tables', icon: 'source' },
+        { text: 'Лекции', link: '/lessons', icon: 'record_voice_over' },
+        { text: 'Пользователи', link: '/users', icon: 'groups' },
         { text: 'Расписание лекций', link: '/', icon: 'edit_calendar' },
       ];
 

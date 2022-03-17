@@ -33,5 +33,5 @@ build/
 .vscode/
 
 .gz
-/logFile.log
-/logFile.log.2022-02-25.0.gz
+/logFile.*
+/oapi/src/main/resources/public/

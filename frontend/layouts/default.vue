@@ -1,118 +1,98 @@
 <template>
   <div class="page-container">
-    <md-app md-waterfall md-mode="fixed">
+    <md-app md-mode="fixed">
       <md-app-toolbar class="md-primary">
-        <
-        <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
-          <md-icon>menu</md-icon>
-        </md-button>
-        <NuxtLink to="/">
-          <md-avatar class="md-avatar-icon md-small">
-            <md-icon>home</md-icon>
-          </md-avatar>
+        <div class="md-toolbar-section-start">
+          <md-button class="md-icon-button" v-if="$auth.loggedIn && !menuVisible" @click="toggleMenu">
+            <md-icon>menu</md-icon>
+          </md-button>
           <span class="md-title">SCHEDULER</span>
-        </NuxtLink>
-        <NuxtLink to="tables"><md-button class="md-primary md-raised">tables</md-button></NuxtLink>
-        <NuxtLink to="login"><md-button class="md-primary md-raised">Login</md-button></NuxtLink>
-        <md-button class="md-primary md-raised" @click="logout">Logout</md-button>
-        <md-button class="md-primary md-raised" ><a target='_blank' href="../sh/swagger-ui/">OAPI</a></md-button>
-<!--        <span v-model:accesskey="$auth">WELCOME user=#{{ $auth.user.id }} email={{ $auth.user.email }}</span>-->
+        </div>
+        <div class="md-toolbar-section-end" v-if="$auth.loggedIn">
+          <span>{{ userFio }}</span>
+        </div>
       </md-app-toolbar>
 
-      <md-app-drawer :md-active.sync="menuVisible">
-        <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
+      <md-app-drawer v-if="$auth.loggedIn" md-persistent="mini" :md-active.sync="menuVisible">
+        <md-toolbar class="md-transparent" md-elevation="0">
+          <span>Меню</span>
+          <div class="md-toolbar-section-end">
+            <md-button class="md-icon-button md-dense" @click="toggleMenu">
+              <md-icon>keyboard_arrow_left</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
 
         <md-list>
-          <md-list-item>
-            <md-icon>home</md-icon>
-            <span class="md-list-item-text"><a target='_blank' href="../sh/swagger-ui/">Scheduler Open API</a></span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>person_add</md-icon>
-            <span class="md-list-item-text"><NuxtLink to="/registration">Регистрация</NuxtLink></span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>login</md-icon>
-            <span class="md-list-item-text"><NuxtLink to="/login">Login</NuxtLink></span>
-          </md-list-item>
-
-          <md-list-item>
+          <NuxtLink
+          v-for="item in menu"
+          :key="item.link"
+          tag="md-list-item"
+          :to="item.link">
+            <md-icon>{{ item.icon }}</md-icon>
+            <span class="md-list-item-text">{{ item.text }}</span>
+          </NuxtLink>
+          <md-divider></md-divider>
+          <md-list-item @click="logout">
             <md-icon>person_off</md-icon>
-            <span class="md-list-item-text"><NuxtLink to="/test">Logoff</NuxtLink></span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>send</md-icon>
-            <span class="md-list-item-text">Sent Mail</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>dynamic_feed</md-icon>
-            <span class="md-list-item-text">Дисциплина</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>record_voice_over</md-icon>
-            <span class="md-list-item-text">Лекции</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>groups</md-icon>
-            <span class="md-list-item-text">Пользователи</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>edit_calendar</md-icon>
-            <span class="md-list-item-text">Расписание лекций</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>safety_divider</md-icon>
-            <span class="md-list-item-text">Роли</span>
-          </md-list-item>
-
-          <md-list-item>
-            <md-icon>settings</md-icon>
-            <span class="md-list-item-text">Settings</span>
+            <span class="md-list-item-text">Выход</span>
           </md-list-item>
         </md-list>
       </md-app-drawer>
 
       <md-app-content>
-        <Nuxt/>
+        <Nuxt />
       </md-app-content>
     </md-app>
   </div>
 </template>
 
-
-<style lang="scss" scoped>
-.md-app {
-  max-height: 100%;
-  border: 1px solid rgba(#000, .12);
-}
-
-// Demo purposes only
-.md-drawer {
-  width: 230px;
-  max-width: calc(100vw - 125px);
-}
-</style>
 <script>
 export default {
-  name: 'Reveal',
-  components: {},
+  components: {  },
+  name: "default",
+  data() {
+    return {
+      menuVisible: this.$auth.loggedIn
+    };
+  },
+  computed: {
+    menu() {
+      let menuItems = [
+        { text: 'Профиль', link: '/profile', icon: 'person' },
+        { text: 'Дисциплина', link: '/disciplines', icon: 'dynamic_feed' },
+        { text: 'Таблицы', link: '/tables', icon: 'source' },
+        { text: 'Лекции', link: '/lessons', icon: 'record_voice_over' },
+        { text: 'Пользователи', link: '/users', icon: 'groups' },
+        { text: 'Расписание лекций', link: '/', icon: 'edit_calendar' },
+      ];
 
-  data: () => ({
-    menuVisible: false
-  }),
+      //TODO разделение по ролям
+      return menuItems;
+    },
+
+    userFio() {
+      if (this.$auth.loggedIn) {
+        const user = this.$auth.user;
+        return user.email ;
+      }
+
+      return '';
+    }
+  },
   methods: {
+    toggleMenu() {
+      this.menuVisible = !this.menuVisible
+    },
+
     logout() {
       this.$auth.logout();
-      window.location = "/sh"
+      window.location.href = "/sh";
     }
   }
 }
 </script>
+
+<style scoped lang="scss">
+
+</style>

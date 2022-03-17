@@ -47,7 +47,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://scheduler-team.herokuapp.com/sh/api/',
+    baseURL: '/sh/api/v1/',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -77,9 +77,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/v1/auth/login', method: 'post' },
-          logout: { url: '/v1/auth/logout', method: 'post' },
-          user: { url: '/v1/auth/user', method: 'get' }
+          login: { url: '/auth/login', method: 'post' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/auth/user', method: 'get' }
         }
       }
     }

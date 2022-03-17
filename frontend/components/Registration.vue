@@ -167,6 +167,12 @@
         class="md-raised md-primary registration__button"
         :disabled="sending"
         v-text="'Зарегистрироваться'" />
+
+        <NuxtLink
+        tag="md-button"
+        to="/login"
+        v-text="'Войти'"
+        class="registration__button" />
       </form>
     </md-card-content>
   </md-card>
@@ -221,17 +227,15 @@ export default {
         return;
       }
       this.sending = true;
-      const response = await this.$axios.$post('v1/auth/registration', this.data);
-      this.sending = true;
-      debugger;
+      const response = await this.$axios.$post('/auth/registration', this.data);
+      this.sending = false;
       if (response.user) {
         let response = await this.$auth.loginWith('local', { data: { email: this.data.email, password: this.data.password } });
-        window.location.href = '/sh';
+        window.location.href = '/';
       }
       else {
         this.isRegistrationError = true;
       }
-      this.sending = false;
     }
   }
 }
