@@ -66,6 +66,7 @@
             <th>Время начала</th>
             <th>Продолжительность</th>
             <th>Преподаватель</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -76,6 +77,9 @@
             <td><span>{{str.timeStart | date: 'yyyy-MM-dd HH:mm'}}</span></td>
             <td>{{str.duration + ' мин'}}</td>
             <td>{{str.teacherLastName + ' ' + str.teacherFirstName + ' ' + str.teacherMiddleName}}</td>
+            <td ng-show="str.isAccepted">
+                <button type="button" class="btn btn-success" ng-click="accept(str.lessonsStudentsId)">Подтвердить участие</button>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -96,14 +100,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="les in studentSchedule">
-            <td style="display: none;">{{les.lessonsStudentsId}}</td>
-            <td>{{les.teacherLastName + ' ' + les.teacherFirstName + ' ' + les.teacherMiddleName}}</td>
-            <td>{{les.disciplineName}}</td>
-            <td>{{les.lessonName}}</td>
-            <td><span>{{les.timeStart | date: 'yyyy-MM-dd HH:mm'}}</span></td>
-            <td>{{les.duration + ' мин'}}</td>
-            <td>кнопка</td>
+        <tr>
+            <td style="display: none;">{{lesson.lessonsId}}</td>
+            <td>{{lesson.teacherLastName + ' ' + lesson.teacherFirstName + ' ' + lesson.teacherMiddleName}}</td>
+            <td>{{lesson.disciplineName}}</td>
+            <td>{{lesson.lessonName}}</td>
+            <td><span>{{lesson.timeStart | date: 'yyyy-MM-dd HH:mm'}}</span></td>
+            <td>{{lesson.duration + ' мин'}}</td>
+            <td ng-show="!lesson.studentRegistered">
+                <button type="button" class="btn btn-success" ng-click="reserveLecture(lesson.lessonsId)">Записаться на лекцию</button>
+            </td>
         </tr>
         </tbody>
     </table>

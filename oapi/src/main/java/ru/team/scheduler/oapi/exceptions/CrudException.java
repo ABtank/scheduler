@@ -2,7 +2,9 @@ package ru.team.scheduler.oapi.exceptions;
 
 import ru.team.scheduler.oapi.constants.CRUD;
 
-public class CrudException extends RuntimeException{
+import java.util.function.Supplier;
+
+public class CrudException extends RuntimeException {
     private CRUD crud;
     private Integer id;
     private String message;

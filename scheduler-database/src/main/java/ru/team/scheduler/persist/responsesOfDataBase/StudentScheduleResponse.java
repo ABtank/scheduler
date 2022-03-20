@@ -12,6 +12,8 @@ public interface StudentScheduleResponse {
      String getTeacherMiddleName();
      String getTeacherLastName();
      String getDisciplineName();
+     boolean getIsValidate();
+     boolean getIsAccepted();
 
 ////            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 ////        this.time_start = simpleDateFormat.format(time_start.getTime());
