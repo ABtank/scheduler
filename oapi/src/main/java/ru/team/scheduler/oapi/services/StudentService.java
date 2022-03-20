@@ -49,10 +49,6 @@ public class StudentService extends UserServiceImpl {
         return studentRepository.getUserSchedule(user_id);
     }
 
-    public Optional<LessonByIdResponse> getLessonById(Integer id) {
-        return lessonRepository.getLessonById(id);
-    }
-
     @Transactional
     public void deleteLessonsStudentById(Integer id) {
         Optional<LessonsStudent> lessonsStudent = lessonsStudentRepository.findById(id);

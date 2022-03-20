@@ -11,10 +11,12 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT\n" +
             "    ls.id as lessonsStudentsId,\n" +
+            "    ls.is_accepted as isAccepted,\n" +
             "    lessons.name as lessonName,\n" +
             "    lessons.dt_start as timeStart,\n" +
             "    exercises.name as exerciseName,\n" +
             "    exercises.duration as duration,\n" +
+            "    exercises.is_validate as isValidate,\n" +
             "    users.first_name as teacherFirstName,\n" +
             "    users.middle_name as teacherMiddleName,\n" +
             "    users.last_name as teacherLastName,\n" +

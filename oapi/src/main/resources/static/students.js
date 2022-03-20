@@ -10,6 +10,8 @@ angular.module('app', ['ngRoute', 'ngStorage']).controller('studentsController',
                 user: $localStorage.summerUser
             }
         }).then(function (response) {
+            $scope.buttonStudentSchedule = true;
+            $scope.buttonLinkFromTeacher = false;
             console.log(response);
             $scope.studentSchedule = response.data;
         });
@@ -33,20 +35,35 @@ angular.module('app', ['ngRoute', 'ngStorage']).controller('studentsController',
                     $scope.showStudentSchedule();
                 }
             }, function errorCallback(response) {
-            });
+        });
     };
 
     $scope.followLinkFromTeacher = function () {
         $http({
-                url: $scope.linkFromTeacher,
-                method: 'GET'
-            }).then(function (response) {
-                $scope.buttonStudentSchedule = false;
-                $scope.buttonLinkFromTeacher = true;
-                    console.log(response);
-                $scope.lessons = response.data;
-            });
-
+            url: $scope.linkFromTeacher,    //    http://localhost:8189/sh/api/v1/students/lessons/2
+            method: 'GET'
+        }).then(function (response) {
+            $scope.lesson = null;
+            $scope.buttonStudentSchedule = false;
+            $scope.buttonLinkFromTeacher = true;
+                console.log(response);
+            $scope.lesson = response.data;
+        });
     };
+
+    $scope.reserveLecture = function (lessonsId) {
+        $http({
+            url: 'http://localhost:8189/sh/api/v1/students/lessons/' + lessonsId,
+            method: 'POST',
+            params: {
+                user: $localStorage.summerUser
+            }
+        }).then(function (response) {
+            console.log(response);
+            $scope.showStudentSchedule();
+        });
+    };
+
+
 
 });

@@ -8,6 +8,7 @@ import ru.team.scheduler.persist.entities.Exercise;
 import ru.team.scheduler.persist.entities.Lesson;
 import ru.team.scheduler.persist.repositories.LessonRepository;
 import ru.team.scheduler.persist.repositories.UserRepository;
+import ru.team.scheduler.persist.responsesOfDataBase.LessonByIdResponse;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
@@ -70,5 +71,9 @@ public class LessonServiceImpl implements LessonService {
         updatedLesson.setExercise(exerciseOptional.get());
         lessonRepository.save(updatedLesson);
         return lessonRepository.findById(updatedLesson.getId());
+    }
+
+    public Optional<LessonByIdResponse> getLessonById(Integer id) {
+        return lessonRepository.getLessonById(id);
     }
 }
