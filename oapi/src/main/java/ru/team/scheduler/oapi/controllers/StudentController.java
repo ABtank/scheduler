@@ -8,22 +8,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import ru.team.scheduler.oapi.constants.CRUD;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.controllers.mappers.UserMapper;
 import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.dto.UserDto;
+import ru.team.scheduler.oapi.exceptions.CrudException;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
-import ru.team.scheduler.oapi.services.LessonsStudentsServiceImpl;
-import ru.team.scheduler.oapi.services.SecurityUserService;
-import ru.team.scheduler.oapi.services.StudentService;
-import ru.team.scheduler.oapi.services.UserService;
+import ru.team.scheduler.oapi.services.*;
 import ru.team.scheduler.persist.dto.LessonByIdDto;
+import ru.team.scheduler.persist.entities.Lesson;
 import ru.team.scheduler.persist.responsesOfDataBase.LessonByIdResponse;
 import ru.team.scheduler.persist.responsesOfDataBase.StudentScheduleResponse;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 import ru.team.scheduler.persist.entities.User;
 import springfox.documentation.annotations.ApiIgnore;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,7 @@ import java.util.Optional;
 public class StudentController {
     private UserService userService;
     private LessonsStudentsServiceImpl lessonsStudentsService;
+    private LessonServiceImpl lessonService;
     private StudentService studentService;
     private UserMapper userMapper;
     private SecurityUserService securityUserService;
@@ -56,6 +58,10 @@ public class StudentController {
     @Autowired
     public void setStudentService(StudentService studentService) {
         this.studentService = studentService;
+    }
+    @Autowired
+    public void setLessonService(LessonServiceImpl lessonService) {
+        this.lessonService = lessonService;
     }
 
     @ApiOperation(value = "Ping",notes = "Тест")
@@ -85,10 +91,10 @@ public class StudentController {
     @ApiOperation(value = "Расписание учителя по предоставленной от него ссылке", notes = "Список занятий, запланированных учителем")
     @GetMapping("/lessons/{id}")
     public LessonByIdDto getLessons(@PathVariable Integer id, @ApiIgnore Principal principal){
-        LessonByIdResponse lessonByIdResponse = studentService.getLessonById(id).orElseThrow(NotFoundException::new);
+        Optional<LessonByIdResponse> lessonByIdResponse = lessonService.getLessonById(id);
         User user = securityUserService.getUserByEmail(principal.getName());
-        Optional<LessonsStudent> lessonsStudent = lessonsStudentsService.getScheduleByUserAndLesson(lessonByIdResponse.getLessonsId(), user.getId());
-        LessonByIdDto lessonByIdDto = new LessonByIdDto(lessonByIdResponse);
+        Optional<LessonsStudent> lessonsStudent = lessonsStudentsService.getScheduleByUserAndLesson(lessonByIdResponse.get().getLessonsId(), user.getId());
+        LessonByIdDto lessonByIdDto = new LessonByIdDto(lessonByIdResponse.get());
         if (lessonsStudent.isPresent()){
             lessonByIdDto.setStudentRegistered(true);
         }

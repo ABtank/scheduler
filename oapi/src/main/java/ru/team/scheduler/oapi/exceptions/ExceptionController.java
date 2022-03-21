@@ -28,4 +28,11 @@ public class ExceptionController {
         log.error(e.getMessage(), e);
         return new ResponseEntity<>(new ProjectError(HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
+
+    @ExceptionHandler
+    public ResponseEntity<?> handleInvalidParamsException(IllegalArgumentException e) {
+        log.info(e.getMessage(), e);
+        return new ResponseEntity<>(new ProjectError(HttpStatus.ALREADY_REPORTED.value(), e.getMessage()), HttpStatus.ALREADY_REPORTED);
+    }
 }

@@ -75,4 +75,16 @@ public class LessonsStudent {
         this.dtCreate = dtCreate;
         this.dtModify = dtModify;
     }
+
+    @Override
+    public String toString() {
+        return "LessonsStudent{" +
+                "id=" + id +
+                ", isAttend=" + isAttend +
+                ", isAccepted=" + isAccepted +
+                ", isСonfirmationRequestSent=" + isСonfirmationRequestSent +
+                ", dtCreate=" + dtCreate +
+                ", dtModify=" + dtModify +
+                '}';
+    }
 }

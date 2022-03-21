@@ -17,8 +17,8 @@ public interface LessonRepository extends JpaRepository<Lesson, Integer> {
             "    lessons.name as lessonName,\n" +
             "    lessons.dt_start as timeStart,\n" +
             "    exercises.duration as duration,\n" +
-            "    users.first_name as teacherFirst_name,\n" +
-            "    users.middle_name as teacherMiddle_name,\n" +
+            "    users.first_name as teacherFirstName,\n" +
+            "    users.middle_name as teacherMiddleName,\n" +
             "    users.last_name as teacherLastName,\n" +
             "    disciplines.name as disciplineName\n" +
             "FROM lessons as lessons\n" +
