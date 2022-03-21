@@ -11,7 +11,7 @@
           Welcome to Scheduler Application
         </h2>
         <p class="mt-3 text-gray-600">
-          Приложение <a target='_blank' href="http://localhost:8189/sh/swagger-ui/">Sheduler</a>
+          Приложение <a target='_blank' href="../sh/">Sheduler</a> (<a target='_blank' href="../sh/swagger-ui/">Sheduler-OAPI</a>)
           для составления/корректировки расписания индивидуальных занятий(уроков) преподавателей/тренеров с учениками/клиентами.<br>
         </p>
         <p class="mt-4 pt-4 text-gray-800 border-t border-dashed">
