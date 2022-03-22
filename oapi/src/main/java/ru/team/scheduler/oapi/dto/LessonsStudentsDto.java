@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 
+import java.time.Instant;
 import java.util.Date;
 
 @Data
@@ -13,6 +14,10 @@ public class LessonsStudentsDto {
   private Integer id;
   private Integer lessonId;
   private String lessonTitle;
+  private Instant lessonDtStart;
+  private String lessonLink;
+  private Integer exerciseId;
+  private String exerciseTitle;
   private Integer studentId;
   private String studentFirstName;
   private String studentMiddleName;
@@ -25,6 +30,11 @@ public class LessonsStudentsDto {
   public LessonsStudentsDto(LessonsStudent lessonsStudent) {
     this.id = lessonsStudent.getId();
     this.lessonId = lessonsStudent.getLesson().getId();
+    this.lessonTitle = lessonsStudent.getLesson().getName();
+    this.lessonDtStart = lessonsStudent.getLesson().getDtStart();
+    this.lessonLink = lessonsStudent.getLesson().getLink();
+    this.exerciseId = lessonsStudent.getLesson().getExercise().getId();
+    this.exerciseTitle = lessonsStudent.getLesson().getExercise().getName();
     this.studentId = lessonsStudent.getStudent().getId();
     this.studentFirstName = lessonsStudent.getStudent().getFirstName();
     this.studentMiddleName = lessonsStudent.getStudent().getMiddleName();

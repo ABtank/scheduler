@@ -1,7 +1,6 @@
 package ru.team.scheduler.oapi.controllers;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -10,12 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import ru.team.scheduler.oapi.constants.SwaggerConstant;
 import ru.team.scheduler.oapi.dto.LessonsStudentsDto;
 import ru.team.scheduler.oapi.exceptions.NotFoundException;
-import ru.team.scheduler.oapi.services.LessonsStudentsService;
 import ru.team.scheduler.oapi.services.LessonsStudentsServiceImpl;
 import ru.team.scheduler.oapi.services.MapperService;
 import ru.team.scheduler.persist.entities.LessonsStudent;
 import springfox.documentation.annotations.ApiIgnore;
 import java.security.Principal;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @RequestMapping("/api/v1/lessonsStudents")
@@ -27,9 +28,9 @@ public class LessonsStudentsController {
     private final MapperService mapperService;
 
     @GetMapping(value = "/{id}")
-    public LessonsStudentsDto findById(@PathVariable("id") Integer id) {
-        LessonsStudent ls = lessonsStudentsService.findById(id).orElseThrow(NotFoundException::new);
-        return new LessonsStudentsDto(ls);
+    public List<LessonsStudentsDto> findById(@PathVariable("id") Integer id) {
+        List<LessonsStudent> ls = lessonsStudentsService.findAllByStudentId(id);
+        return ls.stream().map(LessonsStudentsDto::new).collect(toList());
     }
 
     @PostMapping

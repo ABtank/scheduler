@@ -1,217 +1,222 @@
 <template>
 <div class="profile">
-  <md-card class="profile__card">
-    <md-card-header>
-      <div class="md-title">Профиль пользователя</div>
-    </md-card-header>
-    <md-card-content>
-      <form
-      class="md-layout"
-      @submit.prevent="handleProfileSubmit">
-        <md-field :class="{'md-invalid': veeErrors.has('email')}">
-          <label
-          for="email"
-          v-text="'E-mail'" />
+  <md-tabs class="md-transparent" md-alignment="fixed">
+    <md-tab id="tab-prfile" md-label="Профиль пользователя" md-icon="account_box">
+      <md-card class="profile__card">
+        <md-card-header>
+          <div class="md-title">Профиль пользователя</div>
+        </md-card-header>
+        <md-card-content>
+          <form
+            class="md-layout"
+            @submit.prevent="handleProfileSubmit">
+            <md-field :class="{'md-invalid': veeErrors.has('email')}">
+              <label
+                for="email"
+                v-text="'E-mail'" />
 
-          <md-input
-          name="email"
-          id="email"
-          v-model="profileData.email"
-          v-validate="{ required: true, email: true }"
-          :disabled="profileSending"
-          data-vv-scope="profileForm"
-          :data-vv-as="' '" />
+              <md-input
+                name="email"
+                id="email"
+                v-model="profileData.email"
+                v-validate="{ required: true, email: true }"
+                :disabled="profileSending"
+                data-vv-scope="profileForm"
+                :data-vv-as="' '" />
 
-          <span
-          v-if="veeErrors.has('email')"
-          v-text="getErrors('email', 'profileForm')"
-          class="md-error" />
-        </md-field>
+              <span
+                v-if="veeErrors.has('email')"
+                v-text="getErrors('email', 'profileForm')"
+                class="md-error" />
+            </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('lastName')}">
-          <label
-          for="lastName"
-          v-text="'Фамилия'" />
+            <md-field :class="{'md-invalid': veeErrors.has('lastName')}">
+              <label
+                for="lastName"
+                v-text="'Фамилия'" />
 
-          <md-input
-          name="lastName"
-          id="lastName"
-          v-model="profileData.lastName"
-          v-validate="{ required: true }"
-          :disabled="profileSending"
-          data-vv-scope="profileForm"
-          :data-vv-as="' '" />
+              <md-input
+                name="lastName"
+                id="lastName"
+                v-model="profileData.lastName"
+                v-validate="{ required: true }"
+                :disabled="profileSending"
+                data-vv-scope="profileForm"
+                :data-vv-as="' '" />
 
-          <span
-          v-if="veeErrors.has('lastName')"
-          v-text="getErrors('lastName', 'profileForm')"
-          class="md-error" />
-        </md-field>
+              <span
+                v-if="veeErrors.has('lastName')"
+                v-text="getErrors('lastName', 'profileForm')"
+                class="md-error" />
+            </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('firstName')}">
-          <label
-          for="firstName"
-          v-text="'Имя'" />
+            <md-field :class="{'md-invalid': veeErrors.has('firstName')}">
+              <label
+                for="firstName"
+                v-text="'Имя'" />
 
-          <md-input
-          name="firstName"
-          id="firstName"
-          v-model="profileData.firstName"
-          v-validate="{ required: true }"
-          :disabled="profileSending"
-          data-vv-scope="profileForm"
-          :data-vv-as="' '" />
+              <md-input
+                name="firstName"
+                id="firstName"
+                v-model="profileData.firstName"
+                v-validate="{ required: true }"
+                :disabled="profileSending"
+                data-vv-scope="profileForm"
+                :data-vv-as="' '" />
 
-          <span
-          v-if="veeErrors.has('firstName')"
-          v-text="getErrors('firstName', 'profileForm')"
-          class="md-error" />
-        </md-field>
+              <span
+                v-if="veeErrors.has('firstName')"
+                v-text="getErrors('firstName', 'profileForm')"
+                class="md-error" />
+            </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('middleName')}">
-          <label
-          for="middleName"
-          v-text="'Отчество'" />
+            <md-field :class="{'md-invalid': veeErrors.has('middleName')}">
+              <label
+                for="middleName"
+                v-text="'Отчество'" />
 
-          <md-input
-          name="middleName"
-          id="middleName"
-          v-model="profileData.middleName"
-          :disabled="profileSending"
-          data-vv-scope="profileForm"
-          :data-vv-as="' '" />
+              <md-input
+                name="middleName"
+                id="middleName"
+                v-model="profileData.middleName"
+                :disabled="profileSending"
+                data-vv-scope="profileForm"
+                :data-vv-as="' '" />
 
-          <span
-          v-if="veeErrors.has('middleName')"
-          v-text="getErrors('middleName', 'profileForm')"
-          class="md-error" />
-        </md-field>
+              <span
+                v-if="veeErrors.has('middleName')"
+                v-text="getErrors('middleName', 'profileForm')"
+                class="md-error" />
+            </md-field>
 
-        <md-field :class="{'md-invalid': veeErrors.has('phone')}">
-          <label
-          for="phone"
-          v-text="'Телефон'" />
+            <md-field :class="{'md-invalid': veeErrors.has('phone')}">
+              <label
+                for="phone"
+                v-text="'Телефон'" />
 
-          <md-input
-          name="phone"
-          id="phone"
-          v-model="profileData.phone"
-          :disabled="profileSending"
-          data-vv-scope="profileForm"
-          :data-vv-as="' '" />
+              <md-input
+                name="phone"
+                id="phone"
+                v-model="profileData.phone"
+                :disabled="profileSending"
+                data-vv-scope="profileForm"
+                :data-vv-as="' '" />
 
-          <span
-          v-if="veeErrors.has('phone')"
-          v-text="getErrors('phone', 'profileForm')"
-          class="md-error" />
-        </md-field>
+              <span
+                v-if="veeErrors.has('phone')"
+                v-text="getErrors('phone', 'profileForm')"
+                class="md-error" />
+            </md-field>
 
-        <md-progress-bar
-        md-mode="indeterminate"
-        v-if="profileSending" />
+            <md-progress-bar
+              md-mode="indeterminate"
+              v-if="profileSending" />
 
-        <md-button
-        type="submit"
-        class="md-raised md-primary profile__button"
-        :disabled="profileSending"
-        v-text="'Сохранить'" />
+            <md-button
+              type="submit"
+              class="md-raised md-primary profile__button"
+              :disabled="profileSending"
+              v-text="'Сохранить'" />
 
-        <md-button
-        :disabled="profileSending"
-        v-text="'Сбосить'"
-        class="profile__button" />
-      </form>
-    </md-card-content>
-  </md-card>
+            <md-button
+              :disabled="profileSending"
+              v-text="'Сбосить'"
+              class="profile__button" />
+          </form>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+    <md-tab id="tab-change-password" md-label="Изменить пароль" md-icon="lock_person">
+      <md-card class="profile__card">
+        <md-card-header>
+          <div class="md-title">Изменение пароля</div>
+        </md-card-header>
+        <md-card-content>
+          <form
+            class="md-layout"
+            @submit.prevent="handlePasswordSubmit">
+            <md-field :class="{'md-invalid': veeErrors.has('oldPassword')}">
+              <label
+                for="oldPassword"
+                v-text="'Старый пароль'" />
 
-  <md-card class="profile__card">
-    <md-card-header>
-      <div class="md-title">Изменение пароля</div>
-    </md-card-header>
-    <md-card-content>
-      <form
-        class="md-layout"
-        @submit.prevent="handlePasswordSubmit">
-        <md-field :class="{'md-invalid': veeErrors.has('oldPassword')}">
-          <label
-          for="oldPassword"
-          v-text="'Старый пароль'" />
+              <md-input
+                name="oldPassword"
+                id="oldPassword"
+                v-model="dataPassword.oldPassword"
+                v-validate="{ required: true }"
+                :disabled="passwordSending"
+                type="password"
+                data-vv-scope="passwordForm"
+                :data-vv-as="' '" />
 
-          <md-input
-          name="oldPassword"
-          id="oldPassword"
-          v-model="dataPassword.oldPassword"
-          v-validate="{ required: true }"
-          :disabled="passwordSending"
-          type="password"
-          data-vv-scope="passwordForm"
-          :data-vv-as="' '" />
+              <span
+                v-if="veeErrors.has('password')"
+                v-text="getErrors('password', 'passwordForm')"
+                class="md-error" />
+            </md-field>
 
-          <span
-          v-if="veeErrors.has('password')"
-          v-text="getErrors('password', 'passwordForm')"
-          class="md-error" />
-        </md-field>
+            <md-field :class="{'md-invalid': veeErrors.has('password')}">
+              <label
+                for="password"
+                v-text="'Новый пароль'" />
 
-        <md-field :class="{'md-invalid': veeErrors.has('password')}">
-          <label
-          for="password"
-          v-text="'Новый пароль'" />
+              <md-input
+                name="password"
+                id="password"
+                v-model="dataPassword.password"
+                v-validate="{ required: true }"
+                :disabled="passwordSending"
+                type="password"
+                data-vv-scope="passwordForm"
+                :data-vv-as="' '" />
 
-          <md-input
-          name="password"
-          id="password"
-          v-model="dataPassword.password"
-          v-validate="{ required: true }"
-          :disabled="passwordSending"
-          type="password"
-          data-vv-scope="passwordForm"
-          :data-vv-as="' '" />
+              <span
+                v-if="veeErrors.has('password')"
+                v-text="getErrors('password', 'passwordForm')"
+                class="md-error" />
+            </md-field>
 
-          <span
-          v-if="veeErrors.has('password')"
-          v-text="getErrors('password', 'passwordForm')"
-          class="md-error" />
-        </md-field>
+            <md-field :class="{'md-invalid': veeErrors.has('passwordConfirmation')}">
+              <label
+                for="passwordConfirmation"
+                v-text="'Повторите пароль'" />
 
-        <md-field :class="{'md-invalid': veeErrors.has('passwordConfirmation')}">
-          <label
-          for="passwordConfirmation"
-          v-text="'Повторите пароль'" />
+              <md-input
+                name="passwordConfirmation"
+                id="passwordConfirmation"
+                v-model="dataPassword.passwordConfirmation"
+                v-validate="{ required: true, password_confirmation: dataPassword.password }"
+                :disabled="passwordSending"
+                type="password"
+                data-vv-scope="passwordForm"
+                :data-vv-as="' '" />
 
-          <md-input
-          name="passwordConfirmation"
-          id="passwordConfirmation"
-          v-model="dataPassword.passwordConfirmation"
-          v-validate="{ required: true, password_confirmation: dataPassword.password }"
-          :disabled="passwordSending"
-          type="password"
-          data-vv-scope="passwordForm"
-          :data-vv-as="' '" />
+              <span
+                v-if="veeErrors.has('passwordConfirmation')"
+                v-text="getErrors('passwordConfirmation', 'passwordForm')"
+                class="md-error" />
+            </md-field>
 
-          <span
-          v-if="veeErrors.has('passwordConfirmation')"
-          v-text="getErrors('passwordConfirmation', 'passwordForm')"
-          class="md-error" />
-        </md-field>
+            <md-progress-bar
+              md-mode="indeterminate"
+              v-if="passwordSending" />
 
-        <md-progress-bar
-        md-mode="indeterminate"
-        v-if="passwordSending" />
+            <md-button
+              type="submit"
+              class="md-raised md-primary profile__button profile__button"
+              :disabled="passwordSending"
+              v-text="'Сохранить'" />
 
-        <md-button
-        type="submit"
-        class="md-raised md-primary profile__button profile__button"
-        :disabled="passwordSending"
-        v-text="'Сохранить'" />
-
-        <md-button
-        :disabled="profileSending"
-        v-text="'Сбосить'"
-        class="profile__button" />
-      </form>
-    </md-card-content>
-  </md-card>
+            <md-button
+              :disabled="profileSending"
+              v-text="'Сбосить'"
+              class="profile__button" />
+          </form>
+        </md-card-content>
+      </md-card>
+    </md-tab>
+  </md-tabs>
 
   <md-snackbar
   md-position="center"

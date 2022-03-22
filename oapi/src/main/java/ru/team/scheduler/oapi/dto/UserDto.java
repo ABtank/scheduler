@@ -33,12 +33,14 @@ public class UserDto {
     @NotNull(groups = {Update.class})
     @ApiModelProperty(notes = "Роли", example = "[\"ROLE_USER\",\"ROLE_STUDENT\",\"ROLE_TEACHER\",\"ROLE_ADMIN\"]",value = "ROLE_USER",required = true)
     private List<String> roles;
+    @ApiModelProperty(notes = "Описание роли", example = "[\"Учитель\",\"Студент\",\"Пользователь\",\"Админ\"]",value = "Пользователь")
+    private List<String> descriptionRoles;
     @JsonView({AdminDetails.class})
     private Date createDate;
     @JsonView({AdminDetails.class})
     private Date modifyDate;
 
-    public UserDto(Integer id, String email, String phone, String firstName, String middleName, String lastName, List<String> roles, Date createDate, Date modifyDate) {
+    public UserDto(Integer id, String email, String phone, String firstName, String middleName, String lastName, List<String> roles, List<String> descriptionRoles, Date createDate, Date modifyDate) {
         this.id = id;
         this.email = email;
         this.phone = phone;
@@ -46,6 +48,7 @@ public class UserDto {
         this.middleName = middleName;
         this.lastName = lastName;
         this.roles = roles;
+        this.descriptionRoles = descriptionRoles;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
     }
