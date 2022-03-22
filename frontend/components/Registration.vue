@@ -231,7 +231,7 @@ export default {
       this.sending = false;
       if (response.user) {
         let response = await this.$auth.loginWith('local', { data: { email: this.data.email, password: this.data.password } });
-        window.location.href = '/';
+        window.location.href = '/sh';
       }
       else {
         this.isRegistrationError = true;

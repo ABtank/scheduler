@@ -34,6 +34,10 @@ public class LessonsStudentsServiceImpl implements LessonsStudentsService {
     public Optional<LessonsStudent> findById(Integer id) {
         return lessonsStudentsRepository.findById(id);
     }
+    @Override
+    public List<LessonsStudent> findAllByStudentId(Integer id) {
+        return lessonsStudentsRepository.findAllByStudentId(id);
+    }
 
 
     @Override

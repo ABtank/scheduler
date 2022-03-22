@@ -74,7 +74,7 @@ export default {
     userFio() {
       if (this.$auth.loggedIn) {
         const user = this.$auth.user;
-        return user.email ;
+        return user.lastName + ' ' + user.firstName.substring(0, 1).toUpperCase() + '.';
       }
 
       return '';

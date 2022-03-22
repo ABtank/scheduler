@@ -22,8 +22,8 @@
         <md-table-cell md-label="ФИО" md-sort-by="firstName">
           <a href="#" @click.prevent="openUser(item)">{{ item.firstName }} {{ item.middleName }} {{ item.lastName }}</a></md-table-cell>
         <md-table-cell md-label="phone" md-sort-by="phone">{{ item.phone }}</md-table-cell>
-        <md-table-cell md-label="roles" >{{ item.roles }}</md-table-cell>
-        <md-table-cell md-label="create/modify" md-sort-by="createDate">{{ item.createDate }}</br> {{ item.modifyDate }}</md-table-cell>
+        <md-table-cell md-label="roles"><p v-for="role in item.descriptionRoles">{{role}}</p></md-table-cell>
+        <md-table-cell md-label="create/modify" md-sort-by="createDate"><p>{{ item.createDate }}</p> <p>{{ item.modifyDate }}</p></md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -53,21 +53,7 @@ export default {
   data: () => ({
     search: null,
     searched: [],
-    users: [
-      {
-        id: 1,
-        email: "student12@mail.com",
-        phone: "11-11-11",
-        firstName: "иван",
-        middleName: "иванович",
-        lastName: "иванов",
-        roles: [
-          "ROLE_STUDENT"
-        ],
-        createDate: "2022-03-01T22:49:20.984+00:00",
-        modifyDate: "2022-03-01T22:49:20.984+00:00",
-      }
-    ]
+    users: []
 
   }),
   async asyncData({$axios}){

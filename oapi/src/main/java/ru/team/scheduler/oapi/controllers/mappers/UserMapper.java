@@ -45,6 +45,10 @@ public class UserMapper {
                         .stream()
                         .map(Role::getName)
                         .collect(toList()),
+                user.getRoles()
+                        .stream()
+                        .map(Role::getDescription)
+                        .collect(toList()),
                 user.getDtCreate(),
                 user.getDtModify());
     }
