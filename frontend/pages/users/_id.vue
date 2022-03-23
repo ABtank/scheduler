@@ -46,13 +46,15 @@
 
       <md-tab id="tab-teacher" md-label="Teacher" md-icon="record_voice_over">
         <md-list class="md-double-line">
-          <md-subheader>Уроки</md-subheader>
+          <md-subheader>Курсы/Предметы</md-subheader>
           <md-list-item md-expand v-for="exercise in exercises" v-if="exercise.teacherId === user.id">
             <md-icon>notifications_active</md-icon>
-            <span class="md-list-item-text">{{ exercise.name }}</span>
+            <span class="md-list-item-text">{{exercise.name}}</span>
 
-            <md-list slot="md-expand" v-for="lesson in lessons" v-if="lesson.exerciseId === exercise.id">
-              <md-list-item class="md-inset"><b>{{ lesson.lesson }}</b>  <p>{{lesson.dtStart}}</p></md-list-item>
+            <md-list slot="md-expand">
+              <md-list-item class="md-inset" v-for="lesson in lessons" v-if="lesson.exerciseId === exercise.id">
+                <p>{{lesson.lesson}}</p> <p>{{lesson.dtStart}}</p>
+              </md-list-item>
             </md-list>
           </md-list-item>
 
@@ -126,14 +128,18 @@ export default {
       }
     ]
   }),
+  async asyncData({$axios,params}) {
+    const user = await $axios.$get(`users/${params.id}`)
+    const exercises = await $axios.$get(`exercises`)
+    const lessons = await $axios.$get(`lessons`)
+    const lessonsStudents = await $axios.$get(`lessonsStudents/${params.id}`)
+    return {
+      user,exercises,lessons,lessonsStudents
+    }
+  },
+
   $_veeValidate({params}) {
     return /^\d+$/.test(params.id)
-  },
-  async mounted() {
-    this.user = await this.$axios.$get(`users/${this.$route.params.id}`)
-    this.exercises = await this.$axios.$get(`exercises`)
-    this.lessons = await this.$axios.$get(`lessons`)
-    this.lessonsStudents = await this.$axios.$get(`lessonsStudents/${this.$route.params.id}`)
   },
 }
 </script>
