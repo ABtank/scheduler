@@ -64,7 +64,7 @@ export default {
         { text: 'Таблицы', link: '/tables', icon: 'source' },
         { text: 'Лекции', link: '/lessons', icon: 'record_voice_over' },
         { text: 'Пользователи', link: '/users', icon: 'groups' },
-        { text: 'Расписание лекций', link: '/', icon: 'edit_calendar' },
+        { text: 'Расписание лекций', link: '/scheduler', icon: 'edit_calendar' },
       ];
 
       //TODO разделение по ролям
