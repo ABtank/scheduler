@@ -14,6 +14,7 @@ public class ForwardToUIController {
             , "disciplines"
             , "profile"
             , "registration"
+            , "scheduler"
             , "tables"})
     public String goToUI() {
         // Forward to home page so that route is preserved.
