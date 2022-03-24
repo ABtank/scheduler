@@ -67,7 +67,7 @@ public class ExerciseDto {
     private String discipline;
 
     @ApiModelProperty(notes = "Дата последнего изменения расписания")
-    @NotNull(groups = {Update.class, New.class})
+    @Null(groups = {Update.class, New.class})
     @JsonView({Details.class, AdminDetails.class})
     private Date dtModify;
 }
