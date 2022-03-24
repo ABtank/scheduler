@@ -1,0 +1,110 @@
+### -=USER=-
+GET http://localhost:8189/sh/api/v1/students/student_info
+Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbjJAYmsucnUiLCJleHAiOjE2NDQ3ODYwMDB9.g1cl6DwTB3M3dSNNkkQKeKtBe6A9ZFs6hOGJ52XaL5K4uGh8pv9cyncin9j7kVnx
+###
+GET http://localhost:8189/sh/api/v1/users
+#Authorization: Bearer in_user 123
+###
+GET http://localhost:8189/sh/api/v1/users/1
+#Authorization: Bearer in_user 123
+###
+POST http://localhost:8189/sh/api/v1/users
+#Authorization: Bearer in_user 123
+Content-Type: application/json
+
+{
+  "email": "admin2@bk.ru",
+  "password": "123",
+  "matchingPassword": "123",
+  "roles": [
+    "ROLE_USER",
+    "ROLE_ADMIN"
+  ]
+}
+###
+PUT http://localhost:8189/sh/api/v1/users
+#Authorization: Bearer in_user 123
+Content-Type: application/json
+
+{
+  "id": 3,
+  "password": "123",
+  "email": "1233@bk.ru",
+  "phone": "+79553459023",
+  "firstName": "firstName",
+  "middleName": "middleName",
+  "lastName": "lastName",
+  "roles": [
+    "ROLE_USER",
+    "ROLE_ADMIN"
+  ]
+}
+###
+DELETE http://localhost:8189/sh/api/v1/users/2
+#Authorization: Bearer in_user 123
+###
+DELETE http://localhost:8189/sh/api/v1/users
+###
+POST http://localhost:8189/sh/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin2@bk.ru",
+  "password": "123"
+}
+
+
+### -=ROLE=-
+GET http://localhost:8189/sh/api/v1/roles
+###
+GET http://localhost:8189/sh/api/v1/roles/1
+###
+POST http://localhost:8189/sh/api/v1/roles
+Content-Type: application/json
+
+{
+  "name": "ROLE_POST",
+  "description": "post role"
+}
+###
+PUT http://localhost:8189/sh/api/v1/role
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "ROLE_POST_PUT"
+}
+###
+DELETE http://localhost:8189/sh/api/v1/role/3
+Content-Type: application/json
+###
+DELETE http://localhost:8189/sh/api/v1/role
+Content-Type: application/json
+
+
+### -=ROLE=-
+GET http://localhost:8189/sh/api/v1/roles
+###
+GET http://localhost:8189/sh/api/v1/roles/1
+###
+POST http://localhost:8189/sh/api/v1/roles
+Content-Type: application/json
+
+{
+  "name": "ROLE_POST",
+  "description": "post role"
+}
+###
+PUT http://localhost:8189/sh/api/v1/role
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "ROLE_POST_PUT"
+}
+###
+DELETE http://localhost:8189/sh/api/v1/role/3
+Content-Type: application/json
+###
+DELETE http://localhost:8189/sh/api/v1/role
+Content-Type: application/json
